@@ -434,13 +434,27 @@ a:hover {
     background: var(--text-color);
 }
 
-/* Mobile menu when open */
-.is-head-open .gh-head-menu {
-    background-color: var(--background-color);
-}
+/* Mobile menu when open - full dark theme */
+@media (max-width: 991px) {
+    .gh-head-menu {
+        background-color: var(--background-color);
+    }
 
-.is-head-open .gh-head-menu .nav a {
-    color: var(--text-color);
+    .is-head-open .gh-head-menu {
+        background-color: var(--background-color);
+    }
+
+    .gh-head-menu .nav {
+        background-color: var(--background-color);
+    }
+
+    .gh-head-menu .nav a {
+        color: var(--text-color);
+    }
+
+    .gh-head-menu .nav a:hover {
+        color: var(--color-primary);
+    }
 }
 
 /* Footer Styling
@@ -449,125 +463,34 @@ a:hover {
 .gh-foot {
     background-color: var(--background-color);
     border-top: 1px solid var(--color-border);
-    padding: 60px 0 40px;
+    padding: max(4vw, 40px) 0;
 }
 
 .gh-foot-inner {
-    max-width: calc(1400px + 6vw);
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 3vw;
+    text-align: center;
 }
 
 .gh-foot-content {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 40px 60px;
-    margin-bottom: 40px;
-}
-
-.gh-foot-description {
-    flex: 1 1 100%;
-    max-width: 500px;
-}
-
-.gh-foot-description p {
-    font-size: 1.6rem;
-    line-height: 1.6;
     color: var(--text-color);
-    opacity: 0.7;
-    margin: 0;
+    opacity: 0.6;
 }
 
-.gh-foot-nav,
-.gh-foot-social {
-    flex: 1 1 200px;
-}
-
-.gh-foot-nav-title,
-.gh-foot-social-title {
-    font-size: 1.3rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    color: var(--color-primary);
-    margin: 0 0 16px;
-}
-
-.gh-foot-nav-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.gh-foot-nav-list li {
-    margin-bottom: 10px;
-}
-
-.gh-foot-nav-list a {
+.gh-foot-content p {
     font-size: 1.5rem;
+    margin: 0;
+}
+
+.gh-foot-content a {
     color: var(--text-color);
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
-.gh-foot-nav-list a:hover {
+.gh-foot-content a:hover {
     color: var(--color-primary);
-}
-
-.gh-foot-social-links {
-    display: flex;
-    gap: 12px;
-}
-
-.gh-foot-social-links a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    color: var(--text-color);
-    border: 1px solid var(--color-border);
-    border-radius: 50%;
-    transition: all 0.3s ease;
-}
-
-.gh-foot-social-links a:hover {
-    color: var(--color-primary);
-    border-color: var(--color-primary);
-}
-
-.gh-foot-social-links svg {
-    width: 18px;
-    height: 18px;
-}
-
-.gh-foot-copyright {
-    padding-top: 40px;
-    border-top: 1px solid var(--color-border);
-}
-
-.gh-foot-copyright p {
-    font-size: 1.4rem;
-    color: var(--text-color);
-    opacity: 0.5;
-    margin: 0;
-}
-
-@media (max-width: 768px) {
-    .gh-foot {
-        padding: 40px 0 30px;
-    }
-
-    .gh-foot-inner {
-        padding: 0 24px;
-    }
-
-    .gh-foot-content {
-        gap: 30px;
-    }
-
-    .gh-foot-description p {
-        font-size: 1.5rem;
-    }
 }
 
 /* Minimalist Layout Enhancements
@@ -825,14 +748,14 @@ a:hover {
 
 .portfolio-header-content {
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 3fr 1fr;
     gap: max(4vw, 40px);
     max-width: 1400px;
     margin: 0 auto;
     align-items: end;
 }
 
-/* Left column - Title and excerpt (1/4) */
+/* Right column - Title and excerpt (1/4) */
 .portfolio-header-text {
     display: flex;
     flex-direction: column;
@@ -892,7 +815,7 @@ a:hover {
     transform: translateY(-1px);
 }
 
-/* Right column - Feature image (3/4) */
+/* Left column - Feature image (3/4) */
 .portfolio-header-image {
     width: 100%;
     height: 60vh;
@@ -1593,6 +1516,13 @@ a:hover {
     }
 }
 
+/* Responsive homepage - mid-size breakpoint */
+@media (min-width: 886px) and (max-width: 1280px) {
+    .home-description {
+        font-size: 3.2rem;
+    }
+}
+
 /* Responsive homepage */
 @media (max-width: 1024px) {
     .home-container {
@@ -1602,9 +1532,10 @@ a:hover {
     }
 
     .home-image {
+        order: 1;
         padding-bottom: 0;
         margin-bottom: 30px;
-        align-items: center;
+        align-items: flex-start;
     }
 
     .home-image-inner {
@@ -1612,6 +1543,7 @@ a:hover {
     }
 
     .home-content {
+        order: 2;
         align-items: flex-start;
         padding: 0;
     }

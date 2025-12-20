@@ -10,6 +10,12 @@ Description: Portfolio layout with bold header (1/4 title, 3/4 image) and wide g
     {{!-- Bold header section --}}
     <header class="portfolio-header">
         <div class="portfolio-header-content">
+            {{#if feature_image}}
+                <div class="portfolio-header-image">
+                    <img src="{{feature_image}}" alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}" />
+                </div>
+            {{/if}}
+
             <div class="portfolio-header-text">
                 <h1 class="portfolio-title">{{title}}</h1>
                 {{#if custom_excerpt}}
@@ -25,12 +31,6 @@ Description: Portfolio layout with bold header (1/4 title, 3/4 image) and wide g
                     </div>
                 {{/if}}
             </div>
-
-            {{#if feature_image}}
-                <div class="portfolio-header-image">
-                    <img src="{{feature_image}}" alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}" />
-                </div>
-            {{/if}}
         </div>
     </header>
 
