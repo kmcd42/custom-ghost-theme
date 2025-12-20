@@ -436,6 +436,10 @@ a:hover {
     .is-head-open:not(.is-head-brand):not(.is-head-dark):not(.is-head-transparent) #gh-head {
         background-color: var(--background-color) !important;
     }
+
+    .is-head-open:not(.is-head-brand):not(.is-head-dark):not(.is-head-transparent) .gh-head-actions {
+        background-color: var(--background-color) !important;
+    }
 }
 
 /* Mobile menu when open - full dark theme */
@@ -483,12 +487,16 @@ a:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 20px;
+    width: 100%;
 }
 
 .gh-foot-content p {
     font-size: 1.5rem;
     margin: 0;
+    text-align: center;
+    width: 100%;
 }
 
 .gh-foot-content a {
@@ -505,6 +513,7 @@ a:hover {
     display: flex;
     gap: 12px;
     justify-content: center;
+    width: 100%;
 }
 
 .gh-foot-social-links a {
@@ -1553,15 +1562,8 @@ a:hover {
     }
 }
 
-/* Responsive homepage - mid-size breakpoint */
-@media (min-width: 886px) and (max-width: 1400px) {
-    .home-description {
-        font-size: 2.8rem;
-    }
-}
-
 /* Responsive homepage */
-@media (max-width: 1024px) {
+@media (max-width: 1250px) {
     .home-container {
         flex-direction: column;
         min-height: auto;
@@ -1571,6 +1573,7 @@ a:hover {
     .home-image {
         order: 1;
         padding-bottom: 0;
+        padding-top: 80px;
         margin-bottom: 30px;
         align-items: flex-start;
     }
