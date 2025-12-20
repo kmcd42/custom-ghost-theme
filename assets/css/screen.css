@@ -418,6 +418,29 @@ a:hover {
 .gh-head {
     background-color: var(--background-color);
     border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Mobile menu visibility fixes */
+.gh-burger {
+    color: var(--text-color);
+}
+
+.gh-burger:before,
+.gh-burger:after,
+.gh-burger div {
+    background: var(--text-color);
+}
+
+/* Mobile menu when open */
+.is-head-open .gh-head-menu {
+    background-color: var(--background-color);
+}
+
+.is-head-open .gh-head-menu .nav a {
+    color: var(--text-color);
 }
 
 /* Footer Styling
@@ -426,7 +449,7 @@ a:hover {
 .gh-foot {
     background-color: var(--background-color);
     border-top: 1px solid var(--color-border);
-    padding: max(8vw, 80px) 0 max(4vw, 40px);
+    padding: 60px 0 40px;
 }
 
 .gh-foot-inner {
@@ -436,15 +459,15 @@ a:hover {
 }
 
 .gh-foot-content {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 80px;
-    margin-bottom: 48px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px 60px;
+    margin-bottom: 40px;
 }
 
-/* Footer description */
 .gh-foot-description {
-    max-width: 320px;
+    flex: 1 1 100%;
+    max-width: 500px;
 }
 
 .gh-foot-description p {
@@ -455,16 +478,18 @@ a:hover {
     margin: 0;
 }
 
-/* Footer columns - removed, now using direct grid on .gh-foot-content */
+.gh-foot-nav,
+.gh-foot-social {
+    flex: 1 1 200px;
+}
 
-/* Footer navigation */
 .gh-foot-nav-title,
 .gh-foot-social-title {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-weight: 600;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.05em;
     color: var(--color-primary);
-    margin: 0 0 20px;
+    margin: 0 0 16px;
 }
 
 .gh-foot-nav-list {
@@ -474,11 +499,11 @@ a:hover {
 }
 
 .gh-foot-nav-list li {
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 }
 
 .gh-foot-nav-list a {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     color: var(--text-color);
     text-decoration: none;
     transition: color 0.3s ease;
@@ -488,18 +513,17 @@ a:hover {
     color: var(--color-primary);
 }
 
-/* Footer social links */
 .gh-foot-social-links {
     display: flex;
-    gap: 16px;
+    gap: 12px;
 }
 
 .gh-foot-social-links a {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
     color: var(--text-color);
     border: 1px solid var(--color-border);
     border-radius: 50%;
@@ -509,17 +533,16 @@ a:hover {
 .gh-foot-social-links a:hover {
     color: var(--color-primary);
     border-color: var(--color-primary);
-    transform: translateY(-2px);
 }
 
 .gh-foot-social-links svg {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
 }
 
-/* Footer copyright */
 .gh-foot-copyright {
-    padding-top: 0;
+    padding-top: 40px;
+    border-top: 1px solid var(--color-border);
 }
 
 .gh-foot-copyright p {
@@ -529,10 +552,9 @@ a:hover {
     margin: 0;
 }
 
-/* Responsive footer */
 @media (max-width: 768px) {
     .gh-foot {
-        padding: 60px 0 40px;
+        padding: 40px 0 30px;
     }
 
     .gh-foot-inner {
@@ -540,12 +562,11 @@ a:hover {
     }
 
     .gh-foot-content {
-        grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 30px;
     }
 
     .gh-foot-description p {
-        font-size: 1.4rem;
+        font-size: 1.5rem;
     }
 }
 
@@ -1030,13 +1051,16 @@ a:hover {
 
     .portfolio-body {
         padding: 40px 24px;
+        max-width: 100%;
     }
 
-    /* Galleries still wide but adjusted for mobile */
+    /* Galleries adjusted for mobile */
     .portfolio-body .kg-gallery-card,
     .portfolio-body .kg-gallery-container {
-        max-width: 95vw !important;
-        width: 95vw !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        margin-left: 0;
+        transform: none;
     }
 
     /* Stack image/caption layout on mobile */
@@ -1045,11 +1069,24 @@ a:hover {
     .portfolio-body .kg-video-card.kg-card-hascaption {
         grid-template-columns: 1fr;
         gap: 24px;
+        max-width: 100% !important;
+        width: 100% !important;
+        margin-left: 0;
+        transform: none;
     }
 
-    .portfolio-body .kg-image-card figcaption.kg-image-card-caption,
+    /* Ensure all images respect viewport */
+    .portfolio-body .kg-image-card,
+    .portfolio-body .kg-image-card img,
+    .portfolio-body .kg-video-card,
+    .portfolio-body .kg-video-card video {
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+
+    .portfolio-body .kg-image-card figcaption,
     .portfolio-body .kg-video-card figcaption {
-        font-size: 2rem;
+        font-size: 2rem !important;
     }
 }
 
@@ -1272,8 +1309,10 @@ a:hover {
 
 .home-container {
     display: flex;
-    height: 100vh;
+    min-height: calc(100vh - 120px);
     width: 100%;
+    padding: max(4vw, 40px) 3vw max(4vw, 40px);
+    box-sizing: border-box;
 }
 
 /* Left: Cover image (2/3) */
@@ -1283,16 +1322,15 @@ a:hover {
     position: relative;
     overflow: hidden;
     background-color: var(--background-color);
-    padding: max(5vw, 50px) 3vw 0;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
+    padding-bottom: max(4vw, 40px);
 }
 
 .home-image-inner {
     width: 100%;
     aspect-ratio: 4 / 3;
-    max-width: calc(1400px * 2/3 + 6vw);
-    margin: 0 auto;
+    max-width: 100%;
     position: relative;
     overflow: hidden;
     background: linear-gradient(135deg, #1f1f1f 0%, #111 100%);
@@ -1559,38 +1597,41 @@ a:hover {
 @media (max-width: 1024px) {
     .home-container {
         flex-direction: column;
-        height: auto;
+        min-height: auto;
+        padding: max(3vw, 30px) 24px max(3vw, 30px);
     }
 
     .home-image {
-        padding: 3vw 3vw 0;
+        padding-bottom: 0;
+        margin-bottom: 30px;
+        align-items: center;
     }
 
     .home-image-inner {
-        height: 50vh;
-        max-width: 100%;
+        aspect-ratio: 16 / 10;
     }
 
     .home-content {
         align-items: flex-start;
-        padding: max(4vw, 40px);
+        padding: 0;
     }
 
     .home-description {
-        font-size: 3.5rem;
+        font-size: 3rem;
     }
 }
 
 @media (max-width: 768px) {
     .home-image-inner {
-        height: 40vh;
+        aspect-ratio: 4 / 3;
     }
 
     .home-description {
-        font-size: 2.8rem;
+        font-size: 2.4rem;
     }
 
-    .home-content {
-        padding: 40px 24px;
+    .home-nav {
+        flex-direction: column;
+        gap: 16px;
     }
 }
