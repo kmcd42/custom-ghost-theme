@@ -108,7 +108,7 @@ body {
 
 /* Align navigation with body content */
 .gh-head-inner {
-    max-width: 1400px;
+    max-width: calc(1400px + 6vw);
     margin: 0 auto;
     padding: 0 3vw;
 }
