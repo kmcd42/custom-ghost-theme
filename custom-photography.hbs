@@ -14,15 +14,6 @@ Description: Photography template with full-width galleries and left-aligned tit
             {{#if custom_excerpt}}
                 <p class="photography-excerpt">{{custom_excerpt}}</p>
             {{/if}}
-            {{#if tags}}
-                <div class="photography-tags">
-                    {{#foreach tags}}
-                        {{#unless internal}}
-                            <a href="{{url}}" class="photography-tag">{{name}}</a>
-                        {{/unless}}
-                    {{/foreach}}
-                </div>
-            {{/if}}
         </div>
     </header>
 

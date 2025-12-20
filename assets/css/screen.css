@@ -20,6 +20,11 @@ body {
     color: var(--text-color);
 }
 
+/* Global H3 styling */
+h3 {
+    color: var(--color-primary);
+}
+
 .img {
     display: block;
     width: 100%;
@@ -822,6 +827,65 @@ a:hover {
     width: 80vw !important;
 }
 
+/* Two-column layout for images with captions */
+.portfolio-body .kg-image-card {
+    max-width: 100%;
+    margin: 48px 0;
+}
+
+.portfolio-body .kg-image-card.kg-card-hascaption {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Landscape images: 2/3 image, 1/3 caption */
+.portfolio-body .kg-image-card.kg-card-hascaption.kg-width-wide {
+    grid-template-columns: 2fr 1fr;
+}
+
+.portfolio-body .kg-image-card figcaption.kg-image-card-caption {
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+
+.has-serif-title .portfolio-body .kg-image-card figcaption.kg-image-card-caption {
+    font-family: var(--gh-font-heading, var(--font-serif));
+}
+
+/* Video cards - same treatment */
+.portfolio-body .kg-video-card.kg-card-hascaption {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+    max-width: 1400px;
+    margin: 48px auto;
+}
+
+.portfolio-body .kg-video-card figcaption {
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+
+.has-serif-title .portfolio-body .kg-video-card figcaption {
+    font-family: var(--gh-font-heading, var(--font-serif));
+}
+
 /* Responsive: Stack on mobile/tablet */
 @media (max-width: 1024px) {
     .portfolio-header-content {
@@ -851,6 +915,19 @@ a:hover {
     .portfolio-body .kg-gallery-container {
         max-width: 95vw !important;
         width: 95vw !important;
+    }
+
+    /* Stack image/caption layout on mobile */
+    .portfolio-body .kg-image-card.kg-card-hascaption,
+    .portfolio-body .kg-image-card.kg-card-hascaption.kg-width-wide,
+    .portfolio-body .kg-video-card.kg-card-hascaption {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .portfolio-body .kg-image-card figcaption.kg-image-card-caption,
+    .portfolio-body .kg-video-card figcaption {
+        font-size: 2rem;
     }
 }
 
