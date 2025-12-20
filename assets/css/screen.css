@@ -437,13 +437,14 @@ a:hover {
 
 .gh-foot-content {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 60px;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 80px;
+    margin-bottom: 48px;
 }
 
 /* Footer description */
 .gh-foot-description {
-    max-width: 100%;
+    max-width: 320px;
 }
 
 .gh-foot-description p {
@@ -461,7 +462,6 @@ a:hover {
 .gh-foot-social-title {
     font-size: 1.4rem;
     font-weight: 600;
-    text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--color-primary);
     margin: 0 0 20px;
@@ -519,8 +519,7 @@ a:hover {
 
 /* Footer copyright */
 .gh-foot-copyright {
-    padding-top: 40px;
-    border-top: 1px solid var(--color-border);
+    padding-top: 0;
 }
 
 .gh-foot-copyright p {
@@ -955,7 +954,7 @@ a:hover {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 40px;
-    align-items: start;
+    align-items: center;
     max-width: 1400px;
     width: 1400px;
     margin: 48px 0;
@@ -968,17 +967,17 @@ a:hover {
     grid-template-columns: 2fr 1fr;
 }
 
-.portfolio-body .kg-image-card figcaption.kg-image-card-caption {
-    font-size: 2.4rem;
-    font-weight: 700;
-    line-height: 1.15;
-    color: var(--text-color);
-    margin: 0;
-    padding: 0;
-    text-align: left;
+.portfolio-body .kg-image-card figcaption {
+    font-size: 2.4rem !important;
+    font-weight: 700 !important;
+    line-height: 1.15 !important;
+    color: var(--text-color) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: left !important;
 }
 
-.has-serif-title .portfolio-body .kg-image-card figcaption.kg-image-card-caption {
+.has-serif-title .portfolio-body .kg-image-card figcaption {
     font-family: var(--gh-font-heading, var(--font-serif));
 }
 
@@ -987,7 +986,7 @@ a:hover {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 40px;
-    align-items: start;
+    align-items: center;
     max-width: 1400px;
     width: 1400px;
     margin: 48px 0;
@@ -996,43 +995,16 @@ a:hover {
 }
 
 .portfolio-body .kg-video-card figcaption {
-    font-size: 2.4rem;
-    font-weight: 700;
-    line-height: 1.15;
-    color: var(--text-color);
-    margin: 0;
-    padding: 0;
-    text-align: left;
+    font-size: 2.4rem !important;
+    font-weight: 700 !important;
+    line-height: 1.15 !important;
+    color: var(--text-color) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: left !important;
 }
 
 .has-serif-title .portfolio-body .kg-video-card figcaption {
-    font-family: var(--gh-font-heading, var(--font-serif));
-}
-
-/* Gallery cards with captions - 4:1 ratio */
-.portfolio-body .kg-gallery-card.kg-card-hascaption {
-    display: grid;
-    grid-template-columns: 4fr 1fr;
-    gap: 40px;
-    align-items: start;
-    max-width: 1400px;
-    width: 1400px;
-    margin: 48px 0;
-    margin-left: 50%;
-    transform: translateX(-50%);
-}
-
-.portfolio-body .kg-gallery-card figcaption {
-    font-size: 2.4rem;
-    font-weight: 700;
-    line-height: 1.15;
-    color: var(--text-color);
-    margin: 0;
-    padding: 0;
-    text-align: left;
-}
-
-.has-serif-title .portfolio-body .kg-gallery-card figcaption {
     font-family: var(--gh-font-heading, var(--font-serif));
 }
 
@@ -1311,7 +1283,7 @@ a:hover {
     position: relative;
     overflow: hidden;
     background-color: var(--background-color);
-    padding: max(8vw, 80px) 3vw 0;
+    padding: max(5vw, 50px) 3vw 0;
     display: flex;
     align-items: center;
 }
