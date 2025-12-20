@@ -1,0 +1,656 @@
+/*
+
+This is a development CSS file which is built to a minified
+production stylesheet in assets/built/screen.css using gulp dev
+
+*/
+
+/* Lib - Local component imports
+/* ---------------------------------------------------------- */
+@import "@tryghost/shared-theme-assets/assets/css/v1/screen.css";
+@import "fonts.css";
+@import "vars.css";
+
+/* Main - Theme styles
+/* ---------------------------------------------------------- */
+
+/* Dark Theme Base */
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-position: center center;
+    background-size: cover;
+    border-radius: 100%;
+}
+
+.hidden {
+    position: absolute;
+    text-indent: -9999px;
+    visibility: hidden;
+}
+
+/* Layout
+/* ---------------------------------------------------------- */
+
+.gh-canvas {
+    margin-right: calc(var(--gap) * -1);
+    margin-left: calc(var(--gap) * -1);
+}
+
+.site-wrapper {
+    min-height: 100vh;
+    padding: 0 3vw;
+}
+
+@media (max-width: 850px) {
+    .site-wrapper {
+        padding: 6vw;
+    }
+}
+
+.page-head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 60%;
+    padding: 12vw 0;
+    margin: auto;
+    text-align: center;
+}
+
+.page-head-title {
+    margin: 0;
+    font-size: 5rem;
+    font-weight: 800;
+    line-height: 1.3;
+    color: var(--text-color);
+    word-break: break-word;
+}
+
+.has-serif-title:not([class*=" gh-font-heading"]):not([class^="gh-font-heading"]) .page-head-title {
+    font-family: var(--gh-font-heading, var(--font-serif));
+}
+
+@media (max-width: 500px) {
+    .page-head {
+        max-width: none;
+        padding: 20vw 0;
+    }
+
+    .page-head-title {
+        font-size: 2.4rem;
+    }
+}
+
+.page-head-description {
+    margin: 16px 0;
+    font-size: 2.2rem;
+    line-height: 1.35em;
+    color: var(--text-color);
+    opacity: 0.5;
+}
+
+@media (max-width: 500px) {
+    .page-head-description {
+        font-size: 1.6rem;
+    }
+}
+
+/* Site Navigation
+/* ---------------------------------------------------------- */
+
+.gh-head-logo {
+    font-size: 2.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.gh-head-menu,
+.gh-head-actions {
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+@media (max-width: 850px) {
+    body:not(.is-head-open) .gh-head {
+        margin: -6vw;
+    }
+}
+
+/* Post Feed
+/* ---------------------------------------------------------- */
+
+.post-feed {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.post-card {
+    position: relative;
+    display: flex;
+    flex: 1 1 50%;
+    height: 35vw;
+    overflow: hidden;
+    counter-increment: posts;
+    background: linear-gradient(135deg, #1f1f1f 0%, #111 100%) center center;
+    background-size: cover;
+}
+
+@media (max-width: 700px) {
+    .post-card {
+        flex: 1 1 100%;
+        height: 70vw;
+    }
+}
+
+.post-card-large {
+    flex: 1 1 100%;
+}
+
+.post-card-link {
+    position: relative;
+    display: block;
+    flex: 1 1 auto;
+}
+
+.post-card-link:hover {
+    opacity: 1;
+}
+
+.post-card-link img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.post-card-content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.4);
+    opacity: 1;
+    transition: opacity 0.5s cubic-bezier(0.33, 0, 0.2, 1);
+}
+
+.post-card:not(.no-image) .post-card-content {
+    opacity: 0;
+}
+
+@media (max-width: 700px) {
+    .post-card:not(.no-image) .post-card-content {
+        opacity: 1;
+    }
+}
+
+.post-card-link:hover .post-card-content {
+    opacity: 1;
+}
+
+.post-card-title {
+    display: inline-block;
+    max-width: 70%;
+    margin: 0;
+    font-size: 3.4rem;
+    font-weight: 800;
+    color: var(--color-white);
+    text-align: center;
+    word-break: break-word;
+}
+
+.has-serif-title:not([class*=" gh-font-heading"]):not([class^="gh-font-heading"]) .post-card-title {
+    font-family: var(--gh-font-heading, var(--font-serif));
+}
+
+/* Posts without images */
+.post-card.no-image::before {
+    position: absolute;
+    right: 5vw;
+    bottom: -0.15em;
+    display: block;
+    font-size: 28vw;
+    font-weight: var(--font-heavy);
+    line-height: 1em;
+    color: rgba(255, 255, 255, 0.1);
+    letter-spacing: -0.05em;
+    content: counter(posts);
+}
+
+.post-card.no-image .post-card-content {
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 4vw;
+}
+
+.post-card.no-image .post-card-title {
+    line-height: 1.15em;
+    text-align: left;
+}
+
+.post-card.no-image:hover .post-card-title {
+    text-decoration: underline;
+}
+
+@media (max-width: 700px) {
+    .post-card.no-image::before {
+        font-size: 50vw;
+    }
+}
+
+/* Post Content
+/* ---------------------------------------------------------- */
+
+.post-content {
+    padding-top: max(6vw, 64px);
+    margin: 0 auto;
+}
+
+.page-template .post-content {
+    padding-top: 0;
+}
+
+.page-template .post-content-header {
+    margin-top: var(--header-spacing);
+}
+
+.post-content-title {
+    margin: 0 0 16px;
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--text-color);
+    text-align: center;
+    word-break: break-word;
+}
+
+.has-serif-title:not([class*=" gh-font-heading"]):not([class^="gh-font-heading"]) .post-content-title {
+    font-family: var(--gh-font-heading, var(--font-serif));
+}
+
+.post-content-excerpt {
+    font-size: 2rem;
+    line-height: 1.6em;
+    color: var(--text-color);
+    text-align: center;
+    word-break: break-word;
+    opacity: 0.5;
+}
+
+.has-serif-body:not([class*=" gh-font-body"]):not([class^="gh-font-body"]) .post-content-excerpt {
+    font-family: var(--gh-font-body, var(--font-serif));
+}
+
+@media (max-width: 500px) {
+    .post-content-excerpt {
+        font-size: 1.8rem;
+    }
+}
+
+.post-content-image {
+    margin: 40px 0 2vw;
+}
+
+.post-content-image .kg-image {
+    width: 100%;
+}
+
+@media (max-width: 960px) {
+    .post-content-image .kg-image {
+        width: 88vw;
+    }
+}
+
+.post-content-comments {
+    margin-top: 64px;
+}
+
+/* Author Archive
+/* ---------------------------------------------------------- */
+
+.author-meta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.author-links {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.author-links a {
+    display: block;
+    padding: 0 12px;
+    margin: 0;
+    color: var(--text-color);
+    opacity: 0.4;
+}
+
+.author-links a:hover {
+    text-decoration: none;
+    opacity: 1;
+}
+
+.author-links .divider {
+    display: inline-block;
+    margin: 0 3px;
+}
+
+/* Custom Dark Theme Accents
+/* ---------------------------------------------------------- */
+
+/* Primary buttons and CTAs with golden yellow accent */
+.gh-btn,
+.gh-primary-btn {
+    background-color: var(--color-primary) !important;
+    color: #000 !important;
+    border-radius: 4px;
+    padding: 12px 24px;
+    font-weight: 600;
+    transition: opacity 0.3s ease;
+}
+
+.gh-btn:hover,
+.gh-primary-btn:hover {
+    opacity: 0.9;
+}
+
+/* Navigation links */
+.gh-head-menu a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.gh-head-menu a:hover {
+    color: var(--color-primary);
+}
+
+/* Logo styling */
+.gh-head-logo {
+    color: var(--text-color);
+    font-weight: 700;
+}
+
+/* Links with golden accent on hover */
+a {
+    color: var(--text-color);
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--color-primary);
+}
+
+/* Footer styling */
+.gh-foot {
+    border-top: 1px solid var(--color-border);
+    color: var(--text-color);
+}
+
+.gh-copyright,
+.gh-powered-by a {
+    color: var(--text-color);
+    opacity: 0.6;
+}
+
+/* Header background */
+.gh-head {
+    background-color: var(--background-color);
+    border-bottom: 1px solid var(--color-border);
+}
+
+/* Minimalist Layout Enhancements
+/* ---------------------------------------------------------- */
+
+/* Generous spacing for minimalist feel */
+.post-content {
+    max-width: 720px;
+    padding-top: max(8vw, 80px);
+}
+
+.page-head {
+    padding: 16vw 0;
+}
+
+/* Clean, spacious typography */
+.post-content-title {
+    font-size: 4.8rem;
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+}
+
+@media (max-width: 768px) {
+    .post-content-title {
+        font-size: 3.2rem;
+    }
+}
+
+/* Elegant underline on navigation active state */
+.gh-head-menu .nav-current a {
+    text-decoration: underline;
+    text-decoration-color: var(--color-primary);
+    text-underline-offset: 6px;
+    text-decoration-thickness: 2px;
+}
+
+/* Clean image presentation */
+.kg-image-card,
+.kg-gallery-card {
+    margin: 48px 0;
+}
+
+/* Black and white image filter (optional - can be controlled via Ghost CMS) */
+.post-card-link img {
+    filter: grayscale(0%);
+    transition: filter 0.3s ease;
+}
+
+/* Refined button styles */
+.gh-btn {
+    border: 2px solid var(--color-primary);
+    background-color: transparent !important;
+    color: var(--color-primary) !important;
+}
+
+.gh-btn:hover {
+    background-color: var(--color-primary) !important;
+    color: #000 !important;
+}
+
+/* Split Layout Page Template
+/* ---------------------------------------------------------- */
+
+/* Container for split layout */
+.split-layout {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+}
+
+.split-container {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+}
+
+/* Left column - Scrollable content */
+.split-content {
+    flex: 1;
+    min-width: 0;
+    overflow-y: auto;
+    background-color: var(--background-color);
+}
+
+.split-content-inner {
+    max-width: 720px;
+    padding: max(8vw, 60px) max(6vw, 40px);
+    margin: 0 auto;
+}
+
+/* Right column - Static/sticky image */
+.split-image {
+    flex: 1;
+    min-width: 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.split-image-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.split-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: grayscale(100%);
+}
+
+/* Placeholder when no image is set */
+.split-image-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1f1f1f 0%, #111 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.split-placeholder-content h2 {
+    color: var(--text-color);
+    font-size: 4rem;
+    font-weight: 800;
+    opacity: 0.1;
+    text-align: center;
+    padding: 0 40px;
+}
+
+/* Split layout header */
+.split-header {
+    margin-bottom: 48px;
+}
+
+.split-title {
+    font-size: 4.8rem;
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--text-color);
+    margin: 0 0 24px;
+    letter-spacing: -0.02em;
+}
+
+.has-serif-title .split-title {
+    font-family: var(--gh-font-heading, var(--font-serif));
+}
+
+.split-excerpt {
+    font-size: 2rem;
+    line-height: 1.6;
+    color: var(--text-color);
+    opacity: 0.7;
+    margin: 0;
+}
+
+.has-serif-body .split-excerpt {
+    font-family: var(--gh-font-body, var(--font-serif));
+}
+
+/* Split layout content */
+.split-body {
+    color: var(--text-color);
+}
+
+.split-body h2,
+.split-body h3,
+.split-body h4 {
+    color: var(--text-color);
+    margin-top: 48px;
+    margin-bottom: 16px;
+}
+
+.split-body h2 {
+    font-size: 3.2rem;
+}
+
+.split-body h3 {
+    font-size: 2.4rem;
+}
+
+.split-body p {
+    color: var(--text-color);
+    line-height: 1.8;
+    margin-bottom: 24px;
+}
+
+.split-body a {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+}
+
+.split-body a:hover {
+    text-decoration-thickness: 2px;
+}
+
+/* Responsive: Stack on mobile/tablet */
+@media (max-width: 1024px) {
+    .split-container {
+        flex-direction: column;
+    }
+
+    .split-image {
+        position: relative;
+        height: 60vh;
+        min-height: 400px;
+    }
+
+    .split-content-inner {
+        padding: 40px 24px;
+    }
+
+    .split-title {
+        font-size: 3.2rem;
+    }
+
+    .split-excerpt {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .split-image {
+        height: 50vh;
+        min-height: 300px;
+    }
+
+    .split-title {
+        font-size: 2.8rem;
+    }
+
+    .split-body h2 {
+        font-size: 2.4rem;
+    }
+}
