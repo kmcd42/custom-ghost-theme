@@ -1,0 +1,26 @@
+{{!< default}}
+{{!--
+Template Name: Photography
+Description: Photography template with full-width galleries and left-aligned title
+--}}
+
+{{#post}}
+<article class="post-content photography-layout {{post_class}}">
+
+    {{!-- Header section --}}
+    <header class="photography-header">
+        <div class="photography-header-inner">
+            <h1 class="photography-title">{{title}}</h1>
+            {{#if custom_excerpt}}
+                <p class="photography-excerpt">{{custom_excerpt}}</p>
+            {{/if}}
+        </div>
+    </header>
+
+    {{!-- Content body with full-width galleries --}}
+    <div class="photography-body gh-content">
+        {{content}}
+    </div>
+
+</article>
+{{/post}}

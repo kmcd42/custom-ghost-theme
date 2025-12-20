@@ -1,7 +1,7 @@
 {{!< default}}
 {{!--
 Template Name: Photography Index
-Description: Gallery-style landing page showing photography posts in 1/4-width cascading grid
+Description: Gallery-style landing page showing photography posts in 1/3-width cascading grid
 --}}
 
 {{#post}}
@@ -17,8 +17,8 @@ Description: Gallery-style landing page showing photography posts in 1/4-width c
         </header>
     {{/if}}
 
-    {{!-- Portfolio post grid --}}
-    {{!-- This fetches posts tagged with "photography" - customize the tag as needed --}}
+    {{!-- Photography post grid --}}
+    {{!-- This fetches posts tagged with "photography" --}}
     {{#get "posts" limit="all" filter="tag:photography" include="tags,authors"}}
         {{#if posts}}
             <div class="portfolio-grid">
@@ -46,7 +46,7 @@ Description: Gallery-style landing page showing photography posts in 1/4-width c
             </div>
         {{else}}
             <div class="portfolio-index-empty">
-                <p>No portfolio items found. Add the "photography" tag to posts you want to appear here.</p>
+                <p>No photography items found. Add the "photography" tag to posts you want to appear here.</p>
             </div>
         {{/if}}
     {{/get}}
