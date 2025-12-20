@@ -1,0 +1,51 @@
+{{!< default}}
+{{!--
+Template Name: Homepage
+Description: Custom homepage with cover image (2/3) and description (1/3) with navigation links
+--}}
+
+{{#post}}
+<div class="home-layout">
+    <div class="home-container">
+        {{!-- Left: Cover image (2/3) --}}
+        <div class="home-image">
+            {{#if @site.cover_image}}
+                <img src="{{@site.cover_image}}" alt="{{@site.title}}" />
+            {{else if feature_image}}
+                <img src="{{feature_image}}" alt="{{title}}" />
+            {{else}}
+                <div class="home-image-placeholder">
+                    <h1 class="home-placeholder-text">{{@site.title}}</h1>
+                </div>
+            {{/if}}
+        </div>
+
+        {{!-- Right: Description and links (1/3) --}}
+        <div class="home-content">
+            <div class="home-content-inner">
+                <h1 class="home-title">{{title}}</h1>
+
+                {{#if @site.description}}
+                    <p class="home-description">{{@site.description}}</p>
+                {{/if}}
+
+                {{#if custom_excerpt}}
+                    <p class="home-excerpt">{{custom_excerpt}}</p>
+                {{/if}}
+
+                <nav class="home-nav">
+                    <a href="/portfolio" class="home-nav-link">portfolio</a>
+                    <a href="/contact" class="home-nav-link">contact</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    {{!-- Optional content below --}}
+    {{#if content}}
+        <div class="home-body gh-content">
+            {{content}}
+        </div>
+    {{/if}}
+</div>
+{{/post}}

@@ -15,6 +15,15 @@ Description: Portfolio layout with bold header (1/4 title, 3/4 image) and wide g
                 {{#if custom_excerpt}}
                     <p class="portfolio-excerpt">{{custom_excerpt}}</p>
                 {{/if}}
+                {{#if tags}}
+                    <div class="portfolio-tags">
+                        {{#foreach tags}}
+                            {{#unless internal}}
+                                <a href="{{url}}" class="portfolio-tag">{{name}}</a>
+                            {{/unless}}
+                        {{/foreach}}
+                    </div>
+                {{/if}}
             </div>
 
             {{#if feature_image}}
