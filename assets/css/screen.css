@@ -1073,7 +1073,7 @@ a:hover {
 
 .home-container {
     display: flex;
-    min-height: 100vh;
+    height: 100vh;
     width: 100%;
 }
 
@@ -1081,6 +1081,19 @@ a:hover {
 .home-image {
     flex: 2;
     min-width: 0;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--background-color);
+    padding: 0 3vw;
+    display: flex;
+    align-items: center;
+}
+
+.home-image-inner {
+    width: 100%;
+    height: 100vh;
+    max-width: calc(1400px * 2/3);
+    margin: 0 auto;
     position: relative;
     overflow: hidden;
     background: linear-gradient(135deg, #1f1f1f 0%, #111 100%);
@@ -1115,16 +1128,29 @@ a:hover {
     flex: 1;
     min-width: 0;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     background-color: var(--background-color);
-    padding: max(6vw, 60px) max(4vw, 40px);
+    padding: 0 max(4vw, 40px) max(6vw, 60px);
 }
 
 .home-content-inner {
     width: 100%;
 }
 
-.home-title {
+/* Eyebrow title - small breadcrumb style */
+.home-eyebrow {
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-color);
+    opacity: 0.5;
+    margin: 0 0 16px;
+    text-align: left;
+}
+
+/* Main description - H1 sized */
+.home-description {
     font-size: 4.8rem;
     font-weight: 800;
     line-height: 1.1;
@@ -1134,23 +1160,8 @@ a:hover {
     text-align: left;
 }
 
-.has-serif-title .home-title {
+.has-serif-title .home-description {
     font-family: var(--gh-font-heading, var(--font-serif));
-}
-
-.home-description,
-.home-excerpt {
-    font-size: 1.8rem;
-    line-height: 1.6;
-    color: var(--text-color);
-    opacity: 0.7;
-    margin: 0 0 24px;
-    text-align: left;
-}
-
-.has-serif-body .home-description,
-.has-serif-body .home-excerpt {
-    font-family: var(--gh-font-body, var(--font-serif));
 }
 
 /* Homepage navigation links */
@@ -1189,33 +1200,192 @@ a:hover {
     color: var(--text-color);
 }
 
+/* Photography Template
+/* ---------------------------------------------------------- */
+
+.photography-layout {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+}
+
+/* Photography header */
+.photography-header {
+    background-color: var(--background-color);
+    padding: max(8vw, 60px) 3vw max(4vw, 40px);
+}
+
+.photography-header-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.photography-title {
+    font-size: 4.8rem;
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--text-color);
+    margin: 0 0 24px;
+    letter-spacing: -0.02em;
+    text-align: left;
+}
+
+.has-serif-title .photography-title {
+    font-family: var(--gh-font-heading, var(--font-serif));
+}
+
+.photography-excerpt {
+    font-size: 1.8rem;
+    line-height: 1.6;
+    color: var(--text-color);
+    opacity: 0.7;
+    margin: 0 0 16px;
+    text-align: left;
+    max-width: 720px;
+}
+
+.has-serif-body .photography-excerpt {
+    font-family: var(--gh-font-body, var(--font-serif));
+}
+
+/* Photography tags */
+.photography-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.photography-tag {
+    display: inline-block;
+    padding: 6px 14px;
+    background-color: rgba(232, 197, 71, 0.15);
+    color: var(--color-primary);
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 20px;
+    border: 1px solid rgba(232, 197, 71, 0.3);
+    transition: all 0.3s ease;
+}
+
+.photography-tag:hover {
+    background-color: rgba(232, 197, 71, 0.25);
+    border-color: rgba(232, 197, 71, 0.5);
+    transform: translateY(-1px);
+}
+
+/* Content body with full-width galleries */
+.photography-body {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: max(4vw, 40px) 3vw max(6vw, 60px);
+    color: var(--text-color);
+}
+
+.photography-body h2,
+.photography-body h3,
+.photography-body h4 {
+    color: var(--text-color);
+    margin-top: 48px;
+    margin-bottom: 16px;
+}
+
+.photography-body h2 {
+    font-size: 3.2rem;
+}
+
+.photography-body h3 {
+    font-size: 2.4rem;
+}
+
+.photography-body p {
+    color: var(--text-color);
+    line-height: 1.8;
+    margin-bottom: 24px;
+    max-width: 720px;
+}
+
+.photography-body a {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+}
+
+.photography-body a:hover {
+    text-decoration-thickness: 2px;
+}
+
+/* Full-width galleries for photography */
+.photography-body .kg-gallery-card,
+.photography-body .kg-gallery-container,
+.photography-body .kg-image-card {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 48px 0;
+}
+
+.photography-body .kg-image {
+    max-width: 100%;
+}
+
+/* Responsive photography template */
+@media (max-width: 768px) {
+    .photography-header {
+        padding: 40px 20px 20px;
+    }
+
+    .photography-title {
+        font-size: 3.2rem;
+    }
+
+    .photography-excerpt {
+        font-size: 1.6rem;
+    }
+
+    .photography-body {
+        padding: 40px 20px;
+    }
+
+    .photography-body h2 {
+        font-size: 2.4rem;
+    }
+}
+
 /* Responsive homepage */
 @media (max-width: 1024px) {
     .home-container {
         flex-direction: column;
+        height: auto;
     }
 
     .home-image {
-        min-height: 50vh;
+        padding: 3vw 3vw 0;
     }
 
-    .home-title {
+    .home-image-inner {
+        height: 50vh;
+        max-width: 100%;
+    }
+
+    .home-content {
+        align-items: flex-start;
+        padding: max(4vw, 40px);
+    }
+
+    .home-description {
         font-size: 3.5rem;
     }
 }
 
 @media (max-width: 768px) {
-    .home-image {
-        min-height: 40vh;
+    .home-image-inner {
+        height: 40vh;
     }
 
-    .home-title {
+    .home-description {
         font-size: 2.8rem;
-    }
-
-    .home-description,
-    .home-excerpt {
-        font-size: 1.6rem;
     }
 
     .home-content {

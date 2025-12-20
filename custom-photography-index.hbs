@@ -1,0 +1,62 @@
+{{!< default}}
+{{!--
+Template Name: Photography Index
+Description: Gallery-style landing page showing photography posts in 1/3-width cascading grid
+--}}
+
+{{#post}}
+<div class="portfolio-index-page">
+
+    {{!-- Optional page header --}}
+    {{#if title}}
+        <header class="portfolio-index-header">
+            <h1 class="portfolio-index-title">{{title}}</h1>
+            {{#if custom_excerpt}}
+                <p class="portfolio-index-description">{{custom_excerpt}}</p>
+            {{/if}}
+        </header>
+    {{/if}}
+
+    {{!-- Photography post grid --}}
+    {{!-- This fetches posts tagged with "photography" --}}
+    {{#get "posts" limit="all" filter="tag:photography" include="tags,authors"}}
+        {{#if posts}}
+            <div class="portfolio-grid">
+                {{#foreach posts}}
+                    <article class="portfolio-grid-item {{post_class}}">
+                        <a href="{{url}}" class="portfolio-grid-link">
+                            {{#if feature_image}}
+                                <div class="portfolio-grid-image">
+                                    <img src="{{feature_image}}" alt="{{title}}" loading="lazy" />
+                                </div>
+                            {{else}}
+                                <div class="portfolio-grid-placeholder">
+                                    <span class="portfolio-grid-number">{{@number}}</span>
+                                </div>
+                            {{/if}}
+                            <div class="portfolio-grid-content">
+                                <h2 class="portfolio-grid-title">{{title}}</h2>
+                                {{#if custom_excerpt}}
+                                    <p class="portfolio-grid-excerpt">{{custom_excerpt}}</p>
+                                {{/if}}
+                            </div>
+                        </a>
+                    </article>
+                {{/foreach}}
+            </div>
+        {{else}}
+            <div class="portfolio-index-empty">
+                <p>No photography items found. Add the "photography" tag to posts you want to appear here.</p>
+            </div>
+        {{/if}}
+    {{/get}}
+
+    {{!-- Optional page content below the grid --}}
+    {{#if content}}
+        <div class="portfolio-index-content gh-content">
+            {{content}}
+        </div>
+    {{/if}}
+
+</div>
+{{/post}}
