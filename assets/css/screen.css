@@ -420,134 +420,114 @@ a:hover {
     border-bottom: 1px solid var(--color-border);
 }
 
+/* Mobile menu visibility fixes */
+.gh-burger {
+    color: var(--text-color);
+}
+
+.gh-burger:before,
+.gh-burger:after,
+.gh-burger div {
+    background: var(--text-color);
+}
+
+/* Override Ghost's default white background on mobile */
+@media (max-width: 767px) {
+    .is-head-open:not(.is-head-brand):not(.is-head-dark):not(.is-head-transparent) #gh-head {
+        background-color: var(--background-color) !important;
+    }
+}
+
+/* Mobile menu when open - full dark theme */
+@media (max-width: 991px) {
+    .gh-head-menu {
+        background-color: var(--background-color);
+    }
+
+    .is-head-open .gh-head-menu {
+        background-color: var(--background-color);
+    }
+
+    .gh-head-menu .nav {
+        background-color: var(--background-color);
+    }
+
+    .gh-head-menu .nav a {
+        color: var(--text-color);
+    }
+
+    .gh-head-menu .nav a:hover {
+        color: var(--color-primary);
+    }
+}
+
 /* Footer Styling
 /* ---------------------------------------------------------- */
 
 .gh-foot {
     background-color: var(--background-color);
     border-top: 1px solid var(--color-border);
-    padding: max(8vw, 80px) 0 max(4vw, 40px);
+    padding: max(4vw, 40px) 0;
 }
 
 .gh-foot-inner {
-    max-width: calc(1400px + 6vw);
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 3vw;
+    text-align: center;
 }
 
 .gh-foot-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 60px;
-}
-
-/* Footer description */
-.gh-foot-description {
-    max-width: 100%;
-}
-
-.gh-foot-description p {
-    font-size: 1.6rem;
-    line-height: 1.6;
     color: var(--text-color);
-    opacity: 0.7;
+    opacity: 0.6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.gh-foot-content p {
+    font-size: 1.5rem;
     margin: 0;
 }
 
-/* Footer columns - removed, now using direct grid on .gh-foot-content */
-
-/* Footer navigation */
-.gh-foot-nav-title,
-.gh-foot-social-title {
-    font-size: 1.4rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--color-primary);
-    margin: 0 0 20px;
-}
-
-.gh-foot-nav-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.gh-foot-nav-list li {
-    margin-bottom: 12px;
-}
-
-.gh-foot-nav-list a {
-    font-size: 1.6rem;
+.gh-foot-content a {
     color: var(--text-color);
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
-.gh-foot-nav-list a:hover {
+.gh-foot-content a:hover {
     color: var(--color-primary);
 }
 
-/* Footer social links */
 .gh-foot-social-links {
     display: flex;
-    gap: 16px;
+    gap: 12px;
+    justify-content: center;
 }
 
 .gh-foot-social-links a {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
     color: var(--text-color);
     border: 1px solid var(--color-border);
     border-radius: 50%;
     transition: all 0.3s ease;
+    opacity: 1;
 }
 
 .gh-foot-social-links a:hover {
     color: var(--color-primary);
     border-color: var(--color-primary);
-    transform: translateY(-2px);
 }
 
 .gh-foot-social-links svg {
-    width: 20px;
-    height: 20px;
-}
-
-/* Footer copyright */
-.gh-foot-copyright {
-    padding-top: 40px;
-    border-top: 1px solid var(--color-border);
-}
-
-.gh-foot-copyright p {
-    font-size: 1.4rem;
-    color: var(--text-color);
-    opacity: 0.5;
-    margin: 0;
-}
-
-/* Responsive footer */
-@media (max-width: 768px) {
-    .gh-foot {
-        padding: 60px 0 40px;
-    }
-
-    .gh-foot-inner {
-        padding: 0 24px;
-    }
-
-    .gh-foot-content {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-
-    .gh-foot-description p {
-        font-size: 1.4rem;
-    }
+    width: 18px;
+    height: 18px;
 }
 
 /* Minimalist Layout Enhancements
@@ -805,14 +785,14 @@ a:hover {
 
 .portfolio-header-content {
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 3fr 1fr;
     gap: max(4vw, 40px);
     max-width: 1400px;
     margin: 0 auto;
     align-items: end;
 }
 
-/* Left column - Title and excerpt (1/4) */
+/* Right column - Title and excerpt (1/4) */
 .portfolio-header-text {
     display: flex;
     flex-direction: column;
@@ -872,7 +852,7 @@ a:hover {
     transform: translateY(-1px);
 }
 
-/* Right column - Feature image (3/4) */
+/* Left column - Feature image (3/4) */
 .portfolio-header-image {
     width: 100%;
     height: 60vh;
@@ -955,7 +935,7 @@ a:hover {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 40px;
-    align-items: start;
+    align-items: center;
     max-width: 1400px;
     width: 1400px;
     margin: 48px 0;
@@ -968,17 +948,17 @@ a:hover {
     grid-template-columns: 2fr 1fr;
 }
 
-.portfolio-body .kg-image-card figcaption.kg-image-card-caption {
-    font-size: 2.4rem;
-    font-weight: 700;
-    line-height: 1.15;
-    color: var(--text-color);
-    margin: 0;
-    padding: 0;
-    text-align: left;
+.portfolio-body .kg-image-card figcaption {
+    font-size: 2.4rem !important;
+    font-weight: 700 !important;
+    line-height: 1.15 !important;
+    color: var(--text-color) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: left !important;
 }
 
-.has-serif-title .portfolio-body .kg-image-card figcaption.kg-image-card-caption {
+.has-serif-title .portfolio-body .kg-image-card figcaption {
     font-family: var(--gh-font-heading, var(--font-serif));
 }
 
@@ -987,7 +967,7 @@ a:hover {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 40px;
-    align-items: start;
+    align-items: center;
     max-width: 1400px;
     width: 1400px;
     margin: 48px 0;
@@ -996,43 +976,16 @@ a:hover {
 }
 
 .portfolio-body .kg-video-card figcaption {
-    font-size: 2.4rem;
-    font-weight: 700;
-    line-height: 1.15;
-    color: var(--text-color);
-    margin: 0;
-    padding: 0;
-    text-align: left;
+    font-size: 2.4rem !important;
+    font-weight: 700 !important;
+    line-height: 1.15 !important;
+    color: var(--text-color) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: left !important;
 }
 
 .has-serif-title .portfolio-body .kg-video-card figcaption {
-    font-family: var(--gh-font-heading, var(--font-serif));
-}
-
-/* Gallery cards with captions - 4:1 ratio */
-.portfolio-body .kg-gallery-card.kg-card-hascaption {
-    display: grid;
-    grid-template-columns: 4fr 1fr;
-    gap: 40px;
-    align-items: start;
-    max-width: 1400px;
-    width: 1400px;
-    margin: 48px 0;
-    margin-left: 50%;
-    transform: translateX(-50%);
-}
-
-.portfolio-body .kg-gallery-card figcaption {
-    font-size: 2.4rem;
-    font-weight: 700;
-    line-height: 1.15;
-    color: var(--text-color);
-    margin: 0;
-    padding: 0;
-    text-align: left;
-}
-
-.has-serif-title .portfolio-body .kg-gallery-card figcaption {
     font-family: var(--gh-font-heading, var(--font-serif));
 }
 
@@ -1058,13 +1011,16 @@ a:hover {
 
     .portfolio-body {
         padding: 40px 24px;
+        max-width: 100%;
     }
 
-    /* Galleries still wide but adjusted for mobile */
+    /* Galleries adjusted for mobile */
     .portfolio-body .kg-gallery-card,
     .portfolio-body .kg-gallery-container {
-        max-width: 95vw !important;
-        width: 95vw !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        margin-left: 0;
+        transform: none;
     }
 
     /* Stack image/caption layout on mobile */
@@ -1073,11 +1029,24 @@ a:hover {
     .portfolio-body .kg-video-card.kg-card-hascaption {
         grid-template-columns: 1fr;
         gap: 24px;
+        max-width: 100% !important;
+        width: 100% !important;
+        margin-left: 0;
+        transform: none;
     }
 
-    .portfolio-body .kg-image-card figcaption.kg-image-card-caption,
+    /* Ensure all images respect viewport */
+    .portfolio-body .kg-image-card,
+    .portfolio-body .kg-image-card img,
+    .portfolio-body .kg-video-card,
+    .portfolio-body .kg-video-card video {
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+
+    .portfolio-body .kg-image-card figcaption,
     .portfolio-body .kg-video-card figcaption {
-        font-size: 2rem;
+        font-size: 2rem !important;
     }
 }
 
@@ -1300,8 +1269,10 @@ a:hover {
 
 .home-container {
     display: flex;
-    height: 100vh;
+    min-height: calc(100vh - 120px);
     width: 100%;
+    padding: max(4vw, 40px) 3vw max(4vw, 40px);
+    box-sizing: border-box;
 }
 
 /* Left: Cover image (2/3) */
@@ -1311,16 +1282,15 @@ a:hover {
     position: relative;
     overflow: hidden;
     background-color: var(--background-color);
-    padding: max(8vw, 80px) 3vw 0;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
+    padding-bottom: max(4vw, 40px);
 }
 
 .home-image-inner {
     width: 100%;
     aspect-ratio: 4 / 3;
-    max-width: calc(1400px * 2/3 + 6vw);
-    margin: 0 auto;
+    max-width: 100%;
     position: relative;
     overflow: hidden;
     background: linear-gradient(135deg, #1f1f1f 0%, #111 100%);
@@ -1583,42 +1553,54 @@ a:hover {
     }
 }
 
+/* Responsive homepage - mid-size breakpoint */
+@media (min-width: 886px) and (max-width: 1400px) {
+    .home-description {
+        font-size: 2.8rem;
+    }
+}
+
 /* Responsive homepage */
 @media (max-width: 1024px) {
     .home-container {
         flex-direction: column;
-        height: auto;
+        min-height: auto;
+        padding: max(3vw, 30px) 24px max(3vw, 30px);
     }
 
     .home-image {
-        padding: 3vw 3vw 0;
+        order: 1;
+        padding-bottom: 0;
+        margin-bottom: 30px;
+        align-items: flex-start;
     }
 
     .home-image-inner {
-        height: 50vh;
-        max-width: 100%;
+        aspect-ratio: 16 / 10;
     }
 
     .home-content {
+        order: 2;
         align-items: flex-start;
-        padding: max(4vw, 40px);
+        padding: 0;
     }
 
     .home-description {
-        font-size: 3.5rem;
+        font-size: 3rem;
     }
 }
 
 @media (max-width: 768px) {
     .home-image-inner {
-        height: 40vh;
+        aspect-ratio: 4 / 3;
     }
 
     .home-description {
-        font-size: 2.8rem;
+        font-size: 2.4rem;
     }
 
-    .home-content {
-        padding: 40px 24px;
+    .home-nav {
+        flex-direction: column;
+        gap: 16px;
     }
 }
