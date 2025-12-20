@@ -1,0 +1,34 @@
+{{!< default}}
+{{!--
+Template Name: Portfolio Entry
+Description: Portfolio layout with bold header (1/4 title, 3/4 image) and wide galleries
+--}}
+
+{{#post}}
+<article class="post-content portfolio-layout {{post_class}}">
+
+    {{!-- Bold header section --}}
+    <header class="portfolio-header">
+        <div class="portfolio-header-content">
+            <div class="portfolio-header-text">
+                <h1 class="portfolio-title">{{title}}</h1>
+                {{#if custom_excerpt}}
+                    <p class="portfolio-excerpt">{{custom_excerpt}}</p>
+                {{/if}}
+            </div>
+
+            {{#if feature_image}}
+                <div class="portfolio-header-image">
+                    <img src="{{feature_image}}" alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}" />
+                </div>
+            {{/if}}
+        </div>
+    </header>
+
+    {{!-- Content body with wide galleries --}}
+    <div class="portfolio-body gh-content">
+        {{content}}
+    </div>
+
+</article>
+{{/post}}
