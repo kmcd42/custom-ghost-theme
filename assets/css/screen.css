@@ -418,9 +418,6 @@ a:hover {
 .gh-head {
     background-color: var(--background-color);
     border-bottom: 1px solid var(--color-border);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
 }
 
 /* Mobile menu visibility fixes */
@@ -432,6 +429,13 @@ a:hover {
 .gh-burger:after,
 .gh-burger div {
     background: var(--text-color);
+}
+
+/* Override Ghost's default white background on mobile */
+@media (max-width: 767px) {
+    .is-head-open:not(.is-head-brand):not(.is-head-dark):not(.is-head-transparent) #gh-head {
+        background-color: var(--background-color) !important;
+    }
 }
 
 /* Mobile menu when open - full dark theme */
@@ -476,6 +480,10 @@ a:hover {
 .gh-foot-content {
     color: var(--text-color);
     opacity: 0.6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
 }
 
 .gh-foot-content p {
@@ -491,6 +499,35 @@ a:hover {
 
 .gh-foot-content a:hover {
     color: var(--color-primary);
+}
+
+.gh-foot-social-links {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.gh-foot-social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    color: var(--text-color);
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    opacity: 1;
+}
+
+.gh-foot-social-links a:hover {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.gh-foot-social-links svg {
+    width: 18px;
+    height: 18px;
 }
 
 /* Minimalist Layout Enhancements
@@ -1517,9 +1554,9 @@ a:hover {
 }
 
 /* Responsive homepage - mid-size breakpoint */
-@media (min-width: 886px) and (max-width: 1280px) {
+@media (min-width: 886px) and (max-width: 1400px) {
     .home-description {
-        font-size: 3.2rem;
+        font-size: 2.8rem;
     }
 }
 
