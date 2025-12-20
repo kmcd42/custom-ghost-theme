@@ -433,6 +433,14 @@ a:hover {
     background: var(--text-color);
 }
 
+/* Sticky navigation on mobile only */
+@media (max-width: 1250px) {
+    .gh-head {
+        position: sticky;
+        top: 0;
+    }
+}
+
 /* Override Ghost's default white background on mobile */
 @media (max-width: 767px) {
     .is-head-open:not(.is-head-brand):not(.is-head-dark):not(.is-head-transparent) #gh-head {
