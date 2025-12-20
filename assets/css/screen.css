@@ -456,10 +456,9 @@ a:hover {
     margin: 48px 0;
 }
 
-/* Black and white image filter (optional - can be controlled via Ghost CMS) */
+/* Image styling */
 .post-card-link img {
-    filter: grayscale(0%);
-    transition: filter 0.3s ease;
+    transition: opacity 0.3s ease;
 }
 
 /* Refined button styles */
@@ -525,7 +524,6 @@ a:hover {
     height: 100%;
     object-fit: cover;
     object-position: center;
-    filter: grayscale(100%);
 }
 
 /* Placeholder when no image is set */
@@ -651,6 +649,188 @@ a:hover {
     }
 
     .split-body h2 {
+        font-size: 2.4rem;
+    }
+}
+
+/* Portfolio Layout Page Template
+/* ---------------------------------------------------------- */
+
+/* Reset content padding for full-width header */
+.portfolio-layout {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+}
+
+/* Bold header section */
+.portfolio-header {
+    background-color: var(--background-color);
+    padding: max(8vw, 60px) 3vw;
+}
+
+.portfolio-header-content {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: max(4vw, 40px);
+    max-width: 1400px;
+    margin: 0 auto;
+    align-items: start;
+}
+
+/* Left column - Title and excerpt (1/4) */
+.portfolio-header-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 24px;
+}
+
+.portfolio-title {
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--text-color);
+    margin: 0;
+    letter-spacing: -0.02em;
+}
+
+.has-serif-title .portfolio-title {
+    font-family: var(--gh-font-heading, var(--font-serif));
+}
+
+.portfolio-excerpt {
+    font-size: 1.8rem;
+    line-height: 1.6;
+    color: var(--text-color);
+    opacity: 0.7;
+    margin: 0;
+}
+
+.has-serif-body .portfolio-excerpt {
+    font-family: var(--gh-font-body, var(--font-serif));
+}
+
+/* Right column - Feature image (3/4) */
+.portfolio-header-image {
+    width: 100%;
+    height: 60vh;
+    min-height: 400px;
+    max-height: 700px;
+    overflow: hidden;
+    position: relative;
+}
+
+.portfolio-header-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Content body */
+.portfolio-body {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: max(6vw, 60px) 3vw;
+    color: var(--text-color);
+}
+
+.portfolio-body h2,
+.portfolio-body h3,
+.portfolio-body h4 {
+    color: var(--text-color);
+    margin-top: 48px;
+    margin-bottom: 16px;
+}
+
+.portfolio-body h2 {
+    font-size: 3.2rem;
+}
+
+.portfolio-body h3 {
+    font-size: 2.4rem;
+}
+
+.portfolio-body p {
+    color: var(--text-color);
+    line-height: 1.8;
+    margin-bottom: 24px;
+}
+
+.portfolio-body a {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+}
+
+.portfolio-body a:hover {
+    text-decoration-thickness: 2px;
+}
+
+/* Wide galleries - 80% of viewport width */
+.portfolio-body .kg-gallery-card,
+.portfolio-body .kg-gallery-container {
+    max-width: 80vw !important;
+    width: 80vw !important;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+.portfolio-body .kg-image-card.kg-width-wide,
+.portfolio-body .kg-gallery-card.kg-width-wide {
+    max-width: 80vw !important;
+    width: 80vw !important;
+}
+
+/* Responsive: Stack on mobile/tablet */
+@media (max-width: 1024px) {
+    .portfolio-header-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .portfolio-header-image {
+        height: 50vh;
+        min-height: 350px;
+    }
+
+    .portfolio-title {
+        font-size: 3.2rem;
+    }
+
+    .portfolio-excerpt {
+        font-size: 1.6rem;
+    }
+
+    .portfolio-body {
+        padding: 40px 24px;
+    }
+
+    /* Galleries still wide but adjusted for mobile */
+    .portfolio-body .kg-gallery-card,
+    .portfolio-body .kg-gallery-container {
+        max-width: 95vw !important;
+        width: 95vw !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .portfolio-header {
+        padding: 40px 20px;
+    }
+
+    .portfolio-header-image {
+        height: 40vh;
+        min-height: 300px;
+    }
+
+    .portfolio-title {
+        font-size: 2.8rem;
+    }
+
+    .portfolio-body h2 {
         font-size: 2.4rem;
     }
 }
