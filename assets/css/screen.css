@@ -473,3 +473,184 @@ a:hover {
     background-color: var(--color-primary) !important;
     color: #000 !important;
 }
+
+/* Split Layout Page Template
+/* ---------------------------------------------------------- */
+
+/* Container for split layout */
+.split-layout {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+}
+
+.split-container {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+}
+
+/* Left column - Scrollable content */
+.split-content {
+    flex: 1;
+    min-width: 0;
+    overflow-y: auto;
+    background-color: var(--background-color);
+}
+
+.split-content-inner {
+    max-width: 720px;
+    padding: max(8vw, 60px) max(6vw, 40px);
+    margin: 0 auto;
+}
+
+/* Right column - Static/sticky image */
+.split-image {
+    flex: 1;
+    min-width: 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.split-image-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.split-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: grayscale(100%);
+}
+
+/* Placeholder when no image is set */
+.split-image-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1f1f1f 0%, #111 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.split-placeholder-content h2 {
+    color: var(--text-color);
+    font-size: 4rem;
+    font-weight: 800;
+    opacity: 0.1;
+    text-align: center;
+    padding: 0 40px;
+}
+
+/* Split layout header */
+.split-header {
+    margin-bottom: 48px;
+}
+
+.split-title {
+    font-size: 4.8rem;
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--text-color);
+    margin: 0 0 24px;
+    letter-spacing: -0.02em;
+}
+
+.has-serif-title .split-title {
+    font-family: var(--gh-font-heading, var(--font-serif));
+}
+
+.split-excerpt {
+    font-size: 2rem;
+    line-height: 1.6;
+    color: var(--text-color);
+    opacity: 0.7;
+    margin: 0;
+}
+
+.has-serif-body .split-excerpt {
+    font-family: var(--gh-font-body, var(--font-serif));
+}
+
+/* Split layout content */
+.split-body {
+    color: var(--text-color);
+}
+
+.split-body h2,
+.split-body h3,
+.split-body h4 {
+    color: var(--text-color);
+    margin-top: 48px;
+    margin-bottom: 16px;
+}
+
+.split-body h2 {
+    font-size: 3.2rem;
+}
+
+.split-body h3 {
+    font-size: 2.4rem;
+}
+
+.split-body p {
+    color: var(--text-color);
+    line-height: 1.8;
+    margin-bottom: 24px;
+}
+
+.split-body a {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+}
+
+.split-body a:hover {
+    text-decoration-thickness: 2px;
+}
+
+/* Responsive: Stack on mobile/tablet */
+@media (max-width: 1024px) {
+    .split-container {
+        flex-direction: column;
+    }
+
+    .split-image {
+        position: relative;
+        height: 60vh;
+        min-height: 400px;
+    }
+
+    .split-content-inner {
+        padding: 40px 24px;
+    }
+
+    .split-title {
+        font-size: 3.2rem;
+    }
+
+    .split-excerpt {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .split-image {
+        height: 50vh;
+        min-height: 300px;
+    }
+
+    .split-title {
+        font-size: 2.8rem;
+    }
+
+    .split-body h2 {
+        font-size: 2.4rem;
+    }
+}
