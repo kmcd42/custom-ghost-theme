@@ -53,17 +53,26 @@ body::before {
     z-index: 9999;
 }
 
-/* Top glow effect */
+/* Ambient glow effects - VISIBLE and atmospheric */
 body::after {
     content: '';
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 500px;
-    background: var(--gradient-glow);
+    inset: 0;
+    background:
+        /* Primary warm glow from top */
+        radial-gradient(ellipse 900px 600px at 50% -200px, rgba(232, 168, 71, 0.25) 0%, transparent 60%),
+        /* Secondary accent glow */
+        radial-gradient(ellipse 600px 400px at 80% 20%, rgba(200, 140, 80, 0.12) 0%, transparent 50%),
+        /* Subtle corner accent */
+        radial-gradient(ellipse 400px 300px at 10% 80%, rgba(45, 155, 150, 0.08) 0%, transparent 50%);
     pointer-events: none;
     z-index: -1;
+    animation: glowPulse 8s ease-in-out infinite alternate;
+}
+
+@keyframes glowPulse {
+    0% { opacity: 0.8; }
+    100% { opacity: 1; }
 }
 
 /* Selection styling */
@@ -3445,24 +3454,36 @@ body:has(.custom-cursor) button {
    TIME-AWARE STYLING - The site knows when you visit
    ───────────────────────────────────────────────────────────────────────────── */
 
-/* Dawn - soft, hopeful light */
+/* Dawn - soft, hopeful light - pink/orange warmth */
 .time-dawn body::after {
-    background: radial-gradient(ellipse 600px 400px at 50% 0%, rgba(255, 180, 120, 0.08) 0%, transparent 70%);
+    background:
+        radial-gradient(ellipse 1000px 700px at 50% -200px, rgba(255, 160, 100, 0.3) 0%, transparent 55%),
+        radial-gradient(ellipse 600px 400px at 70% 10%, rgba(255, 120, 140, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse 400px 300px at 20% 90%, rgba(255, 180, 100, 0.1) 0%, transparent 50%);
 }
 
-/* Day - clear, energetic */
+/* Day - clear, energetic - warm amber */
 .time-day body::after {
-    background: radial-gradient(ellipse 600px 400px at 50% 0%, rgba(232, 168, 71, 0.06) 0%, transparent 70%);
+    background:
+        radial-gradient(ellipse 900px 600px at 50% -200px, rgba(232, 168, 71, 0.28) 0%, transparent 55%),
+        radial-gradient(ellipse 600px 400px at 80% 20%, rgba(200, 140, 80, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse 400px 300px at 10% 80%, rgba(45, 155, 150, 0.1) 0%, transparent 50%);
 }
 
-/* Dusk - warm, contemplative */
+/* Dusk - warm, contemplative - orange/purple */
 .time-dusk body::after {
-    background: radial-gradient(ellipse 600px 400px at 50% 0%, rgba(200, 100, 80, 0.08) 0%, transparent 70%);
+    background:
+        radial-gradient(ellipse 1000px 700px at 50% -200px, rgba(220, 100, 80, 0.3) 0%, transparent 55%),
+        radial-gradient(ellipse 700px 500px at 20% 30%, rgba(180, 80, 140, 0.2) 0%, transparent 50%),
+        radial-gradient(ellipse 500px 300px at 80% 70%, rgba(255, 140, 80, 0.12) 0%, transparent 50%);
 }
 
-/* Night - deep, restful */
+/* Night - deep, restful - blue/purple */
 .time-night body::after {
-    background: radial-gradient(ellipse 600px 400px at 50% 0%, rgba(100, 120, 180, 0.06) 0%, transparent 70%);
+    background:
+        radial-gradient(ellipse 900px 600px at 50% -200px, rgba(80, 100, 180, 0.25) 0%, transparent 55%),
+        radial-gradient(ellipse 600px 400px at 80% 30%, rgba(120, 80, 160, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse 400px 300px at 10% 80%, rgba(60, 120, 150, 0.1) 0%, transparent 50%);
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
