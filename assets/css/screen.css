@@ -3178,3 +3178,582 @@ img.loaded {
         gap: var(--space-3);
     }
 }
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   EXPERIMENTAL: HUMAN, MESSY, PLAYFUL, OPTIMISTIC
+   The bicycle of the mind. Agency and community first.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   CLIMATE PULSE - A living connection to our atmosphere
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.climate-pulse {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-1);
+    padding: var(--space-3) var(--space-4);
+    background: rgba(232, 168, 71, 0.08);
+    background: linear-gradient(135deg, rgba(232, 168, 71, 0.1) 0%, rgba(232, 100, 71, 0.05) 100%);
+    border: 1px solid rgba(232, 168, 71, 0.2);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-4);
+    cursor: help;
+    transition: all var(--duration-base) var(--ease-smooth);
+}
+
+.climate-pulse:hover {
+    background: rgba(232, 168, 71, 0.12);
+    border-color: rgba(232, 168, 71, 0.3);
+    transform: translateY(-2px);
+}
+
+.climate-pulse-inner {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-1);
+}
+
+.climate-pulse-current {
+    font-family: var(--font-mono);
+    font-size: var(--text-2xl);
+    font-weight: var(--font-bold);
+    color: var(--color-climate-accent, var(--color-primary));
+    letter-spacing: -0.02em;
+}
+
+.climate-pulse-unit {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.climate-pulse-delta {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: rgba(232, 100, 71, 0.9);
+    margin-left: var(--space-2);
+}
+
+.climate-pulse-label {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   CUSTOM CURSOR - Your presence on the page
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.custom-cursor,
+.custom-cursor-dot {
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10000;
+    mix-blend-mode: difference;
+}
+
+.custom-cursor {
+    width: 40px;
+    height: 40px;
+    margin-left: -20px;
+    margin-top: -20px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    transition: width 0.2s, height 0.2s, margin 0.2s, border-color 0.2s;
+}
+
+.custom-cursor-dot {
+    width: 6px;
+    height: 6px;
+    margin-left: -3px;
+    margin-top: -3px;
+    background: white;
+    border-radius: 50%;
+}
+
+.custom-cursor.cursor-hover {
+    width: 60px;
+    height: 60px;
+    margin-left: -30px;
+    margin-top: -30px;
+    border-color: var(--color-primary);
+}
+
+.custom-cursor.cursor-view {
+    width: 80px;
+    height: 80px;
+    margin-left: -40px;
+    margin-top: -40px;
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
+/* Hide default cursor when custom cursor is active */
+body:has(.custom-cursor) {
+    cursor: none;
+}
+
+body:has(.custom-cursor) a,
+body:has(.custom-cursor) button {
+    cursor: none;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   KINETIC TYPOGRAPHY - Text that breathes
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.kinetic-word {
+    display: inline-block;
+    transition: transform 0.4s var(--ease-spring), opacity 0.4s ease;
+}
+
+.kinetic-text:hover .kinetic-word {
+    animation: wordBreathe 0.6s ease infinite;
+    animation-delay: calc(var(--word-index) * 0.05s);
+}
+
+@keyframes wordBreathe {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-2px); }
+}
+
+/* Reveal on scroll */
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s var(--ease-smooth);
+}
+
+.reveal-on-scroll.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-child {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s ease, transform 0.4s var(--ease-smooth);
+}
+
+.reveal-child.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   ORGANIC ELEMENTS - Imperfect, human, hand-made feeling
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* Subtle rotation for organic feel */
+.portfolio-grid-item {
+    transform: rotate(var(--organic-rotation, 0deg));
+}
+
+/* Hand-drawn underline effect */
+.organic-underline {
+    position: relative;
+    text-decoration: none;
+}
+
+.organic-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: var(--underline-offset, 2px);
+    width: 100%;
+    height: 2px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s var(--ease-smooth);
+    /* Organic waviness via SVG filter would go here */
+}
+
+.organic-underline:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* Hand-drawn border (using SVG) */
+.organic-border {
+    position: relative;
+}
+
+.organic-border::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border: 2px solid var(--color-primary);
+    border-radius: 2px 4px 3px 5px / 5px 3px 4px 2px;
+    opacity: 0.5;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   MAGNETIC ELEMENTS - Playful hover response
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.magnetic {
+    transition: transform 0.3s var(--ease-smooth);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   EASTER EGG MESSAGE
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.easter-egg-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    background: var(--color-charcoal);
+    border: 1px solid var(--color-primary);
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+    text-align: center;
+    z-index: 10001;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s var(--ease-spring);
+    max-width: 400px;
+}
+
+.easter-egg-message.visible {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.easter-egg-message p {
+    font-family: var(--font-display);
+    font-size: var(--text-3xl);
+    color: var(--color-primary);
+    margin: 0 0 var(--space-4);
+}
+
+.easter-egg-sub {
+    font-family: var(--font-sans) !important;
+    font-size: var(--text-base) !important;
+    color: var(--text-muted) !important;
+    line-height: var(--leading-relaxed);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   TIME-AWARE STYLING - The site knows when you visit
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* Dawn - soft, hopeful light */
+.time-dawn body::after {
+    background: radial-gradient(ellipse 600px 400px at 50% 0%, rgba(255, 180, 120, 0.08) 0%, transparent 70%);
+}
+
+/* Day - clear, energetic */
+.time-day body::after {
+    background: radial-gradient(ellipse 600px 400px at 50% 0%, rgba(232, 168, 71, 0.06) 0%, transparent 70%);
+}
+
+/* Dusk - warm, contemplative */
+.time-dusk body::after {
+    background: radial-gradient(ellipse 600px 400px at 50% 0%, rgba(200, 100, 80, 0.08) 0%, transparent 70%);
+}
+
+/* Night - deep, restful */
+.time-night body::after {
+    background: radial-gradient(ellipse 600px 400px at 50% 0%, rgba(100, 120, 180, 0.06) 0%, transparent 70%);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   NOW PAGE STYLES - What I'm doing right now
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.now-layout {
+    padding: var(--space-24) 0;
+}
+
+.now-container {
+    max-width: var(--width-prose);
+    margin: 0 auto;
+    padding: 0 var(--space-6);
+}
+
+.now-header {
+    margin-bottom: var(--space-16);
+    text-align: center;
+}
+
+.now-title {
+    font-family: var(--font-display);
+    font-size: var(--text-6xl);
+    margin-bottom: var(--space-4);
+}
+
+.now-updated {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+}
+
+.now-updated time {
+    color: var(--color-primary);
+}
+
+.now-section {
+    margin-bottom: var(--space-12);
+}
+
+.now-section-title {
+    font-family: var(--font-display);
+    font-size: var(--text-3xl);
+    color: var(--color-primary);
+    margin-bottom: var(--space-4);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.now-section-title::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    animation: pulse 2s ease infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+.now-content {
+    font-size: var(--text-lg);
+    line-height: var(--leading-loose);
+    color: var(--text-soft);
+}
+
+.now-content p {
+    margin-bottom: var(--space-4);
+}
+
+.now-list {
+    list-style: none;
+    padding: 0;
+}
+
+.now-list li {
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.now-list li::before {
+    content: '→';
+    color: var(--color-primary);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   COLOPHON PAGE STYLES - Celebrating self-hosting
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.colophon-layout {
+    padding: var(--space-24) 0;
+}
+
+.colophon-container {
+    max-width: var(--width-prose);
+    margin: 0 auto;
+    padding: 0 var(--space-6);
+}
+
+.colophon-header {
+    margin-bottom: var(--space-16);
+    text-align: center;
+}
+
+.colophon-title {
+    font-family: var(--font-display);
+    font-size: var(--text-5xl);
+    margin-bottom: var(--space-4);
+}
+
+.colophon-intro {
+    font-size: var(--text-xl);
+    color: var(--text-muted);
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.colophon-section {
+    margin-bottom: var(--space-12);
+    padding: var(--space-8);
+    background: var(--gradient-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+}
+
+.colophon-section-title {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    color: var(--color-primary);
+    margin-bottom: var(--space-4);
+}
+
+.colophon-stack {
+    display: grid;
+    gap: var(--space-4);
+}
+
+.colophon-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.colophon-item:last-child {
+    border-bottom: none;
+}
+
+.colophon-label {
+    color: var(--text-muted);
+}
+
+.colophon-value {
+    font-family: var(--font-mono);
+    color: var(--text-color);
+}
+
+.colophon-value a {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.colophon-value a:hover {
+    text-decoration: underline;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   LINKS/BLOGROLL STYLES - Community-minded
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.links-layout {
+    padding: var(--space-24) 0;
+}
+
+.links-container {
+    max-width: var(--width-content);
+    margin: 0 auto;
+    padding: 0 var(--space-6);
+}
+
+.links-header {
+    margin-bottom: var(--space-16);
+    text-align: center;
+}
+
+.links-title {
+    font-family: var(--font-display);
+    font-size: var(--text-6xl);
+    margin-bottom: var(--space-4);
+}
+
+.links-intro {
+    font-size: var(--text-xl);
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--space-6);
+}
+
+.link-card {
+    padding: var(--space-6);
+    background: var(--gradient-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    transition: all var(--duration-base) var(--ease-smooth);
+    text-decoration: none;
+    display: block;
+}
+
+.link-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.link-card-title {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    color: var(--text-color);
+    margin-bottom: var(--space-2);
+}
+
+.link-card-description {
+    font-size: var(--text-base);
+    color: var(--text-muted);
+    margin-bottom: var(--space-4);
+}
+
+.link-card-url {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--color-primary);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   RSS BADGE - Celebrating open standards
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.rss-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    background: rgba(255, 102, 0, 0.1);
+    border: 1px solid rgba(255, 102, 0, 0.3);
+    border-radius: var(--radius-full);
+    color: #FF6600;
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    text-decoration: none;
+    transition: all var(--duration-base) var(--ease-smooth);
+}
+
+.rss-badge:hover {
+    background: rgba(255, 102, 0, 0.2);
+    border-color: rgba(255, 102, 0, 0.5);
+    transform: translateY(-2px);
+}
+
+.rss-badge svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   REDUCED MOTION - Respecting preferences
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+}
+
+.reduce-motion .custom-cursor,
+.reduce-motion .custom-cursor-dot {
+    display: none;
+}

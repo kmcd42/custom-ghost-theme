@@ -1,7 +1,7 @@
 {
     "name": "warmth-tomorrow",
-    "description": "A fashion-forward, empathetic design system for Kasey McDonnell. Curious, compassionate, and focused on making great work that resonates.",
-    "version": "2.0.0",
+    "description": "A human, messy, playful, optimistic design system. The bicycle of the mind. Agency and community first.",
+    "version": "2.1.0",
     "private": true,
     "engines": {
         "ghost": ">=5.0.0"
@@ -26,6 +26,7 @@
     },
     "keywords": [
         "ghost",
+        "ghost-theme",
         "theme",
         "portfolio",
         "designer",

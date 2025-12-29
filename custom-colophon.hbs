@@ -1,0 +1,121 @@
+{{!< default}}
+{{!--
+Template Name: Colophon
+Description: How this site is made - celebrating self-hosting and agency
+
+A colophon is traditionally found at the end of a book, describing its production.
+This is the digital equivalent - a celebration of independence and craft.
+--}}
+
+{{#post}}
+<article class="colophon-layout {{post_class}}">
+
+    <div class="colophon-container">
+        {{!-- Header --}}
+        <header class="colophon-header reveal-on-scroll">
+            <h1 class="colophon-title">Colophon</h1>
+            <p class="colophon-intro">
+                How this corner of the internet is made.
+                A celebration of self-hosting, open standards, and digital independence.
+            </p>
+        </header>
+
+        {{!-- The Stack --}}
+        <section class="colophon-section reveal-on-scroll">
+            <h2 class="colophon-section-title">The Stack</h2>
+            <div class="colophon-stack">
+                <div class="colophon-item">
+                    <span class="colophon-label">Platform</span>
+                    <span class="colophon-value">
+                        <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
+                    </span>
+                </div>
+                <div class="colophon-item">
+                    <span class="colophon-label">Theme</span>
+                    <span class="colophon-value">Warmth at the Edge of Tomorrow (custom)</span>
+                </div>
+                <div class="colophon-item">
+                    <span class="colophon-label">Hosting</span>
+                    <span class="colophon-value">Self-hosted</span>
+                </div>
+                <div class="colophon-item">
+                    <span class="colophon-label">Domain</span>
+                    <span class="colophon-value">{{@site.url}}</span>
+                </div>
+            </div>
+        </section>
+
+        {{!-- Typography --}}
+        <section class="colophon-section reveal-on-scroll">
+            <h2 class="colophon-section-title">Typography</h2>
+            <div class="colophon-stack">
+                <div class="colophon-item">
+                    <span class="colophon-label">Display</span>
+                    <span class="colophon-value">
+                        <a href="https://fonts.google.com/specimen/Instrument+Serif" target="_blank" rel="noopener">Instrument Serif</a>
+                    </span>
+                </div>
+                <div class="colophon-item">
+                    <span class="colophon-label">Interface</span>
+                    <span class="colophon-value">
+                        <a href="https://fonts.google.com/specimen/Inter" target="_blank" rel="noopener">Inter</a>
+                    </span>
+                </div>
+                <div class="colophon-item">
+                    <span class="colophon-label">Body</span>
+                    <span class="colophon-value">
+                        <a href="https://fonts.google.com/specimen/Source+Serif+4" target="_blank" rel="noopener">Source Serif 4</a>
+                    </span>
+                </div>
+                <div class="colophon-item">
+                    <span class="colophon-label">Code</span>
+                    <span class="colophon-value">
+                        <a href="https://fonts.google.com/specimen/JetBrains+Mono" target="_blank" rel="noopener">JetBrains Mono</a>
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        {{!-- Values --}}
+        <section class="colophon-section reveal-on-scroll">
+            <h2 class="colophon-section-title">Values</h2>
+            <div class="colophon-values">
+                <p>This site is built with intention:</p>
+                <ul class="now-list">
+                    <li><strong>Self-hosted</strong> — I own my content and my data</li>
+                    <li><strong>Open standards</strong> — RSS, semantic HTML, no tracking</li>
+                    <li><strong>Accessible</strong> — WCAG guidelines, reduced motion support</li>
+                    <li><strong>Climate-aware</strong> — Lightweight, efficient, conscious</li>
+                    <li><strong>Human-first</strong> — No dark patterns, no surveillance</li>
+                </ul>
+            </div>
+        </section>
+
+        {{!-- Subscribe --}}
+        <section class="colophon-section reveal-on-scroll">
+            <h2 class="colophon-section-title">Subscribe</h2>
+            <div class="colophon-subscribe">
+                <p>Follow along via open standards:</p>
+                <div class="colophon-subscribe-options">
+                    <a href="{{@site.url}}/rss/" class="rss-badge">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1Z"/>
+                        </svg>
+                        <span>RSS Feed</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        {{!-- Additional content from editor --}}
+        {{#if content}}
+        <section class="colophon-extra reveal-on-scroll">
+            <div class="gh-content">
+                {{content}}
+            </div>
+        </section>
+        {{/if}}
+    </div>
+
+</article>
+{{/post}}

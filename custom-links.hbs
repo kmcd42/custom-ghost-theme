@@ -1,0 +1,53 @@
+{{!< default}}
+{{!--
+Template Name: Links / Blogroll
+Description: Sites I love - a community-minded collection of recommendations
+
+The blogroll is a beautiful, almost-lost tradition of the early web.
+It's about community over competition. Sharing over hoarding.
+These are the corners of the internet that inspire me.
+--}}
+
+{{#post}}
+<article class="links-layout {{post_class}}">
+
+    <div class="links-container">
+        {{!-- Header --}}
+        <header class="links-header reveal-on-scroll">
+            <h1 class="links-title kinetic-text">Links</h1>
+            <p class="links-intro">
+                Corners of the internet I love.
+                People making good things.
+                Ideas worth spreading.
+            </p>
+        </header>
+
+        {{!-- Main content with link cards --}}
+        {{!--
+            In the Ghost editor, use HTML cards with this structure:
+
+            <div class="links-grid">
+                <a href="https://example.com" class="link-card" target="_blank" rel="noopener">
+                    <h3 class="link-card-title">Site Name</h3>
+                    <p class="link-card-description">Why I love this site...</p>
+                    <span class="link-card-url">example.com</span>
+                </a>
+            </div>
+        --}}
+
+        <div class="links-body gh-content reveal-on-scroll">
+            {{content}}
+        </div>
+
+        {{!-- Footer --}}
+        <footer class="links-footer reveal-on-scroll">
+            <p class="links-note">
+                This is a <a href="https://blogroll.org" target="_blank" rel="noopener">blogroll</a> —
+                a tradition from the early web where we shared the sites we loved.
+                Community over competition.
+            </p>
+        </footer>
+    </div>
+
+</article>
+{{/post}}

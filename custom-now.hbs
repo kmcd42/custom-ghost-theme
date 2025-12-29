@@ -1,0 +1,67 @@
+{{!< default}}
+{{!--
+Template Name: Now
+Description: What I'm doing right now - a living, breathing snapshot
+Inspired by Derek Sivers' /now page movement, but warmer
+
+This page should be updated regularly. It's your current state.
+What are you working on? Reading? Wrestling with? Excited about?
+--}}
+
+{{#post}}
+<article class="now-layout {{post_class}}">
+
+    <div class="now-container">
+        {{!-- Header --}}
+        <header class="now-header reveal-on-scroll">
+            <h1 class="now-title kinetic-text">Now</h1>
+            <p class="now-updated">
+                Last updated <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMMM D, YYYY"}}</time>
+            </p>
+        </header>
+
+        {{!-- Main content from Ghost editor --}}
+        <div class="now-body gh-content reveal-on-scroll">
+            {{content}}
+        </div>
+
+        {{!-- Optional structured sections --}}
+        {{!-- These can be used in the Ghost editor with HTML cards --}}
+
+        {{!-- Example structure for the editor:
+
+        <section class="now-section">
+            <h2 class="now-section-title">Working on</h2>
+            <div class="now-content">
+                <p>Currently deep in a rebrand for a climate-focused nonprofit...</p>
+            </div>
+        </section>
+
+        <section class="now-section">
+            <h2 class="now-section-title">Reading</h2>
+            <ul class="now-list">
+                <li>Ministry for the Future by Kim Stanley Robinson</li>
+                <li>Design Justice by Sasha Costanza-Chock</li>
+            </ul>
+        </section>
+
+        <section class="now-section">
+            <h2 class="now-section-title">Thinking about</h2>
+            <div class="now-content">
+                <p>How design can be a tool for climate justice...</p>
+            </div>
+        </section>
+
+        --}}
+
+        {{!-- Footer with context --}}
+        <footer class="now-footer reveal-on-scroll">
+            <p class="now-context">
+                This is a <a href="https://nownownow.com/about" target="_blank" rel="noopener">/now page</a>.
+                It's a snapshot of what I'm focused on at this point in my life.
+            </p>
+        </footer>
+    </div>
+
+</article>
+{{/post}}
