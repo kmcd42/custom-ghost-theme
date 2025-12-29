@@ -261,7 +261,7 @@
     </main>
 
     {{!-- Footer --}}
-    {{#unless @custom.footer_style "=" "Hidden"}}
+    {{#match @custom.footer_style "!=" "Hidden"}}
     <footer class="gh-foot gh-outer {{#match @custom.footer_style "Expanded (Links + Bio)"}}gh-foot-expanded{{/match}}">
         <div class="gh-foot-inner">
             <div class="gh-foot-content">
@@ -306,7 +306,7 @@
             </div>
         </div>
     </footer>
-    {{/unless}}
+    {{/match}}
 
 </div>
 
