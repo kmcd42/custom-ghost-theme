@@ -72,6 +72,37 @@ body::after {
     color: var(--text-color);
 }
 
+/* Custom Scrollbar - Refined for dark theme */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-charcoal);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-slate);
+    border-radius: var(--radius-full);
+    border: 2px solid var(--color-charcoal);
+    transition: background var(--duration-fast) var(--ease-out);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-steel);
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: var(--color-primary);
+}
+
+/* Firefox scrollbar */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-slate) var(--color-charcoal);
+}
+
 /* ═══════════════════════════════════════════════════════════════════════════
    TYPOGRAPHY
    ═══════════════════════════════════════════════════════════════════════════ */
@@ -2678,21 +2709,131 @@ hr {
     animation-delay: 0.3s;
 }
 
+/* Staggered entrance animations for lists and grids */
+.anim-subtle .home-nav-link,
+.anim-subtle .portfolio-grid-item,
+.anim-subtle .home-minimal-link {
+    animation: fadeInUp 0.6s var(--ease-smooth) both;
+}
+
+.anim-playful .home-nav-link,
+.anim-playful .portfolio-grid-item,
+.anim-playful .home-minimal-link {
+    animation: fadeInUp 0.8s var(--ease-spring) both;
+}
+
+/* Stagger delays for children - elegant cascade effect */
+.home-nav-link:nth-child(1),
+.portfolio-grid-item:nth-child(1),
+.home-minimal-link:nth-child(1) { animation-delay: 0.1s; }
+.home-nav-link:nth-child(2),
+.portfolio-grid-item:nth-child(2),
+.home-minimal-link:nth-child(2) { animation-delay: 0.15s; }
+.home-nav-link:nth-child(3),
+.portfolio-grid-item:nth-child(3),
+.home-minimal-link:nth-child(3) { animation-delay: 0.2s; }
+.home-nav-link:nth-child(4),
+.portfolio-grid-item:nth-child(4),
+.home-minimal-link:nth-child(4) { animation-delay: 0.25s; }
+.home-nav-link:nth-child(5),
+.portfolio-grid-item:nth-child(5),
+.home-minimal-link:nth-child(5) { animation-delay: 0.3s; }
+.home-nav-link:nth-child(6),
+.portfolio-grid-item:nth-child(6),
+.home-minimal-link:nth-child(6) { animation-delay: 0.35s; }
+.home-nav-link:nth-child(n+7),
+.portfolio-grid-item:nth-child(n+7),
+.home-minimal-link:nth-child(n+7) { animation-delay: 0.4s; }
+
+/* Article content stagger */
+.post-content-body > * {
+    animation: fadeInUp 0.5s var(--ease-smooth) both;
+}
+
+.post-content-body > *:nth-child(1) { animation-delay: 0.05s; }
+.post-content-body > *:nth-child(2) { animation-delay: 0.1s; }
+.post-content-body > *:nth-child(3) { animation-delay: 0.15s; }
+.post-content-body > *:nth-child(n+4) { animation-delay: 0.2s; }
+
 /* ═══════════════════════════════════════════════════════════════════════════
    SUBTLE ENHANCEMENTS
    ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Image loading shimmer effect */
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* Wrapper for shimmer effect on images */
+.home-image-inner,
+.portfolio-grid-image,
+.split-image-container,
+.post-header-background {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-charcoal);
+}
+
+.home-image-inner::before,
+.portfolio-grid-image::before,
+.split-image-container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.03) 20%,
+        rgba(255, 255, 255, 0.06) 50%,
+        rgba(255, 255, 255, 0.03) 80%,
+        transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity var(--duration-slow) var(--ease-smooth);
+}
+
+/* Hide shimmer when image is loaded */
+.home-image-inner:has(img[complete]),
+.portfolio-grid-image:has(img[complete]),
+.split-image-container:has(img[complete]),
+.home-image-inner.loaded,
+.portfolio-grid-image.loaded,
+.split-image-container.loaded {
+    background: transparent;
+}
+
+.home-image-inner:has(img[complete])::before,
+.portfolio-grid-image:has(img[complete])::before,
+.split-image-container:has(img[complete])::before,
+.home-image-inner.loaded::before,
+.portfolio-grid-image.loaded::before,
+.split-image-container.loaded::before {
+    opacity: 0;
+}
 
 /* Smooth image loading */
 img {
     opacity: 1;
     transition: opacity var(--duration-slow) var(--ease-smooth);
+    position: relative;
+    z-index: 2;
 }
 
 img[loading="lazy"] {
     opacity: 0;
 }
 
-img[loading="lazy"].loaded {
+img[loading="lazy"].loaded,
+img.loaded {
     opacity: 1;
 }
 
