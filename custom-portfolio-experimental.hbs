@@ -1,0 +1,113 @@
+{{!< default}}
+{{!--
+Template Name: Portfolio Experimental
+Description: Break all the rules. Overlapping elements, tilted images,
+scattered typography, and playful chaos. For the bold.
+--}}
+
+{{#post}}
+<article class="experimental-layout {{post_class}}">
+
+    {{!-- Chaotic Hero --}}
+    <header class="experimental-hero">
+        <div class="experimental-hero-scatter">
+            {{!-- Scattered decorative elements --}}
+            <div class="experimental-deco experimental-deco-1">✦</div>
+            <div class="experimental-deco experimental-deco-2">◆</div>
+            <div class="experimental-deco experimental-deco-3">●</div>
+            <div class="experimental-deco experimental-deco-4">✱</div>
+        </div>
+
+        <div class="experimental-hero-content">
+            {{#if primary_tag}}
+                <span class="experimental-eyebrow">{{primary_tag.name}}</span>
+            {{/if}}
+
+            <h1 class="experimental-title kinetic-text">
+                {{!-- Split title into characters for animation --}}
+                {{title}}
+            </h1>
+
+            {{#if custom_excerpt}}
+                <p class="experimental-subtitle">{{custom_excerpt}}</p>
+            {{/if}}
+        </div>
+
+        {{#if feature_image}}
+        <div class="experimental-hero-image">
+            <div class="experimental-image-frame">
+                <img
+                    srcset="{{img_url feature_image size="m"}} 720w,
+                            {{img_url feature_image size="l"}} 1200w"
+                    sizes="(max-width: 768px) 90vw, 60vw"
+                    src="{{img_url feature_image size="l"}}"
+                    alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+                    loading="eager"
+                />
+            </div>
+            <div class="experimental-image-shadow"></div>
+        </div>
+        {{/if}}
+
+        <div class="experimental-meta-float">
+            <div class="experimental-meta-item">
+                <span class="experimental-meta-label">Year</span>
+                <span class="experimental-meta-value">{{date format="YYYY"}}</span>
+            </div>
+            {{#if reading_time}}
+            <div class="experimental-meta-item">
+                <span class="experimental-meta-label">Read</span>
+                <span class="experimental-meta-value">{{reading_time}}</span>
+            </div>
+            {{/if}}
+        </div>
+    </header>
+
+    {{!-- Content with Experimental Styling --}}
+    <div class="experimental-body gh-content">
+        {{content}}
+    </div>
+
+    {{!-- Floating Tags --}}
+    {{#if tags}}
+    <aside class="experimental-tags reveal-on-scroll">
+        {{#foreach tags}}
+            {{#unless internal}}
+                <a href="{{url}}" class="experimental-tag" style="--delay: {{@index}}">
+                    {{name}}
+                </a>
+            {{/unless}}
+        {{/foreach}}
+    </aside>
+    {{/if}}
+
+    {{!-- Playful Next Project --}}
+    {{#get "posts" filter="tag:portfolio+id:-{{id}}" limit="1" order="random"}}
+        {{#foreach posts}}
+            <a href="{{url}}" class="experimental-next reveal-on-scroll">
+                <div class="experimental-next-arrow">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </div>
+                <div class="experimental-next-content">
+                    <span class="experimental-next-label">Next up</span>
+                    <span class="experimental-next-title">{{title}}</span>
+                </div>
+                {{#if feature_image}}
+                    <div class="experimental-next-thumb">
+                        <img src="{{img_url feature_image size="s"}}" alt="" loading="lazy" />
+                    </div>
+                {{/if}}
+            </a>
+        {{/foreach}}
+    {{/get}}
+
+    {{!-- Signature --}}
+    <footer class="experimental-signature">
+        <div class="experimental-signature-line"></div>
+        <span class="experimental-signature-text">{{date format="MMM YYYY"}} · Made with curiosity</span>
+    </footer>
+
+</article>
+{{/post}}

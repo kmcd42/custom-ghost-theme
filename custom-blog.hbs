@@ -1,0 +1,39 @@
+{{!< default}}
+{{!--
+Template Name: Blog
+Description: Clean, minimal blog index. Image-free list with essential metadata.
+--}}
+
+<div class="blog-index">
+    <header class="blog-header reveal-on-scroll">
+        <h1 class="blog-title kinetic-text">{{#post}}{{title}}{{else}}Writing{{/post}}</h1>
+        {{#post}}
+            {{#if custom_excerpt}}
+                <p class="blog-intro">{{custom_excerpt}}</p>
+            {{/if}}
+        {{/post}}
+    </header>
+
+    <div class="blog-list">
+        {{#get "posts" filter="tag:-portfolio+tag:-photography" limit="all" include="tags"}}
+            {{#foreach posts}}
+                <article class="blog-item reveal-on-scroll">
+                    <a href="{{url}}" class="blog-item-link">
+                        <div class="blog-item-content">
+                            <h2 class="blog-item-title">{{title}}</h2>
+                            <div class="blog-item-meta">
+                                {{#if primary_tag}}
+                                    <span class="blog-item-tag">{{primary_tag.name}}</span>
+                                {{/if}}
+                                <span class="blog-item-reading-time">{{reading_time}}</span>
+                            </div>
+                        </div>
+                        <time class="blog-item-date" datetime="{{date format="YYYY-MM-DD"}}">
+                            {{date format="MMM D, YYYY"}}
+                        </time>
+                    </a>
+                </article>
+            {{/foreach}}
+        {{/get}}
+    </div>
+</div>

@@ -1,0 +1,95 @@
+{{!< default}}
+{{!--
+Template Name: Portfolio Magazine
+Description: Editorial magazine-style layout with dramatic typography,
+pull quotes, and asymmetric photo placements. Think Kinfolk meets Wallpaper*.
+--}}
+
+{{#post}}
+<article class="magazine-layout {{post_class}}">
+
+    {{!-- Dramatic Cover --}}
+    <header class="magazine-cover">
+        {{#if feature_image}}
+        <div class="magazine-cover-image">
+            <img
+                srcset="{{img_url feature_image size="l"}} 1200w,
+                        {{img_url feature_image size="xl"}} 2000w"
+                sizes="100vw"
+                src="{{img_url feature_image size="xl"}}"
+                alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+                loading="eager"
+            />
+            <div class="magazine-cover-overlay"></div>
+        </div>
+        {{/if}}
+
+        <div class="magazine-cover-content">
+            <div class="magazine-issue">
+                {{#if primary_tag}}
+                    <span class="magazine-tag">{{primary_tag.name}}</span>
+                {{/if}}
+                <span class="magazine-date">{{date format="MMMM YYYY"}}</span>
+            </div>
+
+            <h1 class="magazine-title kinetic-text">{{title}}</h1>
+
+            {{#if custom_excerpt}}
+                <p class="magazine-deck">{{custom_excerpt}}</p>
+            {{/if}}
+
+            <div class="magazine-byline">
+                {{#if primary_author}}
+                    <span>By {{primary_author.name}}</span>
+                {{/if}}
+            </div>
+        </div>
+
+        <div class="magazine-scroll-hint">
+            <span>Scroll to explore</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M19 12l-7 7-7-7"/>
+            </svg>
+        </div>
+    </header>
+
+    {{!-- Content with Magazine Styling --}}
+    <div class="magazine-body gh-content">
+        {{content}}
+    </div>
+
+    {{!-- Magazine Footer --}}
+    <footer class="magazine-footer">
+        <div class="magazine-footer-inner">
+            {{#if tags}}
+                <div class="magazine-topics">
+                    <span class="magazine-topics-label">Topics</span>
+                    <div class="magazine-topics-list">
+                        {{#foreach tags}}
+                            {{#unless internal}}
+                                <a href="{{url}}" class="magazine-topic">{{name}}</a>
+                            {{/unless}}
+                        {{/foreach}}
+                    </div>
+                </div>
+            {{/if}}
+        </div>
+    </footer>
+
+    {{!-- Next Project Teaser --}}
+    {{#get "posts" filter="tag:portfolio+id:-{{id}}" limit="1" order="random"}}
+        {{#foreach posts}}
+            <a href="{{url}}" class="magazine-next">
+                <span class="magazine-next-label">Next Project</span>
+                <span class="magazine-next-title">{{title}}</span>
+                {{#if feature_image}}
+                    <div class="magazine-next-image">
+                        <img src="{{img_url feature_image size="m"}}" alt="" loading="lazy" />
+                    </div>
+                {{/if}}
+            </a>
+        {{/foreach}}
+    {{/get}}
+
+</article>
+{{/post}}

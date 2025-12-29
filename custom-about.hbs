@@ -1,13 +1,12 @@
 {{!< default}}
 {{!--
-    Custom Template: About
-    A living biography - work history as journey, not just a list.
-    Integrates photography and personal story.
+Template Name: About
+Description: Your personal story. All content is editable through Ghost.
+Use the Ghost editor to write your story, add images, and structure your content.
 --}}
 
 {{#post}}
 <article class="about-page">
-    {{!-- Hero Section --}}
     <header class="about-hero">
         <div class="about-hero-content">
             <h1 class="about-hero-title kinetic-text">{{title}}</h1>
@@ -32,7 +31,6 @@
         {{/if}}
     </header>
 
-    {{!-- Story Section --}}
     <section class="about-story reveal-on-scroll">
         <div class="about-story-inner gh-canvas">
             <div class="about-story-content gh-content">
@@ -41,39 +39,10 @@
         </div>
     </section>
 
-    {{!-- Work Journey Section --}}
-    <section class="about-journey reveal-on-scroll">
-        <div class="about-journey-inner">
-            <h2 class="about-section-title">The Journey</h2>
-            <p class="about-section-intro">Where I've been, what I've made, how I've grown.</p>
-
-            <div class="about-timeline">
-                {{!-- Timeline items - these would typically come from the page content
-                     but we provide visual structure here --}}
-                <div class="about-timeline-track"></div>
-
-                <div class="about-timeline-item reveal-on-scroll" style="--item-index: 0">
-                    <div class="about-timeline-marker">
-                        <span class="about-timeline-year">Now</span>
-                    </div>
-                    <div class="about-timeline-content">
-                        <h3>Current Chapter</h3>
-                        <p class="about-timeline-role">Independent Creative</p>
-                        <p class="about-timeline-desc">Bringing together design, writing, and strategy for clients who care about craft.</p>
-                    </div>
-                </div>
-
-                {{!-- More timeline items would be added here via Ghost content --}}
-            </div>
-        </div>
-    </section>
-
-    {{!-- Photography Section --}}
+    {{!-- Photography section - pulls from photography tag --}}
     <section class="about-photos reveal-on-scroll">
         <div class="about-photos-inner">
             <h2 class="about-section-title">Through My Lens</h2>
-            <p class="about-section-intro">The world as I see it.</p>
-
             <div class="about-photos-grid">
                 {{#get "posts" filter="tag:photography" limit="6" include="tags"}}
                     {{#foreach posts}}
@@ -84,90 +53,17 @@
                                 alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
                                 loading="lazy"
                             />
-                            <div class="about-photos-overlay">
-                                <span>{{title}}</span>
-                            </div>
                         </a>
                         {{/if}}
                     {{/foreach}}
                 {{/get}}
             </div>
-
             <a href="/photography/" class="about-photos-link">
                 <span>Explore all photography</span>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>
             </a>
-        </div>
-    </section>
-
-    {{!-- Values Section --}}
-    <section class="about-values reveal-on-scroll">
-        <div class="about-values-inner gh-canvas">
-            <h2 class="about-section-title">What I Believe</h2>
-
-            <div class="about-values-grid">
-                <div class="about-value-card">
-                    <div class="about-value-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                        </svg>
-                    </div>
-                    <h3>Craft Over Speed</h3>
-                    <p>Good work takes time. I'd rather make something that lasts than something that ships.</p>
-                </div>
-
-                <div class="about-value-card">
-                    <div class="about-value-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <circle cx="12" cy="12" r="10"/>
-                            <path d="M12 6v6l4 2"/>
-                        </svg>
-                    </div>
-                    <h3>Human First</h3>
-                    <p>Technology should serve people, not the other way around. Every design decision considers the human on the other end.</p>
-                </div>
-
-                <div class="about-value-card">
-                    <div class="about-value-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-                        </svg>
-                    </div>
-                    <h3>Climate Conscious</h3>
-                    <p>Born at 366ppm. Every project considers its footprint. Lighter, faster, more thoughtful.</p>
-                </div>
-
-                <div class="about-value-card">
-                    <div class="about-value-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8zM6 1v3M10 1v3M14 1v3"/>
-                        </svg>
-                    </div>
-                    <h3>Community Minded</h3>
-                    <p>Open web, open source, open standards. We build better things together.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    {{!-- Connect Section --}}
-    <section class="about-connect reveal-on-scroll">
-        <div class="about-connect-inner">
-            <h2 class="about-section-title">Let's Connect</h2>
-            <p class="about-section-intro">I'm always interested in meaningful conversations about design, creativity, and the intersection of technology and humanity.</p>
-
-            <div class="about-connect-links">
-                <a href="/links/" class="about-connect-card">
-                    <span class="about-connect-label">All My Links</span>
-                    <span class="about-connect-action">Find me everywhere</span>
-                </a>
-                <a href="mailto:hello@kaseymcdonnell.co.nz" class="about-connect-card">
-                    <span class="about-connect-label">Email</span>
-                    <span class="about-connect-action">Say hello</span>
-                </a>
-            </div>
         </div>
     </section>
 </article>
