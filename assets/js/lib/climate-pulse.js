@@ -107,11 +107,19 @@
         }));
     }
 
-    // Initialize when DOM is ready
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', createClimatePulse);
-    } else {
+    // Initialize when DOM is ready - only if climate pulse is enabled
+    function init() {
+        // Check if climate pulse is enabled via body class
+        if (!document.body.classList.contains('has-climate-pulse')) {
+            return;
+        }
         createClimatePulse();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
     }
 
 })();

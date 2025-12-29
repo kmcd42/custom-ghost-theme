@@ -196,7 +196,8 @@
     {{#match @custom.homepage_style "Full Bleed (Immersive Image)"}}home-fullbleed{{/match}}
     {{#match @custom.homepage_style "Minimal Text (Words First)"}}home-minimal{{/match}}
     {{#unless @custom.show_portfolio_excerpts}}hide-excerpts{{/unless}}
-    {{#if @custom.show_reading_progress}}has-reading-progress{{/if}}">
+    {{#if @custom.show_reading_progress}}has-reading-progress{{/if}}
+    {{#if @custom.climate_signature}}has-climate-pulse{{/if}}">
 
 <div class="site-wrapper">
 
@@ -315,16 +316,8 @@
     {{> "pswp"}}
 {{/is}}
 
-{{!-- Main JavaScript --}}
+{{!-- Main JavaScript (includes playful interactions and climate pulse) --}}
 <script src="{{asset "built/main.min.js"}}"></script>
-
-{{!-- Playful Interactions - The Human Touch --}}
-<script src="{{asset "js/playful-interactions.js"}}"></script>
-
-{{!-- Climate Pulse - Living connection to our atmosphere --}}
-{{#if @custom.climate_signature}}
-<script src="{{asset "js/climate-pulse.js"}}"></script>
-{{/if}}
 
 {{!-- Reading Progress Script --}}
 {{#if @custom.show_reading_progress}}
