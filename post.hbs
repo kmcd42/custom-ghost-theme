@@ -1,21 +1,119 @@
 {{!< default}}
+{{!--
+    Post Template - Article detail page
+    Supports multiple header styles via custom settings
+--}}
 
 {{#post}}
 <article class="post-content {{post_class}}">
 
-    <header class="post-content-header gh-canvas">
-        <h1 class="post-content-title">{{title}}</h1>
-        {{#if custom_excerpt}}
-            <p class="post-content-excerpt">{{custom_excerpt}}</p>
+    {{#match @custom.post_header_style "Full Bleed Image"}}
+        {{!-- Full bleed header with image background --}}
+        {{#if feature_image}}
+            <header class="post-header-fullbleed">
+                <div class="post-header-background">
+                    <img
+                        srcset="{{img_url feature_image size="l"}} 1200w,
+                                {{img_url feature_image size="xl"}} 2000w"
+                        sizes="100vw"
+                        src="{{img_url feature_image size="xl"}}"
+                        alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+                    />
+                    <div class="post-header-overlay"></div>
+                </div>
+                <div class="post-header-content">
+                    {{#if primary_tag}}
+                        <a href="{{primary_tag.url}}" class="post-header-tag">{{primary_tag.name}}</a>
+                    {{/if}}
+                    <h1 class="post-content-title">{{title}}</h1>
+                    {{#if custom_excerpt}}
+                        <p class="post-content-excerpt">{{custom_excerpt}}</p>
+                    {{/if}}
+                    <div class="post-header-meta">
+                        <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMMM D, YYYY"}}</time>
+                        {{#if reading_time}}
+                            <span>·</span>
+                            <span>{{reading_time}} min read</span>
+                        {{/if}}
+                    </div>
+                </div>
+            </header>
+        {{else}}
+            <header class="post-content-header gh-canvas">
+                <h1 class="post-content-title">{{title}}</h1>
+                {{#if custom_excerpt}}
+                    <p class="post-content-excerpt">{{custom_excerpt}}</p>
+                {{/if}}
+            </header>
         {{/if}}
+
+    {{else match @custom.post_header_style "Left Aligned"}}
+        {{!-- Left-aligned header --}}
+        <header class="post-header-left gh-canvas">
+            {{#if primary_tag}}
+                <a href="{{primary_tag.url}}" class="post-header-tag">{{primary_tag.name}}</a>
+            {{/if}}
+            <h1 class="post-content-title">{{title}}</h1>
+            {{#if custom_excerpt}}
+                <p class="post-content-excerpt">{{custom_excerpt}}</p>
+            {{/if}}
+            <div class="post-header-meta">
+                <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMMM D, YYYY"}}</time>
+                {{#if reading_time}}
+                    <span>·</span>
+                    <span>{{reading_time}} min read</span>
+                {{/if}}
+            </div>
+        </header>
         {{> "feature-image"}}
-    </header>
 
+    {{else}}
+        {{!-- Default: Centered Classic --}}
+        <header class="post-content-header gh-canvas">
+            {{#if primary_tag}}
+                <a href="{{primary_tag.url}}" class="post-header-tag">{{primary_tag.name}}</a>
+            {{/if}}
+            <h1 class="post-content-title">{{title}}</h1>
+            {{#if custom_excerpt}}
+                <p class="post-content-excerpt">{{custom_excerpt}}</p>
+            {{/if}}
+            <div class="post-header-meta">
+                <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMMM D, YYYY"}}</time>
+                {{#if reading_time}}
+                    <span>·</span>
+                    <span>{{reading_time}} min read</span>
+                {{/if}}
+            </div>
+        </header>
+        {{> "feature-image"}}
+    {{/match}}
 
+    {{!-- Article Body --}}
     <div class="post-content-body gh-content gh-canvas">
         {{content}}
     </div>
 
+    {{!-- Author Card --}}
+    {{#if primary_author}}
+        <section class="post-author-card gh-canvas">
+            <div class="post-author-inner">
+                {{#if primary_author.profile_image}}
+                    <img class="post-author-image" src="{{primary_author.profile_image}}" alt="{{primary_author.name}}" loading="lazy" />
+                {{/if}}
+                <div class="post-author-content">
+                    <span class="post-author-label">Written by</span>
+                    <h4 class="post-author-name">
+                        <a href="{{primary_author.url}}">{{primary_author.name}}</a>
+                    </h4>
+                    {{#if primary_author.bio}}
+                        <p class="post-author-bio">{{primary_author.bio}}</p>
+                    {{/if}}
+                </div>
+            </div>
+        </section>
+    {{/if}}
+
+    {{!-- Comments --}}
     {{#if comments}}
         <div class="gh-comments gh-canvas">
             {{comments}}
