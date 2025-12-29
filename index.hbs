@@ -3,16 +3,26 @@
     HOMEPAGE - "Warmth at the Edge of Tomorrow"
     Three modes: Hero Split, Full Bleed, Minimal Text
     Each crafted to make a bold first impression
+
+    Now uses Ghost navigation for dynamic links
 --}}
 
 {{#match @custom.homepage_style "Full Bleed (Immersive Image)"}}
     {{!-- FULL BLEED MODE: Immersive, cinematic, image-first --}}
     <div class="home-fullbleed-layout">
         <div class="home-fullbleed-container">
-            {{!-- Background Image --}}
+            {{!-- Background Image with responsive srcset --}}
             <div class="home-fullbleed-background">
                 {{#if @site.cover_image}}
-                    <img src="{{@site.cover_image}}" alt="{{@site.title}}" />
+                    <img
+                        srcset="{{img_url @site.cover_image size="m"}} 720w,
+                                {{img_url @site.cover_image size="l"}} 1200w,
+                                {{img_url @site.cover_image size="xl"}} 2000w"
+                        sizes="100vw"
+                        src="{{img_url @site.cover_image size="xl"}}"
+                        alt="{{@site.title}}"
+                        loading="eager"
+                    />
                 {{else}}
                     <div class="home-fullbleed-gradient"></div>
                 {{/if}}
@@ -30,16 +40,18 @@
                         <h1 class="home-fullbleed-title">{{@site.description}}</h1>
                     {{/if}}
 
+                    {{!-- Use Ghost navigation for dynamic links --}}
                     <nav class="home-fullbleed-nav">
-                        <a href="/portfolio" class="home-fullbleed-link">
-                            <span>Explore Work</span>
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M5 12h14M12 5l7 7-7 7"/>
-                            </svg>
-                        </a>
-                        <a href="/about" class="home-fullbleed-link home-fullbleed-link-secondary">
-                            <span>About</span>
-                        </a>
+                        {{#foreach navigation limit="3"}}
+                            <a href="{{url}}" class="home-fullbleed-link{{#if @first}} home-fullbleed-link-primary{{else}} home-fullbleed-link-secondary{{/if}}">
+                                <span>{{label}}</span>
+                                {{#if @first}}
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                                {{/if}}
+                            </a>
+                        {{/foreach}}
                     </nav>
                 </div>
             </div>
@@ -76,17 +88,26 @@
                     </div>
                 </div>
 
+                {{!-- Use Ghost navigation for dynamic links --}}
                 <nav class="home-minimal-nav">
-                    <a href="/portfolio" class="home-minimal-link">Portfolio</a>
-                    <a href="/about" class="home-minimal-link">About</a>
-                    <a href="/contact" class="home-minimal-link">Contact</a>
+                    {{#foreach navigation}}
+                        <a href="{{url}}" class="home-minimal-link">{{label}}</a>
+                    {{/foreach}}
                 </nav>
             </div>
 
-            {{!-- Optional image aside --}}
+            {{!-- Optional image aside with responsive srcset --}}
             {{#if @site.cover_image}}
             <div class="home-minimal-image">
-                <img src="{{@site.cover_image}}" alt="" />
+                <img
+                    srcset="{{img_url @site.cover_image size="s"}} 400w,
+                            {{img_url @site.cover_image size="m"}} 720w,
+                            {{img_url @site.cover_image size="l"}} 1200w"
+                    sizes="(max-width: 768px) 100vw, 40vw"
+                    src="{{img_url @site.cover_image size="l"}}"
+                    alt=""
+                    loading="lazy"
+                />
             </div>
             {{/if}}
         </div>
@@ -96,11 +117,20 @@
     {{!-- HERO SPLIT MODE (default): Balanced image + statement --}}
     <div class="home-layout">
         <div class="home-container">
-            {{!-- Left: Hero Image --}}
+            {{!-- Left: Hero Image with responsive srcset --}}
             <div class="home-image">
                 <div class="home-image-inner">
                     {{#if @site.cover_image}}
-                        <img src="{{@site.cover_image}}" alt="{{@site.title}}" />
+                        <img
+                            srcset="{{img_url @site.cover_image size="s"}} 400w,
+                                    {{img_url @site.cover_image size="m"}} 720w,
+                                    {{img_url @site.cover_image size="l"}} 1200w,
+                                    {{img_url @site.cover_image size="xl"}} 2000w"
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                            src="{{img_url @site.cover_image size="xl"}}"
+                            alt="{{@site.title}}"
+                            loading="eager"
+                        />
                     {{else}}
                         <div class="home-image-placeholder">
                             <h1 class="home-placeholder-text">{{@site.title}}</h1>
@@ -120,10 +150,11 @@
                         <h1 class="home-description">{{@site.description}}</h1>
                     {{/if}}
 
+                    {{!-- Use Ghost navigation for dynamic links --}}
                     <nav class="home-nav">
-                        <a href="/portfolio" class="home-nav-link">portfolio</a>
-                        <a href="/about" class="home-nav-link">about</a>
-                        <a href="/contact" class="home-nav-link">contact</a>
+                        {{#foreach navigation}}
+                            <a href="{{url}}" class="home-nav-link">{{label}}</a>
+                        {{/foreach}}
                     </nav>
                 </div>
             </div>

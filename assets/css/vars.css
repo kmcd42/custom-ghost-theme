@@ -27,22 +27,22 @@
     --color-steel: #2A3544;
     --color-mist: #A3B1C6;
 
-    /* Base Colors */
+    /* Base Colors - WCAG AA compliant contrast ratios */
     --background-color: var(--color-midnight);
     --background-subtle: var(--color-charcoal);
     --text-color: #F7F8FA;
-    --text-muted: #8A9BB5;
-    --text-soft: rgba(247, 248, 250, 0.7);
-    --color-border: rgba(163, 177, 198, 0.12);
-    --color-border-light: rgba(163, 177, 198, 0.06);
+    --text-muted: #9FAFCA;           /* Improved: 5.2:1 contrast ratio */
+    --text-soft: rgba(247, 248, 250, 0.75);  /* Improved: better legibility */
+    --color-border: rgba(163, 177, 198, 0.15);
+    --color-border-light: rgba(163, 177, 198, 0.08);
 
-    /* Gradients - Living Color */
-    --gradient-sky: linear-gradient(135deg, #0A0E12 0%, #131820 40%, #1a2535 100%);
-    --gradient-dawn: linear-gradient(135deg, var(--color-midnight) 0%, #1C1A24 50%, #241C24 100%);
-    --gradient-ocean: linear-gradient(180deg, var(--color-midnight) 0%, #0D1C26 50%, var(--color-ocean) 100%);
-    --gradient-warmth: linear-gradient(135deg, rgba(232, 168, 71, 0.05) 0%, rgba(45, 155, 150, 0.03) 100%);
-    --gradient-card: linear-gradient(145deg, rgba(28, 37, 48, 0.5) 0%, rgba(19, 24, 32, 0.8) 100%);
-    --gradient-glow: radial-gradient(ellipse 600px 400px at 50% 0%, rgba(232, 168, 71, 0.06) 0%, transparent 70%);
+    /* Gradients - Living Color - MORE VISIBLE */
+    --gradient-sky: linear-gradient(135deg, #0C1015 0%, #141C28 30%, #1a2540 60%, #1E2845 100%);
+    --gradient-dawn: linear-gradient(135deg, #0F0D14 0%, #201828 40%, #2A1C30 70%, #1E1620 100%);
+    --gradient-ocean: linear-gradient(180deg, #070E14 0%, #0D1C28 40%, #0F2535 70%, #0A1E2C 100%);
+    --gradient-warmth: linear-gradient(135deg, rgba(232, 168, 71, 0.12) 0%, rgba(45, 155, 150, 0.08) 100%);
+    --gradient-card: linear-gradient(145deg, rgba(35, 45, 60, 0.6) 0%, rgba(20, 28, 40, 0.9) 100%);
+    --gradient-glow: radial-gradient(ellipse 800px 500px at 50% -100px, rgba(232, 168, 71, 0.2) 0%, rgba(200, 120, 60, 0.08) 40%, transparent 70%);
 
     /* ═══════════════════════════════════════════════════════════
        TYPOGRAPHY - Editorial Character
@@ -62,19 +62,19 @@
     --font-bold: 700;
     --font-heavy: 800;
 
-    /* Type Scale - Musical Intervals */
+    /* Type Scale - Musical Intervals with Fluid Sizing */
     --text-xs: 0.75rem;      /* 12px */
     --text-sm: 0.875rem;     /* 14px */
     --text-base: 1rem;       /* 16px */
     --text-lg: 1.125rem;     /* 18px */
     --text-xl: 1.25rem;      /* 20px */
-    --text-2xl: 1.5rem;      /* 24px */
-    --text-3xl: 1.875rem;    /* 30px */
-    --text-4xl: 2.25rem;     /* 36px */
-    --text-5xl: 3rem;        /* 48px */
-    --text-6xl: 3.75rem;     /* 60px */
-    --text-7xl: 4.5rem;      /* 72px */
-    --text-8xl: 6rem;        /* 96px */
+    --text-2xl: clamp(1.25rem, 1.125rem + 0.5vw, 1.5rem);       /* 20-24px */
+    --text-3xl: clamp(1.5rem, 1.25rem + 1vw, 1.875rem);         /* 24-30px */
+    --text-4xl: clamp(1.75rem, 1.5rem + 1.5vw, 2.25rem);        /* 28-36px */
+    --text-5xl: clamp(2rem, 1.5rem + 2.5vw, 3rem);              /* 32-48px */
+    --text-6xl: clamp(2.5rem, 2rem + 3vw, 3.75rem);             /* 40-60px */
+    --text-7xl: clamp(3rem, 2rem + 4vw, 4.5rem);                /* 48-72px */
+    --text-8xl: clamp(3.5rem, 2.5rem + 5vw, 6rem);              /* 56-96px */
 
     /* Line Heights */
     --leading-none: 1;
@@ -93,23 +93,29 @@
     --tracking-widest: 0.1em;
 
     /* ═══════════════════════════════════════════════════════════
-       SPACING & LAYOUT
+       SPACING & LAYOUT - Fluid with clamp()
        ═══════════════════════════════════════════════════════════ */
 
-    /* Spacing Scale */
+    /* Fixed Spacing Scale (for small, precise values) */
     --space-1: 0.25rem;
     --space-2: 0.5rem;
     --space-3: 0.75rem;
     --space-4: 1rem;
     --space-5: 1.25rem;
     --space-6: 1.5rem;
-    --space-8: 2rem;
-    --space-10: 2.5rem;
-    --space-12: 3rem;
-    --space-16: 4rem;
-    --space-20: 5rem;
-    --space-24: 6rem;
-    --space-32: 8rem;
+
+    /* Fluid Spacing Scale (scales smoothly between breakpoints) */
+    --space-8: clamp(1.5rem, 1.25rem + 1vw, 2rem);
+    --space-10: clamp(2rem, 1.5rem + 1.5vw, 2.5rem);
+    --space-12: clamp(2.5rem, 2rem + 2vw, 3rem);
+    --space-16: clamp(3rem, 2rem + 3vw, 4rem);
+    --space-20: clamp(3.5rem, 2.5rem + 4vw, 5rem);
+    --space-24: clamp(4rem, 3rem + 5vw, 6rem);
+    --space-32: clamp(5rem, 4rem + 6vw, 8rem);
+
+    /* Fluid Section Spacing */
+    --section-gap: clamp(4rem, 3rem + 8vw, 8rem);
+    --content-gap: clamp(2rem, 1.5rem + 3vw, 4rem);
 
     /* Container Widths */
     --width-prose: 720px;
@@ -176,17 +182,6 @@
 }
 
 /* ═══════════════════════════════════════════════════════════
-   CUSTOM FONT IMPORTS
+   FONTS - Loaded in HTML head with preload for performance
+   See default.hbs for font loading implementation
    ═══════════════════════════════════════════════════════════ */
-
-/* Instrument Serif - Editorial Display Font */
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
-
-/* Inter - Clean Interface Font */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-
-/* Source Serif 4 - Beautiful Body Text */
-@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400;1,8..60,500&display=swap');
-
-/* JetBrains Mono - Technical Code */
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');

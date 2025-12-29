@@ -53,23 +53,63 @@ body::before {
     z-index: 9999;
 }
 
-/* Top glow effect */
+/* Ambient glow effects - VISIBLE and atmospheric */
 body::after {
     content: '';
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 500px;
-    background: var(--gradient-glow);
+    inset: 0;
+    background:
+        /* Primary warm glow from top */
+        radial-gradient(ellipse 900px 600px at 50% -200px, rgba(232, 168, 71, 0.25) 0%, transparent 60%),
+        /* Secondary accent glow */
+        radial-gradient(ellipse 600px 400px at 80% 20%, rgba(200, 140, 80, 0.12) 0%, transparent 50%),
+        /* Subtle corner accent */
+        radial-gradient(ellipse 400px 300px at 10% 80%, rgba(45, 155, 150, 0.08) 0%, transparent 50%);
     pointer-events: none;
     z-index: -1;
+    animation: glowPulse 8s ease-in-out infinite alternate;
+}
+
+@keyframes glowPulse {
+    0% { opacity: 0.8; }
+    100% { opacity: 1; }
 }
 
 /* Selection styling */
 ::selection {
     background: rgba(232, 168, 71, 0.25);
     color: var(--text-color);
+}
+
+/* Custom Scrollbar - Refined for dark theme */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-charcoal);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-slate);
+    border-radius: var(--radius-full);
+    border: 2px solid var(--color-charcoal);
+    transition: background var(--duration-fast) var(--ease-out);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-steel);
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: var(--color-primary);
+}
+
+/* Firefox scrollbar */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-slate) var(--color-charcoal);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -2678,21 +2718,131 @@ hr {
     animation-delay: 0.3s;
 }
 
+/* Staggered entrance animations for lists and grids */
+.anim-subtle .home-nav-link,
+.anim-subtle .portfolio-grid-item,
+.anim-subtle .home-minimal-link {
+    animation: fadeInUp 0.6s var(--ease-smooth) both;
+}
+
+.anim-playful .home-nav-link,
+.anim-playful .portfolio-grid-item,
+.anim-playful .home-minimal-link {
+    animation: fadeInUp 0.8s var(--ease-spring) both;
+}
+
+/* Stagger delays for children - elegant cascade effect */
+.home-nav-link:nth-child(1),
+.portfolio-grid-item:nth-child(1),
+.home-minimal-link:nth-child(1) { animation-delay: 0.1s; }
+.home-nav-link:nth-child(2),
+.portfolio-grid-item:nth-child(2),
+.home-minimal-link:nth-child(2) { animation-delay: 0.15s; }
+.home-nav-link:nth-child(3),
+.portfolio-grid-item:nth-child(3),
+.home-minimal-link:nth-child(3) { animation-delay: 0.2s; }
+.home-nav-link:nth-child(4),
+.portfolio-grid-item:nth-child(4),
+.home-minimal-link:nth-child(4) { animation-delay: 0.25s; }
+.home-nav-link:nth-child(5),
+.portfolio-grid-item:nth-child(5),
+.home-minimal-link:nth-child(5) { animation-delay: 0.3s; }
+.home-nav-link:nth-child(6),
+.portfolio-grid-item:nth-child(6),
+.home-minimal-link:nth-child(6) { animation-delay: 0.35s; }
+.home-nav-link:nth-child(n+7),
+.portfolio-grid-item:nth-child(n+7),
+.home-minimal-link:nth-child(n+7) { animation-delay: 0.4s; }
+
+/* Article content stagger */
+.post-content-body > * {
+    animation: fadeInUp 0.5s var(--ease-smooth) both;
+}
+
+.post-content-body > *:nth-child(1) { animation-delay: 0.05s; }
+.post-content-body > *:nth-child(2) { animation-delay: 0.1s; }
+.post-content-body > *:nth-child(3) { animation-delay: 0.15s; }
+.post-content-body > *:nth-child(n+4) { animation-delay: 0.2s; }
+
 /* ═══════════════════════════════════════════════════════════════════════════
    SUBTLE ENHANCEMENTS
    ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Image loading shimmer effect */
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* Wrapper for shimmer effect on images */
+.home-image-inner,
+.portfolio-grid-image,
+.split-image-container,
+.post-header-background {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-charcoal);
+}
+
+.home-image-inner::before,
+.portfolio-grid-image::before,
+.split-image-container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.03) 20%,
+        rgba(255, 255, 255, 0.06) 50%,
+        rgba(255, 255, 255, 0.03) 80%,
+        transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity var(--duration-slow) var(--ease-smooth);
+}
+
+/* Hide shimmer when image is loaded */
+.home-image-inner:has(img[complete]),
+.portfolio-grid-image:has(img[complete]),
+.split-image-container:has(img[complete]),
+.home-image-inner.loaded,
+.portfolio-grid-image.loaded,
+.split-image-container.loaded {
+    background: transparent;
+}
+
+.home-image-inner:has(img[complete])::before,
+.portfolio-grid-image:has(img[complete])::before,
+.split-image-container:has(img[complete])::before,
+.home-image-inner.loaded::before,
+.portfolio-grid-image.loaded::before,
+.split-image-container.loaded::before {
+    opacity: 0;
+}
 
 /* Smooth image loading */
 img {
     opacity: 1;
     transition: opacity var(--duration-slow) var(--ease-smooth);
+    position: relative;
+    z-index: 2;
 }
 
 img[loading="lazy"] {
     opacity: 0;
 }
 
-img[loading="lazy"].loaded {
+img[loading="lazy"].loaded,
+img.loaded {
     opacity: 1;
 }
 
@@ -3036,4 +3186,595 @@ img[loading="lazy"].loaded {
         flex-direction: column;
         gap: var(--space-3);
     }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   EXPERIMENTAL: HUMAN, MESSY, PLAYFUL, OPTIMISTIC
+   The bicycle of the mind. Agency and community first.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   CLIMATE PULSE - A living connection to our atmosphere
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.climate-pulse {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-1);
+    padding: var(--space-3) var(--space-4);
+    background: rgba(232, 168, 71, 0.08);
+    background: linear-gradient(135deg, rgba(232, 168, 71, 0.1) 0%, rgba(232, 100, 71, 0.05) 100%);
+    border: 1px solid rgba(232, 168, 71, 0.2);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-4);
+    cursor: help;
+    transition: all var(--duration-base) var(--ease-smooth);
+}
+
+.climate-pulse:hover {
+    background: rgba(232, 168, 71, 0.12);
+    border-color: rgba(232, 168, 71, 0.3);
+    transform: translateY(-2px);
+}
+
+.climate-pulse-inner {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-1);
+}
+
+.climate-pulse-current {
+    font-family: var(--font-mono);
+    font-size: var(--text-2xl);
+    font-weight: var(--font-bold);
+    color: var(--color-climate-accent, var(--color-primary));
+    letter-spacing: -0.02em;
+}
+
+.climate-pulse-unit {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.climate-pulse-delta {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: rgba(232, 100, 71, 0.9);
+    margin-left: var(--space-2);
+}
+
+.climate-pulse-label {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   CUSTOM CURSOR - Your presence on the page
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.custom-cursor,
+.custom-cursor-dot {
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10000;
+    mix-blend-mode: difference;
+}
+
+.custom-cursor {
+    width: 40px;
+    height: 40px;
+    margin-left: -20px;
+    margin-top: -20px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    transition: width 0.2s, height 0.2s, margin 0.2s, border-color 0.2s;
+}
+
+.custom-cursor-dot {
+    width: 6px;
+    height: 6px;
+    margin-left: -3px;
+    margin-top: -3px;
+    background: white;
+    border-radius: 50%;
+}
+
+.custom-cursor.cursor-hover {
+    width: 60px;
+    height: 60px;
+    margin-left: -30px;
+    margin-top: -30px;
+    border-color: var(--color-primary);
+}
+
+.custom-cursor.cursor-view {
+    width: 80px;
+    height: 80px;
+    margin-left: -40px;
+    margin-top: -40px;
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
+/* Hide default cursor when custom cursor is active */
+body:has(.custom-cursor) {
+    cursor: none;
+}
+
+body:has(.custom-cursor) a,
+body:has(.custom-cursor) button {
+    cursor: none;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   KINETIC TYPOGRAPHY - Text that breathes
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.kinetic-word {
+    display: inline-block;
+    transition: transform 0.4s var(--ease-spring), opacity 0.4s ease;
+}
+
+.kinetic-text:hover .kinetic-word {
+    animation: wordBreathe 0.6s ease infinite;
+    animation-delay: calc(var(--word-index) * 0.05s);
+}
+
+@keyframes wordBreathe {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-2px); }
+}
+
+/* Reveal on scroll */
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s var(--ease-smooth);
+}
+
+.reveal-on-scroll.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-child {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s ease, transform 0.4s var(--ease-smooth);
+}
+
+.reveal-child.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   ORGANIC ELEMENTS - Imperfect, human, hand-made feeling
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* Subtle rotation for organic feel */
+.portfolio-grid-item {
+    transform: rotate(var(--organic-rotation, 0deg));
+}
+
+/* Hand-drawn underline effect */
+.organic-underline {
+    position: relative;
+    text-decoration: none;
+}
+
+.organic-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: var(--underline-offset, 2px);
+    width: 100%;
+    height: 2px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s var(--ease-smooth);
+    /* Organic waviness via SVG filter would go here */
+}
+
+.organic-underline:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* Hand-drawn border (using SVG) */
+.organic-border {
+    position: relative;
+}
+
+.organic-border::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border: 2px solid var(--color-primary);
+    border-radius: 2px 4px 3px 5px / 5px 3px 4px 2px;
+    opacity: 0.5;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   MAGNETIC ELEMENTS - Playful hover response
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.magnetic {
+    transition: transform 0.3s var(--ease-smooth);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   EASTER EGG MESSAGE
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.easter-egg-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    background: var(--color-charcoal);
+    border: 1px solid var(--color-primary);
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+    text-align: center;
+    z-index: 10001;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s var(--ease-spring);
+    max-width: 400px;
+}
+
+.easter-egg-message.visible {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.easter-egg-message p {
+    font-family: var(--font-display);
+    font-size: var(--text-3xl);
+    color: var(--color-primary);
+    margin: 0 0 var(--space-4);
+}
+
+.easter-egg-sub {
+    font-family: var(--font-sans) !important;
+    font-size: var(--text-base) !important;
+    color: var(--text-muted) !important;
+    line-height: var(--leading-relaxed);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   TIME-AWARE STYLING - The site knows when you visit
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* Dawn - soft, hopeful light - pink/orange warmth */
+.time-dawn body::after {
+    background:
+        radial-gradient(ellipse 1000px 700px at 50% -200px, rgba(255, 160, 100, 0.3) 0%, transparent 55%),
+        radial-gradient(ellipse 600px 400px at 70% 10%, rgba(255, 120, 140, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse 400px 300px at 20% 90%, rgba(255, 180, 100, 0.1) 0%, transparent 50%);
+}
+
+/* Day - clear, energetic - warm amber */
+.time-day body::after {
+    background:
+        radial-gradient(ellipse 900px 600px at 50% -200px, rgba(232, 168, 71, 0.28) 0%, transparent 55%),
+        radial-gradient(ellipse 600px 400px at 80% 20%, rgba(200, 140, 80, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse 400px 300px at 10% 80%, rgba(45, 155, 150, 0.1) 0%, transparent 50%);
+}
+
+/* Dusk - warm, contemplative - orange/purple */
+.time-dusk body::after {
+    background:
+        radial-gradient(ellipse 1000px 700px at 50% -200px, rgba(220, 100, 80, 0.3) 0%, transparent 55%),
+        radial-gradient(ellipse 700px 500px at 20% 30%, rgba(180, 80, 140, 0.2) 0%, transparent 50%),
+        radial-gradient(ellipse 500px 300px at 80% 70%, rgba(255, 140, 80, 0.12) 0%, transparent 50%);
+}
+
+/* Night - deep, restful - blue/purple */
+.time-night body::after {
+    background:
+        radial-gradient(ellipse 900px 600px at 50% -200px, rgba(80, 100, 180, 0.25) 0%, transparent 55%),
+        radial-gradient(ellipse 600px 400px at 80% 30%, rgba(120, 80, 160, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse 400px 300px at 10% 80%, rgba(60, 120, 150, 0.1) 0%, transparent 50%);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   NOW PAGE STYLES - What I'm doing right now
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.now-layout {
+    padding: var(--space-24) 0;
+}
+
+.now-container {
+    max-width: var(--width-prose);
+    margin: 0 auto;
+    padding: 0 var(--space-6);
+}
+
+.now-header {
+    margin-bottom: var(--space-16);
+    text-align: center;
+}
+
+.now-title {
+    font-family: var(--font-display);
+    font-size: var(--text-6xl);
+    margin-bottom: var(--space-4);
+}
+
+.now-updated {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+}
+
+.now-updated time {
+    color: var(--color-primary);
+}
+
+.now-section {
+    margin-bottom: var(--space-12);
+}
+
+.now-section-title {
+    font-family: var(--font-display);
+    font-size: var(--text-3xl);
+    color: var(--color-primary);
+    margin-bottom: var(--space-4);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.now-section-title::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    animation: pulse 2s ease infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+.now-content {
+    font-size: var(--text-lg);
+    line-height: var(--leading-loose);
+    color: var(--text-soft);
+}
+
+.now-content p {
+    margin-bottom: var(--space-4);
+}
+
+.now-list {
+    list-style: none;
+    padding: 0;
+}
+
+.now-list li {
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.now-list li::before {
+    content: '→';
+    color: var(--color-primary);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   COLOPHON PAGE STYLES - Celebrating self-hosting
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.colophon-layout {
+    padding: var(--space-24) 0;
+}
+
+.colophon-container {
+    max-width: var(--width-prose);
+    margin: 0 auto;
+    padding: 0 var(--space-6);
+}
+
+.colophon-header {
+    margin-bottom: var(--space-16);
+    text-align: center;
+}
+
+.colophon-title {
+    font-family: var(--font-display);
+    font-size: var(--text-5xl);
+    margin-bottom: var(--space-4);
+}
+
+.colophon-intro {
+    font-size: var(--text-xl);
+    color: var(--text-muted);
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.colophon-section {
+    margin-bottom: var(--space-12);
+    padding: var(--space-8);
+    background: var(--gradient-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+}
+
+.colophon-section-title {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    color: var(--color-primary);
+    margin-bottom: var(--space-4);
+}
+
+.colophon-stack {
+    display: grid;
+    gap: var(--space-4);
+}
+
+.colophon-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.colophon-item:last-child {
+    border-bottom: none;
+}
+
+.colophon-label {
+    color: var(--text-muted);
+}
+
+.colophon-value {
+    font-family: var(--font-mono);
+    color: var(--text-color);
+}
+
+.colophon-value a {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.colophon-value a:hover {
+    text-decoration: underline;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   LINKS/BLOGROLL STYLES - Community-minded
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.links-layout {
+    padding: var(--space-24) 0;
+}
+
+.links-container {
+    max-width: var(--width-content);
+    margin: 0 auto;
+    padding: 0 var(--space-6);
+}
+
+.links-header {
+    margin-bottom: var(--space-16);
+    text-align: center;
+}
+
+.links-title {
+    font-family: var(--font-display);
+    font-size: var(--text-6xl);
+    margin-bottom: var(--space-4);
+}
+
+.links-intro {
+    font-size: var(--text-xl);
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--space-6);
+}
+
+.link-card {
+    padding: var(--space-6);
+    background: var(--gradient-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    transition: all var(--duration-base) var(--ease-smooth);
+    text-decoration: none;
+    display: block;
+}
+
+.link-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.link-card-title {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    color: var(--text-color);
+    margin-bottom: var(--space-2);
+}
+
+.link-card-description {
+    font-size: var(--text-base);
+    color: var(--text-muted);
+    margin-bottom: var(--space-4);
+}
+
+.link-card-url {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--color-primary);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   RSS BADGE - Celebrating open standards
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.rss-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    background: rgba(255, 102, 0, 0.1);
+    border: 1px solid rgba(255, 102, 0, 0.3);
+    border-radius: var(--radius-full);
+    color: #FF6600;
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    text-decoration: none;
+    transition: all var(--duration-base) var(--ease-smooth);
+}
+
+.rss-badge:hover {
+    background: rgba(255, 102, 0, 0.2);
+    border-color: rgba(255, 102, 0, 0.5);
+    transform: translateY(-2px);
+}
+
+.rss-badge svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   REDUCED MOTION - Respecting preferences
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+}
+
+.reduce-motion .custom-cursor,
+.reduce-motion .custom-cursor-dot {
+    display: none;
 }

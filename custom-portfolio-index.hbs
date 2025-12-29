@@ -18,7 +18,7 @@ Description: A stunning portfolio gallery with asymmetric grid, hover effects, a
     {{!-- Portfolio Grid --}}
     <div class="portfolio-grid" role="list">
         {{!-- Get all posts tagged with "portfolio" --}}
-        {{#get "posts" filter="tag:portfolio" limit="all" include="tags"}}
+        {{#get "posts" filter="tag:portfolio" limit="50" include="tags"}}
             {{#foreach posts}}
                 <article class="portfolio-grid-item" role="listitem">
                     <a href="{{url}}" class="portfolio-grid-link" aria-label="View project: {{title}}">

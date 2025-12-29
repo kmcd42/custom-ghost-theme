@@ -18,6 +18,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
+    {{!-- Font Loading - Non-blocking with display=swap --}}
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&display=swap"></noscript>
+
     {{!-- Styles --}}
     <link rel="stylesheet" type="text/css" href="{{asset "built/screen.css"}}" />
 
@@ -191,7 +196,8 @@
     {{#match @custom.homepage_style "Full Bleed (Immersive Image)"}}home-fullbleed{{/match}}
     {{#match @custom.homepage_style "Minimal Text (Words First)"}}home-minimal{{/match}}
     {{#unless @custom.show_portfolio_excerpts}}hide-excerpts{{/unless}}
-    {{#if @custom.show_reading_progress}}has-reading-progress{{/if}}">
+    {{#if @custom.show_reading_progress}}has-reading-progress{{/if}}
+    {{#if @custom.climate_signature}}has-climate-pulse{{/if}}">
 
 <div class="site-wrapper">
 
@@ -256,7 +262,7 @@
     </main>
 
     {{!-- Footer --}}
-    {{#unless @custom.footer_style "=" "Hidden"}}
+    {{#match @custom.footer_style "!=" "Hidden"}}
     <footer class="gh-foot gh-outer {{#match @custom.footer_style "Expanded (Links + Bio)"}}gh-foot-expanded{{/match}}">
         <div class="gh-foot-inner">
             <div class="gh-foot-content">
@@ -273,6 +279,13 @@
                 {{/match}}
 
                 <div class="gh-foot-social-links">
+                    {{!-- RSS - Open standards, community first --}}
+                    <a href="{{@site.url}}/rss/" class="rss-badge" aria-label="RSS Feed">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1Z"/>
+                        </svg>
+                        <span>RSS</span>
+                    </a>
                     <a href="https://www.linkedin.com/in/kaseydesign/" target="_blank" rel="noopener" aria-label="LinkedIn">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
                             <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/>
@@ -294,7 +307,7 @@
             </div>
         </div>
     </footer>
-    {{/unless}}
+    {{/match}}
 
 </div>
 
@@ -303,7 +316,7 @@
     {{> "pswp"}}
 {{/is}}
 
-{{!-- Main JavaScript --}}
+{{!-- Main JavaScript (includes playful interactions and climate pulse) --}}
 <script src="{{asset "built/main.min.js"}}"></script>
 
 {{!-- Reading Progress Script --}}

@@ -19,7 +19,7 @@ Description: Gallery-style landing page showing photography posts in 1/3-width c
 
     {{!-- Photography post grid --}}
     {{!-- This fetches posts tagged with "photography" --}}
-    {{#get "posts" limit="all" filter="tag:photography" include="tags,authors"}}
+    {{#get "posts" limit="50" filter="tag:photography" include="tags,authors"}}
         {{#if posts}}
             <div class="portfolio-grid">
                 {{#foreach posts}}
