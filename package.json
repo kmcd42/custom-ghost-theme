@@ -1,7 +1,7 @@
 {
-    "name": "london",
-    "description": "A minimum, image-centric theme for Ghost.",
-    "version": "1.0.6",
+    "name": "warmth-tomorrow",
+    "description": "A fashion-forward, empathetic design system for Kasey McDonnell. Curious, compassionate, and focused on making great work that resonates.",
+    "version": "2.0.0",
     "private": true,
     "engines": {
         "ghost": ">=5.0.0"
@@ -12,31 +12,33 @@
         "mobile": "assets/screenshot-mobile.jpg"
     },
     "author": {
-        "name": "Ghost Foundation",
-        "email": "hello@ghost.org",
-        "url": "https://ghost.org"
+        "name": "Kasey McDonnell",
+        "email": "hello@kaseymcdonnell.co.nz",
+        "url": "https://kaseymcdonnell.co.nz"
     },
     "gpm": {
         "type": "theme",
         "categories": [
-            "Minimal",
-            "Magazine"
+            "Portfolio",
+            "Magazine",
+            "Photography"
         ]
     },
     "keywords": [
         "ghost",
         "theme",
-        "ghost-theme"
+        "portfolio",
+        "designer",
+        "creative",
+        "editorial",
+        "climate"
     ],
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/TryGhost/London.git"
-    },
-    "bugs": "https://github.com/TryGhost/London/issues",
-    "docs": "https://london.ghost.io/about/",
     "config": {
-        "posts_per_page": 15,
+        "posts_per_page": 12,
         "image_sizes": {
+            "xxs": {
+                "width": 50
+            },
             "xs": {
                 "width": 100
             },
@@ -44,37 +46,172 @@
                 "width": 300
             },
             "m": {
-                "width": 600
+                "width": 720
             },
             "l": {
                 "width": 1200
             },
             "xl": {
                 "width": 2000
+            },
+            "xxl": {
+                "width": 2800
             }
         },
-        "card_assets": true,
+        "card_assets": {
+            "exclude": ["audio", "video", "product", "signup"]
+        },
         "custom": {
+            "site_mood": {
+                "type": "select",
+                "options": [
+                    "Midnight (Deep & Warm)",
+                    "Dawn (Soft & Hopeful)",
+                    "Ocean (Teal & Contemplative)"
+                ],
+                "default": "Midnight (Deep & Warm)",
+                "group": "design"
+            },
+            "accent_style": {
+                "type": "select",
+                "options": [
+                    "Warm Amber",
+                    "Soft Copper",
+                    "Climate Teal"
+                ],
+                "default": "Warm Amber",
+                "group": "design"
+            },
+            "typography_style": {
+                "type": "select",
+                "options": [
+                    "Editorial (Serif headlines)",
+                    "Modern (Sans-serif headlines)",
+                    "Mixed (Serif body, sans headlines)"
+                ],
+                "default": "Editorial (Serif headlines)",
+                "group": "design"
+            },
             "navigation_layout": {
                 "type": "select",
-                "options": ["Logo on the left", "Logo in the middle", "Stacked"],
-                "default": "Logo on the left"
+                "options": [
+                    "Floating Glass",
+                    "Minimal Line",
+                    "Bold Statement"
+                ],
+                "default": "Floating Glass",
+                "group": "design"
             },
-            "title_font": {
+            "homepage_style": {
                 "type": "select",
                 "options": [
-                    "Modern sans-serif",
-                    "Elegant serif"
+                    "Hero Split (Image + Statement)",
+                    "Full Bleed (Immersive Image)",
+                    "Minimal Text (Words First)"
                 ],
-                "default": "Elegant serif"
+                "default": "Hero Split (Image + Statement)",
+                "group": "homepage"
             },
-            "body_font": {
+            "homepage_image_ratio": {
                 "type": "select",
                 "options": [
-                    "Modern sans-serif",
-                    "Elegant serif"
+                    "Portrait (4:5)",
+                    "Square (1:1)",
+                    "Landscape (16:10)"
                 ],
-                "default": "Elegant serif"
+                "default": "Portrait (4:5)",
+                "group": "homepage"
+            },
+            "show_homepage_tagline": {
+                "type": "boolean",
+                "default": true,
+                "group": "homepage"
+            },
+            "portfolio_layout": {
+                "type": "select",
+                "options": [
+                    "Asymmetric Masonry",
+                    "Uniform Grid",
+                    "List View"
+                ],
+                "default": "Asymmetric Masonry",
+                "group": "portfolio"
+            },
+            "portfolio_columns": {
+                "type": "select",
+                "options": [
+                    "Two Columns",
+                    "Three Columns",
+                    "Dynamic"
+                ],
+                "default": "Dynamic",
+                "group": "portfolio"
+            },
+            "show_portfolio_excerpts": {
+                "type": "boolean",
+                "default": true,
+                "group": "portfolio"
+            },
+            "animation_style": {
+                "type": "select",
+                "options": [
+                    "Subtle & Refined",
+                    "Playful & Expressive",
+                    "Minimal Motion"
+                ],
+                "default": "Subtle & Refined",
+                "group": "effects"
+            },
+            "enable_grain_texture": {
+                "type": "boolean",
+                "default": true,
+                "group": "effects"
+            },
+            "enable_glow_effects": {
+                "type": "boolean",
+                "default": true,
+                "group": "effects"
+            },
+            "image_treatment": {
+                "type": "select",
+                "options": [
+                    "Natural",
+                    "Slight Warmth",
+                    "High Contrast"
+                ],
+                "default": "Natural",
+                "group": "effects"
+            },
+            "footer_style": {
+                "type": "select",
+                "options": [
+                    "Minimal (Icons + Copyright)",
+                    "Expanded (Links + Bio)",
+                    "Hidden"
+                ],
+                "default": "Minimal (Icons + Copyright)",
+                "group": "footer"
+            },
+            "climate_signature": {
+                "type": "boolean",
+                "default": false,
+                "description": "Show 'Born at 366ppm CO₂' signature in footer",
+                "group": "footer"
+            },
+            "show_reading_progress": {
+                "type": "boolean",
+                "default": true,
+                "group": "posts"
+            },
+            "post_header_style": {
+                "type": "select",
+                "options": [
+                    "Centered Classic",
+                    "Left Aligned",
+                    "Full Bleed Image"
+                ],
+                "default": "Centered Classic",
+                "group": "posts"
             }
         }
     },

@@ -1,7 +1,8 @@
 {{!< default}}
 {{!--
 Template Name: Split Layout
-Description: Two-column layout with static image on right, scrollable content on left
+Description: Immersive two-column layout - scrollable content on left, sticky image on right
+Perfect for About pages, long-form content, or storytelling
 --}}
 
 {{#post}}
@@ -17,11 +18,25 @@ Description: Two-column layout with static image on right, scrollable content on
                         {{#if custom_excerpt}}
                             <p class="split-excerpt">{{custom_excerpt}}</p>
                         {{/if}}
+                        {{#if tags}}
+                            <div class="split-tags">
+                                {{#foreach tags limit="3"}}
+                                    {{#unless internal}}
+                                        <a href="{{url}}" class="split-tag">{{name}}</a>
+                                    {{/unless}}
+                                {{/foreach}}
+                            </div>
+                        {{/if}}
                     </header>
                 {{/match}}
 
                 <div class="split-body gh-content">
                     {{content}}
+                </div>
+
+                {{!-- Optional CTA at bottom --}}
+                <div class="split-cta">
+                    <a href="/contact" class="split-cta-button">Get in touch</a>
                 </div>
             </div>
         </div>
@@ -30,10 +45,17 @@ Description: Two-column layout with static image on right, scrollable content on
         <div class="split-image">
             {{#if feature_image}}
                 <div class="split-image-container">
-                    <img src="{{feature_image}}" alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}" />
+                    <img
+                        srcset="{{img_url feature_image size="m"}} 720w,
+                                {{img_url feature_image size="l"}} 1200w,
+                                {{img_url feature_image size="xl"}} 2000w"
+                        sizes="50vw"
+                        src="{{img_url feature_image size="xl"}}"
+                        alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+                    />
                 </div>
             {{else}}
-                {{!-- Fallback: Show a placeholder or color block if no feature image --}}
+                {{!-- Fallback gradient --}}
                 <div class="split-image-placeholder">
                     <div class="split-placeholder-content">
                         <h2>{{title}}</h2>

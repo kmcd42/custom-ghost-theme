@@ -1,21 +1,30 @@
 {{!< default}}
 {{!--
 Template Name: Portfolio Entry
-Description: Portfolio layout with bold header (1/4 title, 3/4 image) and wide galleries
+Description: Cinematic portfolio detail page with bold header, wide galleries, and editorial caption layouts
 --}}
 
 {{#post}}
 <article class="post-content portfolio-layout {{post_class}}">
 
-    {{!-- Bold header section --}}
+    {{!-- Cinematic Header --}}
     <header class="portfolio-header">
         <div class="portfolio-header-content">
+            {{!-- Feature Image (2/3 width) --}}
             {{#if feature_image}}
                 <div class="portfolio-header-image">
-                    <img src="{{feature_image}}" alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}" />
+                    <img
+                        srcset="{{img_url feature_image size="m"}} 720w,
+                                {{img_url feature_image size="l"}} 1200w,
+                                {{img_url feature_image size="xl"}} 2000w"
+                        sizes="(max-width: 768px) 100vw, 66vw"
+                        src="{{img_url feature_image size="xl"}}"
+                        alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+                    />
                 </div>
             {{/if}}
 
+            {{!-- Title & Meta (1/3 width) --}}
             <div class="portfolio-header-text">
                 <h1 class="portfolio-title">{{title}}</h1>
                 {{#if custom_excerpt}}
@@ -30,14 +39,55 @@ Description: Portfolio layout with bold header (1/4 title, 3/4 image) and wide g
                         {{/foreach}}
                     </div>
                 {{/if}}
+                {{!-- Project meta --}}
+                <div class="portfolio-meta">
+                    {{#if primary_author}}
+                        <div class="portfolio-meta-item">
+                            <span class="portfolio-meta-label">Created by</span>
+                            <span class="portfolio-meta-value">{{primary_author.name}}</span>
+                        </div>
+                    {{/if}}
+                    <div class="portfolio-meta-item">
+                        <span class="portfolio-meta-label">Published</span>
+                        <span class="portfolio-meta-value">{{date format="MMMM YYYY"}}</span>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
 
-    {{!-- Content body with wide galleries --}}
+    {{!-- Content Body --}}
     <div class="portfolio-body gh-content">
         {{content}}
     </div>
+
+    {{!-- Project Navigation --}}
+    {{#get "posts" filter="tag:portfolio+id:-{{id}}" limit="2"}}
+        {{#if posts}}
+            <nav class="portfolio-nav">
+                <div class="portfolio-nav-inner">
+                    <h4 class="portfolio-nav-title">More Projects</h4>
+                    <div class="portfolio-nav-links">
+                        {{#foreach posts}}
+                            <a href="{{url}}" class="portfolio-nav-link">
+                                {{#if feature_image}}
+                                    <div class="portfolio-nav-image">
+                                        <img src="{{img_url feature_image size="s"}}" alt="{{title}}" loading="lazy" />
+                                    </div>
+                                {{/if}}
+                                <div class="portfolio-nav-content">
+                                    <span class="portfolio-nav-name">{{title}}</span>
+                                    {{#if primary_tag}}
+                                        <span class="portfolio-nav-tag">{{primary_tag.name}}</span>
+                                    {{/if}}
+                                </div>
+                            </a>
+                        {{/foreach}}
+                    </div>
+                </div>
+            </nav>
+        {{/if}}
+    {{/get}}
 
 </article>
 {{/post}}

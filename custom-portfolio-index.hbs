@@ -1,62 +1,89 @@
 {{!< default}}
 {{!--
 Template Name: Portfolio Index
-Description: Gallery-style landing page showing portfolio posts in 1/4-width cascading grid
+Description: A stunning portfolio gallery with asymmetric grid, hover effects, and multiple layout options
 --}}
 
 {{#post}}
-<div class="portfolio-index-page">
+<article class="portfolio-index-page {{post_class}}">
 
-    {{!-- Optional page header --}}
-    {{#if title}}
-        <header class="portfolio-index-header">
-            <h1 class="portfolio-index-title">{{title}}</h1>
-            {{#if custom_excerpt}}
-                <p class="portfolio-index-description">{{custom_excerpt}}</p>
-            {{/if}}
-        </header>
-    {{/if}}
+    {{!-- Page Header --}}
+    <header class="portfolio-index-header">
+        <h1 class="portfolio-index-title">{{title}}</h1>
+        {{#if custom_excerpt}}
+            <p class="portfolio-index-description">{{custom_excerpt}}</p>
+        {{/if}}
+    </header>
 
-    {{!-- Portfolio post grid --}}
-    {{!-- This fetches posts tagged with "portfolio" - customize the tag as needed --}}
-    {{#get "posts" limit="all" filter="tag:portfolio" include="tags,authors"}}
-        {{#if posts}}
-            <div class="portfolio-grid">
-                {{#foreach posts}}
-                    <article class="portfolio-grid-item {{post_class}}">
-                        <a href="{{url}}" class="portfolio-grid-link">
-                            {{#if feature_image}}
-                                <div class="portfolio-grid-image">
-                                    <img src="{{feature_image}}" alt="{{title}}" loading="lazy" />
+    {{!-- Portfolio Grid --}}
+    <div class="portfolio-grid" role="list">
+        {{!-- Get all posts tagged with "portfolio" --}}
+        {{#get "posts" filter="tag:portfolio" limit="all" include="tags"}}
+            {{#foreach posts}}
+                <article class="portfolio-grid-item" role="listitem">
+                    <a href="{{url}}" class="portfolio-grid-link" aria-label="View project: {{title}}">
+                        {{#if feature_image}}
+                            <div class="portfolio-grid-image">
+                                <img
+                                    srcset="{{img_url feature_image size="s"}} 300w,
+                                            {{img_url feature_image size="m"}} 720w,
+                                            {{img_url feature_image size="l"}} 1200w"
+                                    sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                                    src="{{img_url feature_image size="l"}}"
+                                    alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+                                    loading="lazy"
+                                />
+                                {{!-- Hover overlay with title --}}
+                                <div class="portfolio-grid-overlay">
+                                    <h3 class="portfolio-grid-overlay-title">{{title}}</h3>
+                                    {{#if primary_tag}}
+                                        <span class="portfolio-grid-overlay-tag">{{primary_tag.name}}</span>
+                                    {{/if}}
                                 </div>
-                            {{else}}
-                                <div class="portfolio-grid-placeholder">
-                                    <span class="portfolio-grid-number">{{@number}}</span>
-                                </div>
-                            {{/if}}
-                            <div class="portfolio-grid-content">
-                                <h2 class="portfolio-grid-title">{{title}}</h2>
+                            </div>
+                        {{else}}
+                            <div class="portfolio-grid-placeholder">
+                                <span class="portfolio-grid-number">{{@number}}</span>
+                            </div>
+                        {{/if}}
+                        <div class="portfolio-grid-content">
+                            <h3 class="portfolio-grid-title">{{title}}</h3>
+                            {{#if @custom.show_portfolio_excerpts}}
                                 {{#if custom_excerpt}}
                                     <p class="portfolio-grid-excerpt">{{custom_excerpt}}</p>
                                 {{/if}}
-                            </div>
-                        </a>
-                    </article>
-                {{/foreach}}
-            </div>
-        {{else}}
+                            {{/if}}
+                            {{#if tags}}
+                                <div class="portfolio-grid-tags">
+                                    {{#foreach tags limit="3"}}
+                                        {{#unless internal}}
+                                            <span class="portfolio-grid-tag">{{name}}</span>
+                                        {{/unless}}
+                                    {{/foreach}}
+                                </div>
+                            {{/if}}
+                        </div>
+                    </a>
+                </article>
+            {{/foreach}}
+        {{/get}}
+    </div>
+
+    {{!-- Empty state --}}
+    {{#get "posts" filter="tag:portfolio" limit="1"}}
+        {{#unless posts}}
             <div class="portfolio-index-empty">
-                <p>No portfolio items found. Add the "portfolio" tag to posts you want to appear here.</p>
+                <p>No portfolio projects yet. Tag posts with "portfolio" to display them here.</p>
             </div>
-        {{/if}}
+        {{/unless}}
     {{/get}}
 
-    {{!-- Optional page content below the grid --}}
+    {{!-- Optional page content below grid --}}
     {{#if content}}
         <div class="portfolio-index-content gh-content">
             {{content}}
         </div>
     {{/if}}
 
-</div>
+</article>
 {{/post}}

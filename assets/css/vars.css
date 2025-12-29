@@ -1,34 +1,192 @@
-/* Variables
+/* Variables - Warmth at the Edge of Tomorrow
+/* A design system for curious, compassionate, climate-conscious creativity
 /* ---------------------------------------------------------- */
 
 :root {
-    /* Colours */
-    --color-primary: var(--ghost-accent-color, #E8C547);
-    --color-base: #ffffff;
-    --color-secondary: #E8C547;
-    --color-border: #333;
-    --background-color: #000000;
-    --text-color: #ffffff;
+    /* ═══════════════════════════════════════════════════════════
+       COLOR SYSTEM - Earth, Sky, Ocean
+       Inspired by the gradients of dawn, deep water, and the northern lights
+       ═══════════════════════════════════════════════════════════ */
 
-    /* Fonts */
-    --font-sans: Mulish, sans-serif;
-    --font-serif: Georgia, Times, serif;
-    --font-mono: Menlo, Courier, monospace;
-    --font-light: 100;
+    /* Primary Palette - Warm Copper & Amber */
+    --color-primary: var(--ghost-accent-color, #E8A847);
+    --color-primary-soft: #F4C97B;
+    --color-primary-deep: #C4892A;
+    --color-primary-glow: rgba(232, 168, 71, 0.15);
+
+    /* Secondary - Deep Teal & Ocean */
+    --color-teal: #2D9B96;
+    --color-teal-soft: #3DB5AF;
+    --color-teal-deep: #1F6B68;
+    --color-ocean: #0D3B4C;
+
+    /* Neutral Depths */
+    --color-midnight: #0A0E12;
+    --color-charcoal: #131820;
+    --color-slate: #1C2530;
+    --color-steel: #2A3544;
+    --color-mist: #A3B1C6;
+
+    /* Base Colors */
+    --background-color: var(--color-midnight);
+    --background-subtle: var(--color-charcoal);
+    --text-color: #F7F8FA;
+    --text-muted: #8A9BB5;
+    --text-soft: rgba(247, 248, 250, 0.7);
+    --color-border: rgba(163, 177, 198, 0.12);
+    --color-border-light: rgba(163, 177, 198, 0.06);
+
+    /* Gradients - Living Color */
+    --gradient-sky: linear-gradient(135deg, #0A0E12 0%, #131820 40%, #1a2535 100%);
+    --gradient-dawn: linear-gradient(135deg, var(--color-midnight) 0%, #1C1A24 50%, #241C24 100%);
+    --gradient-ocean: linear-gradient(180deg, var(--color-midnight) 0%, #0D1C26 50%, var(--color-ocean) 100%);
+    --gradient-warmth: linear-gradient(135deg, rgba(232, 168, 71, 0.05) 0%, rgba(45, 155, 150, 0.03) 100%);
+    --gradient-card: linear-gradient(145deg, rgba(28, 37, 48, 0.5) 0%, rgba(19, 24, 32, 0.8) 100%);
+    --gradient-glow: radial-gradient(ellipse 600px 400px at 50% 0%, rgba(232, 168, 71, 0.06) 0%, transparent 70%);
+
+    /* ═══════════════════════════════════════════════════════════
+       TYPOGRAPHY - Editorial Character
+       ═══════════════════════════════════════════════════════════ */
+
+    /* Font Families */
+    --font-display: 'Instrument Serif', Georgia, serif;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-serif: 'Source Serif 4', Georgia, Times, serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', Menlo, Courier, monospace;
+
+    /* Font Weights */
+    --font-light: 300;
     --font-normal: 400;
+    --font-medium: 500;
+    --font-semibold: 600;
     --font-bold: 700;
     --font-heavy: 800;
 
-    /* Breakpoints */
-    --xlarge: 1680px;
-    --large: 1280px;
-    --medium: 980px;
-    --small: 740px;
-    --xsmall: 480px;
+    /* Type Scale - Musical Intervals */
+    --text-xs: 0.75rem;      /* 12px */
+    --text-sm: 0.875rem;     /* 14px */
+    --text-base: 1rem;       /* 16px */
+    --text-lg: 1.125rem;     /* 18px */
+    --text-xl: 1.25rem;      /* 20px */
+    --text-2xl: 1.5rem;      /* 24px */
+    --text-3xl: 1.875rem;    /* 30px */
+    --text-4xl: 2.25rem;     /* 36px */
+    --text-5xl: 3rem;        /* 48px */
+    --text-6xl: 3.75rem;     /* 60px */
+    --text-7xl: 4.5rem;      /* 72px */
+    --text-8xl: 6rem;        /* 96px */
 
-    /* Sizes */
+    /* Line Heights */
+    --leading-none: 1;
+    --leading-tight: 1.1;
+    --leading-snug: 1.25;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.65;
+    --leading-loose: 1.8;
+
+    /* Letter Spacing */
+    --tracking-tighter: -0.04em;
+    --tracking-tight: -0.02em;
+    --tracking-normal: 0;
+    --tracking-wide: 0.02em;
+    --tracking-wider: 0.05em;
+    --tracking-widest: 0.1em;
+
+    /* ═══════════════════════════════════════════════════════════
+       SPACING & LAYOUT
+       ═══════════════════════════════════════════════════════════ */
+
+    /* Spacing Scale */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-10: 2.5rem;
+    --space-12: 3rem;
+    --space-16: 4rem;
+    --space-20: 5rem;
+    --space-24: 6rem;
+    --space-32: 8rem;
+
+    /* Container Widths */
+    --width-prose: 720px;
+    --width-content: 1000px;
+    --width-wide: 1400px;
+    --width-full: 1800px;
+
+    /* Breakpoints */
+    --screen-sm: 640px;
+    --screen-md: 768px;
+    --screen-lg: 1024px;
+    --screen-xl: 1280px;
+    --screen-2xl: 1536px;
+
+    /* Border Radius */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --radius-2xl: 24px;
+    --radius-full: 9999px;
+
+    /* ═══════════════════════════════════════════════════════════
+       EFFECTS & ANIMATION
+       ═══════════════════════════════════════════════════════════ */
+
+    /* Shadows - Soft & Atmospheric */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.25);
+    --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.3);
+    --shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.4);
+    --shadow-glow: 0 0 40px rgba(232, 168, 71, 0.15);
+    --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+
+    /* Blur */
+    --blur-sm: 4px;
+    --blur-md: 8px;
+    --blur-lg: 16px;
+    --blur-xl: 24px;
+
+    /* Animation Timing */
+    --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+    --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Durations */
+    --duration-fast: 150ms;
+    --duration-base: 250ms;
+    --duration-slow: 400ms;
+    --duration-slower: 600ms;
+
+    /* ═══════════════════════════════════════════════════════════
+       LEGACY SUPPORT
+       ═══════════════════════════════════════════════════════════ */
+
+    --color-base: #ffffff;
+    --color-secondary: var(--color-primary);
     --height: 4rem;
     --margin: 2rem;
-    --radius: 0.5rem;
+    --radius: var(--radius-md);
     --header-spacing: max(6vw, 64px);
+    --gap: 24px;
 }
+
+/* ═══════════════════════════════════════════════════════════
+   CUSTOM FONT IMPORTS
+   ═══════════════════════════════════════════════════════════ */
+
+/* Instrument Serif - Editorial Display Font */
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+
+/* Inter - Clean Interface Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* Source Serif 4 - Beautiful Body Text */
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400;1,8..60,500&display=swap');
+
+/* JetBrains Mono - Technical Code */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');

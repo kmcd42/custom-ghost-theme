@@ -1,7 +1,10 @@
 <!DOCTYPE html>
-<html lang="{{@site.locale}}">
+<html lang="{{@site.locale}}"
+    class="{{#match @custom.site_mood "Dawn (Soft & Hopeful)"}}mood-dawn{{else match @custom.site_mood "Ocean (Teal & Contemplative)"}}mood-ocean{{else}}mood-midnight{{/match}}
+           {{#match @custom.accent_style "Soft Copper"}}accent-copper{{else match @custom.accent_style "Climate Teal"}}accent-teal{{else}}accent-amber{{/match}}
+           {{#match @custom.typography_style "Modern (Sans-serif headlines)"}}typo-modern{{else match @custom.typography_style "Mixed (Serif body, sans headlines)"}}typo-mixed{{else}}typo-editorial{{/match}}
+           {{#match @custom.animation_style "Playful & Expressive"}}anim-playful{{else match @custom.animation_style "Minimal Motion"}}anim-minimal{{else}}anim-subtle{{/match}}">
 <head>
-
     {{!-- Document Settings --}}
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -11,16 +14,200 @@
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    {{!-- Styles'n'Scripts --}}
+    {{!-- Preload Critical Fonts --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    {{!-- Styles --}}
     <link rel="stylesheet" type="text/css" href="{{asset "built/screen.css"}}" />
 
-    {{!-- This tag outputs SEO meta+structured data and other important settings --}}
-    {{ghost_head}}
+    {{!-- Custom Properties Based on Settings --}}
+    <style>
+        :root {
+            {{!-- Mood-based color overrides --}}
+            {{#match @custom.site_mood "Dawn (Soft & Hopeful)"}}
+            --color-midnight: #0F0D14;
+            --color-charcoal: #1A1620;
+            --color-slate: #2A2435;
+            --gradient-sky: linear-gradient(135deg, #0F0D14 0%, #1A1620 40%, #2A2435 100%);
+            --gradient-glow: radial-gradient(ellipse 600px 400px at 50% 0%, rgba(255, 180, 120, 0.08) 0%, transparent 70%);
+            {{else match @custom.site_mood "Ocean (Teal & Contemplative)"}}
+            --color-midnight: #070E12;
+            --color-charcoal: #0D1920;
+            --color-slate: #15252F;
+            --gradient-sky: linear-gradient(135deg, #070E12 0%, #0D1920 40%, #15252F 100%);
+            --gradient-glow: radial-gradient(ellipse 600px 400px at 50% 0%, rgba(45, 155, 150, 0.08) 0%, transparent 70%);
+            {{/match}}
 
+            {{!-- Accent color overrides --}}
+            {{#match @custom.accent_style "Soft Copper"}}
+            --color-primary: #D4956A;
+            --color-primary-soft: #E8B896;
+            --color-primary-deep: #B57A4E;
+            --color-primary-glow: rgba(212, 149, 106, 0.15);
+            {{else match @custom.accent_style "Climate Teal"}}
+            --color-primary: #2D9B96;
+            --color-primary-soft: #4EBAB5;
+            --color-primary-deep: #1F7A76;
+            --color-primary-glow: rgba(45, 155, 150, 0.15);
+            {{/match}}
+
+            {{!-- Ghost accent color override --}}
+            {{#if @site.accent_color}}
+            --ghost-accent-color: {{@site.accent_color}};
+            {{/if}}
+        }
+
+        {{!-- Typography style overrides --}}
+        {{#match @custom.typography_style "Modern (Sans-serif headlines)"}}
+        h1, h2, h3, .home-description, .portfolio-title, .split-title, .photography-title {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+        }
+        {{else match @custom.typography_style "Mixed (Serif body, sans headlines)"}}
+        h1, h2, h3, .home-description, .portfolio-title, .split-title, .photography-title {
+            font-family: var(--font-sans);
+            font-weight: 700;
+        }
+        p, li, .post-content-body, .portfolio-body, .split-body {
+            font-family: var(--font-serif);
+        }
+        {{/match}}
+
+        {{!-- Grain texture toggle --}}
+        {{#unless @custom.enable_grain_texture}}
+        body::before { display: none; }
+        {{/unless}}
+
+        {{!-- Glow effects toggle --}}
+        {{#unless @custom.enable_glow_effects}}
+        body::after { display: none; }
+        .home-image-inner::after { display: none; }
+        {{/unless}}
+
+        {{!-- Animation style modifiers --}}
+        {{#match @custom.animation_style "Minimal Motion"}}
+        *, *::before, *::after {
+            transition-duration: 0.01ms !important;
+        }
+        {{else match @custom.animation_style "Playful & Expressive"}}
+        :root {
+            --duration-base: 350ms;
+            --duration-slow: 500ms;
+            --ease-smooth: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        {{/match}}
+
+        {{!-- Image treatment --}}
+        {{#match @custom.image_treatment "Slight Warmth"}}
+        .home-image img, .portfolio-header-image img, .split-image img, .portfolio-grid-image img {
+            filter: sepia(0.08) saturate(1.1);
+        }
+        {{else match @custom.image_treatment "High Contrast"}}
+        .home-image img, .portfolio-header-image img, .split-image img, .portfolio-grid-image img {
+            filter: contrast(1.1) saturate(1.05);
+        }
+        {{/match}}
+
+        {{!-- Homepage image ratio --}}
+        {{#match @custom.homepage_image_ratio "Square (1:1)"}}
+        .home-image-inner { aspect-ratio: 1 / 1; }
+        {{else match @custom.homepage_image_ratio "Landscape (16:10)"}}
+        .home-image-inner { aspect-ratio: 16 / 10; }
+        {{/match}}
+
+        {{!-- Portfolio layout variations --}}
+        {{#match @custom.portfolio_layout "Uniform Grid"}}
+        .portfolio-grid-item:nth-child(3n+1),
+        .portfolio-grid-item:nth-child(3n+2),
+        .portfolio-grid-item:nth-child(3n) {
+            grid-column: span 4;
+        }
+        .portfolio-grid-item:nth-child(3n) .portfolio-grid-image {
+            aspect-ratio: 16 / 10;
+        }
+        {{else match @custom.portfolio_layout "List View"}}
+        .portfolio-grid {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-8);
+        }
+        .portfolio-grid-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        .portfolio-grid-image { aspect-ratio: 16 / 9; }
+        .portfolio-grid-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-top: none;
+            border-left: 1px solid var(--color-border);
+        }
+        {{/match}}
+
+        {{!-- Portfolio columns --}}
+        {{#match @custom.portfolio_columns "Two Columns"}}
+        .portfolio-grid-item:nth-child(3n+1),
+        .portfolio-grid-item:nth-child(3n+2),
+        .portfolio-grid-item:nth-child(3n) {
+            grid-column: span 6;
+        }
+        {{else match @custom.portfolio_columns "Three Columns"}}
+        .portfolio-grid-item:nth-child(3n+1),
+        .portfolio-grid-item:nth-child(3n+2),
+        .portfolio-grid-item:nth-child(3n) {
+            grid-column: span 4;
+        }
+        {{/match}}
+
+        {{!-- Navigation layout variations --}}
+        {{#match @custom.navigation_layout "Minimal Line"}}
+        .gh-head {
+            background: transparent;
+            backdrop-filter: none;
+            border-bottom-color: var(--color-border);
+        }
+        {{else match @custom.navigation_layout "Bold Statement"}}
+        .gh-head {
+            background: var(--color-primary);
+            border-bottom: none;
+        }
+        .gh-head-logo, .gh-head-menu .nav a, .gh-burger::before, .gh-burger::after {
+            color: var(--color-midnight);
+        }
+        .gh-head-menu .nav a { color: var(--color-midnight); opacity: 0.8; }
+        .gh-head-menu .nav a:hover { opacity: 1; background: rgba(0,0,0,0.1); }
+        .gh-search.gh-icon-btn { border-color: rgba(0,0,0,0.2); color: var(--color-midnight); }
+        {{/match}}
+    </style>
+
+    {{!-- SEO & Structured Data --}}
+    {{ghost_head}}
 </head>
-<body class="{{body_class}} is-head-{{#match @custom.navigation_layout "Logo on the left"}}left-logo{{else match @custom.navigation_layout "Logo in the middle"}}middle-logo{{else}}stacked{{/match}}{{#match @custom.title_font "=" "Elegant serif"}} has-serif-title{{/match}}{{#match @custom.body_font "=" "Elegant serif"}} has-serif-body{{/match}}">
+
+<body class="{{body_class}}
+    {{#match @custom.homepage_style "Full Bleed (Immersive Image)"}}home-fullbleed{{/match}}
+    {{#match @custom.homepage_style "Minimal Text (Words First)"}}home-minimal{{/match}}
+    {{#unless @custom.show_portfolio_excerpts}}hide-excerpts{{/unless}}
+    {{#if @custom.show_reading_progress}}has-reading-progress{{/if}}">
+
 <div class="site-wrapper">
 
+    {{!-- Skip Link for Accessibility --}}
+    <a href="#site-main" class="skip-link">Skip to main content</a>
+
+    {{!-- Reading Progress Bar (for posts) --}}
+    {{#if @custom.show_reading_progress}}
+    {{#is "post"}}
+    <div class="reading-progress" id="reading-progress">
+        <div class="reading-progress-bar"></div>
+    </div>
+    {{/is}}
+    {{/if}}
+
+    {{!-- Header --}}
     <header id="gh-head" class="gh-head gh-outer">
         <div class="gh-head-inner gh-inner">
             <div class="gh-head-brand">
@@ -39,18 +226,11 @@
 
             <nav class="gh-head-menu">
                 {{navigation}}
-                {{#unless @site.members_enabled}}
-                    {{#match @custom.navigation_layout "Stacked"}}
-                        <button class="gh-search gh-icon-btn" aria-label="Search this site" data-ghost-search>{{> "icons/search"}}</button>
-                    {{/match}}
-                {{/unless}}
             </nav>
 
             <div class="gh-head-actions">
                 {{#unless @site.members_enabled}}
-                    {{^match @custom.navigation_layout "Stacked"}}
-                        <button class="gh-search gh-icon-btn" aria-label="Search this site" data-ghost-search>{{> "icons/search"}}</button>
-                    {{/match}}
+                    <button class="gh-search gh-icon-btn" aria-label="Search this site" data-ghost-search>{{> "icons/search"}}</button>
                 {{else}}
                     <button class="gh-search gh-icon-btn" aria-label="Search this site" data-ghost-search>{{> "icons/search"}}</button>
                     <div class="gh-head-members">
@@ -70,13 +250,28 @@
         </div>
     </header>
 
+    {{!-- Main Content --}}
     <main id="site-main" class="site-main">
         {{{body}}}
     </main>
 
-    <footer class="gh-foot gh-outer">
+    {{!-- Footer --}}
+    {{#unless @custom.footer_style "=" "Hidden"}}
+    <footer class="gh-foot gh-outer {{#match @custom.footer_style "Expanded (Links + Bio)"}}gh-foot-expanded{{/match}}">
         <div class="gh-foot-inner">
             <div class="gh-foot-content">
+                {{#match @custom.footer_style "Expanded (Links + Bio)"}}
+                    {{!-- Expanded footer with bio --}}
+                    <div class="gh-foot-bio">
+                        {{#if @site.description}}
+                            <p class="gh-foot-description">{{@site.description}}</p>
+                        {{/if}}
+                    </div>
+                    <nav class="gh-foot-nav">
+                        {{navigation type="secondary"}}
+                    </nav>
+                {{/match}}
+
                 <div class="gh-foot-social-links">
                     <a href="https://www.linkedin.com/in/kaseydesign/" target="_blank" rel="noopener" aria-label="LinkedIn">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
@@ -89,18 +284,56 @@
                         </svg>
                     </a>
                 </div>
-                <p>{{@site.title}} © {{date format="YYYY"}}</p>
+
+                <div class="gh-foot-meta">
+                    {{#if @custom.climate_signature}}
+                        <p class="gh-foot-signature">Born at 366ppm CO₂</p>
+                    {{/if}}
+                    <p>{{@site.title}} © {{date format="YYYY"}}</p>
+                </div>
             </div>
         </div>
     </footer>
+    {{/unless}}
 
 </div>
 
+{{!-- PhotoSwipe for image galleries --}}
 {{#is "post, page"}}
     {{> "pswp"}}
 {{/is}}
 
+{{!-- Main JavaScript --}}
 <script src="{{asset "built/main.min.js"}}"></script>
+
+{{!-- Reading Progress Script --}}
+{{#if @custom.show_reading_progress}}
+{{#is "post"}}
+<script>
+(function() {
+    const progressBar = document.querySelector('.reading-progress-bar');
+    if (!progressBar) return;
+
+    const article = document.querySelector('.post-content-body') || document.querySelector('.portfolio-body') || document.querySelector('.split-body');
+    if (!article) return;
+
+    function updateProgress() {
+        const articleRect = article.getBoundingClientRect();
+        const articleTop = articleRect.top + window.scrollY;
+        const articleHeight = article.offsetHeight;
+        const windowHeight = window.innerHeight;
+        const scrollY = window.scrollY;
+
+        const progress = Math.min(Math.max((scrollY - articleTop + windowHeight * 0.5) / articleHeight, 0), 1);
+        progressBar.style.transform = `scaleX(${progress})`;
+    }
+
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+})();
+</script>
+{{/is}}
+{{/if}}
 
 {{ghost_foot}}
 

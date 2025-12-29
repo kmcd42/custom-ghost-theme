@@ -1,36 +1,132 @@
 {{!< default}}
-{{!-- Homepage with cover image and description --}}
+{{!--
+    HOMEPAGE - "Warmth at the Edge of Tomorrow"
+    Three modes: Hero Split, Full Bleed, Minimal Text
+    Each crafted to make a bold first impression
+--}}
 
-<div class="home-layout">
-    <div class="home-container">
-        {{!-- Left: Cover image (2/3) --}}
-        <div class="home-image">
-            <div class="home-image-inner">
+{{#match @custom.homepage_style "Full Bleed (Immersive Image)"}}
+    {{!-- FULL BLEED MODE: Immersive, cinematic, image-first --}}
+    <div class="home-fullbleed-layout">
+        <div class="home-fullbleed-container">
+            {{!-- Background Image --}}
+            <div class="home-fullbleed-background">
                 {{#if @site.cover_image}}
                     <img src="{{@site.cover_image}}" alt="{{@site.title}}" />
                 {{else}}
-                    <div class="home-image-placeholder">
-                        <h1 class="home-placeholder-text">{{@site.title}}</h1>
-                    </div>
+                    <div class="home-fullbleed-gradient"></div>
                 {{/if}}
+                <div class="home-fullbleed-overlay"></div>
             </div>
-        </div>
 
-        {{!-- Right: Description and links (1/3) --}}
-        <div class="home-content">
-            <div class="home-content-inner">
-                <h1 class="home-eyebrow">{{@site.title}}</h1>
+            {{!-- Centered Content --}}
+            <div class="home-fullbleed-content">
+                <div class="home-fullbleed-inner">
+                    {{#if @custom.show_homepage_tagline}}
+                        <span class="home-fullbleed-eyebrow">{{@site.title}}</span>
+                    {{/if}}
 
-                {{#if @site.description}}
-                    <h1 class="home-description">{{@site.description}}</h1>
-                {{/if}}
+                    {{#if @site.description}}
+                        <h1 class="home-fullbleed-title">{{@site.description}}</h1>
+                    {{/if}}
 
-                <nav class="home-nav">
-                    <a href="/portfolio" class="home-nav-link">portfolio</a>
-                    <a href="/contact" class="home-nav-link">contact</a>
-                </nav>
+                    <nav class="home-fullbleed-nav">
+                        <a href="/portfolio" class="home-fullbleed-link">
+                            <span>Explore Work</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                        <a href="/about" class="home-fullbleed-link home-fullbleed-link-secondary">
+                            <span>About</span>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+
+            {{!-- Scroll indicator --}}
+            <div class="home-scroll-indicator">
+                <span>Scroll</span>
+                <div class="home-scroll-line"></div>
             </div>
         </div>
     </div>
-</div>
 
+{{else match @custom.homepage_style "Minimal Text (Words First)"}}
+    {{!-- MINIMAL TEXT MODE: Typography-focused, words first --}}
+    <div class="home-minimal-layout">
+        <div class="home-minimal-container">
+            <div class="home-minimal-content">
+                {{#if @custom.show_homepage_tagline}}
+                    <span class="home-minimal-eyebrow">{{@site.title}}</span>
+                {{/if}}
+
+                {{#if @site.description}}
+                    <h1 class="home-minimal-statement">{{@site.description}}</h1>
+                {{/if}}
+
+                <div class="home-minimal-meta">
+                    <p class="home-minimal-location">Wellington, Aotearoa</p>
+                    <div class="home-minimal-roles">
+                        <span>Designer</span>
+                        <span class="home-minimal-separator">·</span>
+                        <span>Writer</span>
+                        <span class="home-minimal-separator">·</span>
+                        <span>Marketer</span>
+                    </div>
+                </div>
+
+                <nav class="home-minimal-nav">
+                    <a href="/portfolio" class="home-minimal-link">Portfolio</a>
+                    <a href="/about" class="home-minimal-link">About</a>
+                    <a href="/contact" class="home-minimal-link">Contact</a>
+                </nav>
+            </div>
+
+            {{!-- Optional image aside --}}
+            {{#if @site.cover_image}}
+            <div class="home-minimal-image">
+                <img src="{{@site.cover_image}}" alt="" />
+            </div>
+            {{/if}}
+        </div>
+    </div>
+
+{{else}}
+    {{!-- HERO SPLIT MODE (default): Balanced image + statement --}}
+    <div class="home-layout">
+        <div class="home-container">
+            {{!-- Left: Hero Image --}}
+            <div class="home-image">
+                <div class="home-image-inner">
+                    {{#if @site.cover_image}}
+                        <img src="{{@site.cover_image}}" alt="{{@site.title}}" />
+                    {{else}}
+                        <div class="home-image-placeholder">
+                            <h1 class="home-placeholder-text">{{@site.title}}</h1>
+                        </div>
+                    {{/if}}
+                </div>
+            </div>
+
+            {{!-- Right: Statement & Navigation --}}
+            <div class="home-content">
+                <div class="home-content-inner">
+                    {{#if @custom.show_homepage_tagline}}
+                        <span class="home-eyebrow">{{@site.title}}</span>
+                    {{/if}}
+
+                    {{#if @site.description}}
+                        <h1 class="home-description">{{@site.description}}</h1>
+                    {{/if}}
+
+                    <nav class="home-nav">
+                        <a href="/portfolio" class="home-nav-link">portfolio</a>
+                        <a href="/about" class="home-nav-link">about</a>
+                        <a href="/contact" class="home-nav-link">contact</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+{{/match}}
