@@ -861,6 +861,7 @@ hr {
 
     .gh-head-brand {
         flex: 0 0 auto;
+        margin-right: 0;
     }
 
     .gh-head-actions {
@@ -871,6 +872,7 @@ hr {
         align-items: center;
         gap: var(--space-3);
         flex: 0 0 auto;
+        margin-left: 0;
     }
 
     .gh-search.gh-icon-btn {
