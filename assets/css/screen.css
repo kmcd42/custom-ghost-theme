@@ -860,43 +860,70 @@ hr {
     }
 
     /* Override Ghost's grid layout with flexbox - using #gh-head for specificity */
+    #gh-head.gh-head {
+        height: auto !important;
+        min-height: 64px;
+    }
+
     #gh-head .gh-head-inner {
         display: flex !important;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        padding: var(--space-3) var(--space-4);
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: var(--space-3) var(--space-4) !important;
+        grid-template-columns: none !important;
+        gap: var(--space-3) !important;
     }
 
-    .gh-head-brand {
-        flex: 0 0 auto;
-        margin-right: 0;
-        order: 1;
+    /* Logo/brand stays on left */
+    #gh-head .gh-head-brand {
+        display: flex !important;
+        flex: 0 0 auto !important;
+        margin-right: 0 !important;
+        order: 1 !important;
+        position: static !important;
+        grid-template-columns: none !important;
     }
 
-    /* Actions on right - override Ghost's hidden state */
+    /* Actions on right - override Ghost's hidden/fixed state */
     #gh-head .gh-head-actions {
         display: flex !important;
         visibility: visible !important;
         opacity: 1 !important;
-        flex-direction: row;
-        align-items: center;
-        gap: var(--space-3);
-        flex: 0 0 auto;
-        margin-left: auto;
-        order: 2;
+        position: static !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: var(--space-3) !important;
+        flex: 0 0 auto !important;
+        margin-left: auto !important;
+        order: 2 !important;
+        transform: none !important;
+        width: auto !important;
+        height: auto !important;
+        inset: unset !important;
+        top: unset !important;
+        right: unset !important;
+        bottom: unset !important;
+        left: unset !important;
+        background: transparent !important;
+        padding: 0 !important;
     }
 
     #gh-head .gh-search.gh-icon-btn {
         display: flex !important;
         visibility: visible !important;
         opacity: 1 !important;
+        position: static !important;
+        transform: none !important;
     }
 
     #gh-head .gh-drawer-toggle {
         display: flex !important;
         visibility: visible !important;
         opacity: 1 !important;
+        position: static !important;
+        transform: none !important;
         align-items: center;
         justify-content: center;
         width: 40px;
@@ -7434,56 +7461,120 @@ body:has(.custom-cursor) button {
    ═══════════════════════════════════════════════════════════════════════════ */
 
 @media (max-width: 768px) {
-    /* All Ghost gallery rows - flexbox based */
-    .kg-gallery-row,
-    .gh-content .kg-gallery-row,
-    .portfolio-body .kg-gallery-row,
-    .experimental-body .kg-gallery-row {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: var(--space-4) !important;
-    }
+    /* -------------------------------------------------------------------------
+       Ghost Gallery Cards - Force single column for ALL gallery contexts
+       ------------------------------------------------------------------------- */
 
-    /* All Ghost gallery images */
-    .kg-gallery-image,
-    .gh-content .kg-gallery-image,
-    .portfolio-body .kg-gallery-image,
-    .experimental-body .kg-gallery-image {
-        flex: 1 1 100% !important;
+    /* Gallery container resets */
+    .kg-gallery-card,
+    .kg-gallery-container,
+    .gh-content .kg-gallery-card,
+    .gh-content .kg-gallery-container,
+    .portfolio-body .kg-gallery-card,
+    .portfolio-body .kg-gallery-container,
+    .experimental-body .kg-gallery-card,
+    .experimental-body .kg-gallery-container,
+    .photography-body .kg-gallery-card,
+    .photography-body .kg-gallery-container,
+    .photography-layout .kg-gallery-card,
+    .photography-layout .kg-gallery-container,
+    .experimental-layout .kg-gallery-card,
+    .experimental-layout .kg-gallery-container {
         width: 100% !important;
         max-width: 100% !important;
     }
 
-    /* Photography template galleries - grid based, force single column */
-    .photography-body .kg-gallery-row {
-        display: grid !important;
+    /* All Ghost gallery rows - force single column with flexbox */
+    .kg-gallery-row,
+    .gh-content .kg-gallery-row,
+    .portfolio-body .kg-gallery-row,
+    .experimental-body .kg-gallery-row,
+    .photography-body .kg-gallery-row,
+    .photography-layout .kg-gallery-row,
+    .experimental-layout .kg-gallery-row,
+    article .kg-gallery-row,
+    .post-content .kg-gallery-row {
+        display: flex !important;
+        flex-direction: column !important;
+        flex-wrap: nowrap !important;
+        align-items: stretch !important;
+        gap: var(--space-4, 1rem) !important;
         grid-template-columns: 1fr !important;
         grid-auto-flow: row !important;
-        grid-auto-columns: unset !important;
     }
 
-    .photography-body .kg-gallery-image {
+    /* All Ghost gallery images - full width single column */
+    .kg-gallery-image,
+    .gh-content .kg-gallery-image,
+    .portfolio-body .kg-gallery-image,
+    .experimental-body .kg-gallery-image,
+    .photography-body .kg-gallery-image,
+    .photography-layout .kg-gallery-image,
+    .experimental-layout .kg-gallery-image,
+    article .kg-gallery-image,
+    .post-content .kg-gallery-image {
+        flex: 0 0 100% !important;
         width: 100% !important;
+        max-width: 100% !important;
+        min-width: 100% !important;
     }
 
-    /* Photo gallery index grid */
+    .kg-gallery-image img,
+    .gh-content .kg-gallery-image img,
+    .portfolio-body .kg-gallery-image img,
+    .experimental-body .kg-gallery-image img,
+    .photography-body .kg-gallery-image img {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    /* -------------------------------------------------------------------------
+       Photo Gallery Index Grid - Single column
+       ------------------------------------------------------------------------- */
     .photo-gallery-grid {
         grid-template-columns: 1fr !important;
+        gap: var(--space-4, 1rem) !important;
     }
 
     .photo-gallery-item,
-    .photo-gallery-item:nth-child(n) {
+    .photo-gallery-item:nth-child(n),
+    .photo-gallery-item:nth-child(odd),
+    .photo-gallery-item:nth-child(even),
+    .photo-gallery-item:nth-child(3n+1),
+    .photo-gallery-item:nth-child(5n+1),
+    .photo-gallery-item:nth-child(7n+3) {
         grid-row: span 1 !important;
+        grid-column: span 1 !important;
     }
 
-    /* Photo bento grid */
+    /* -------------------------------------------------------------------------
+       Photo Bento Grid - Single column
+       ------------------------------------------------------------------------- */
     .photo-bento-grid {
         grid-template-columns: 1fr !important;
+        gap: var(--space-4, 1rem) !important;
     }
 
-    /* About page photos */
+    .photo-bento-card {
+        aspect-ratio: 3/2 !important;
+    }
+
+    /* -------------------------------------------------------------------------
+       About Page Photos - Single column
+       ------------------------------------------------------------------------- */
     .about-photos-grid {
         grid-template-columns: 1fr !important;
+    }
+
+    /* -------------------------------------------------------------------------
+       Portfolio Grid Items - Single column
+       ------------------------------------------------------------------------- */
+    .portfolio-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .portfolio-grid-item,
+    .portfolio-grid-item:nth-child(n) {
+        grid-column: span 1 !important;
     }
 }
