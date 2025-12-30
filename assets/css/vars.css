@@ -1,48 +1,64 @@
 /* Variables - Warmth at the Edge of Tomorrow
 /* A design system for curious, compassionate, climate-conscious creativity
+/* Single bright theme inspired by #EEC643 (golden yellow) and #FFFCF1 (cream)
 /* ---------------------------------------------------------- */
 
 :root {
     /* ═══════════════════════════════════════════════════════════
-       COLOR SYSTEM - Earth, Sky, Ocean
-       Inspired by the gradients of dawn, deep water, and the northern lights
+       COLOR SYSTEM - Bright & Warm
+       A single cohesive palette inspired by sunlight and warmth
        ═══════════════════════════════════════════════════════════ */
 
-    /* Primary Palette - Warm Copper & Amber */
-    --color-primary: var(--ghost-accent-color, #E8A847);
-    --color-primary-soft: #F4C97B;
-    --color-primary-deep: #C4892A;
-    --color-primary-glow: rgba(232, 168, 71, 0.15);
+    /* Primary Palette - Golden Yellow (the slay 💛) */
+    --color-primary: var(--ghost-accent-color, #EEC643);
+    --color-primary-soft: #F5D76E;
+    --color-primary-deep: #D4A82F;
+    --color-primary-glow: rgba(238, 198, 67, 0.18);
 
-    /* Secondary - Deep Teal & Ocean */
-    --color-teal: #2D9B96;
-    --color-teal-soft: #3DB5AF;
-    --color-teal-deep: #1F6B68;
+    /* Complementary Accent Colors - for visual pops */
+    --color-coral: #EE7B5A;
+    --color-coral-glow: rgba(238, 123, 90, 0.15);
+    --color-rose: #E88EA4;
+    --color-rose-glow: rgba(232, 142, 164, 0.12);
+    --color-teal: #43CDBE;
+    --color-teal-glow: rgba(67, 205, 190, 0.12);
+    --color-lavender: #9B7ED9;
+    --color-lavender-glow: rgba(155, 126, 217, 0.10);
+
+    /* Ocean & Deep Tones */
+    --color-teal-soft: #5DD9CB;
+    --color-teal-deep: #2A9B8E;
     --color-ocean: #0D3B4C;
 
-    /* Neutral Depths */
+    /* Neutral Depths - Dark Mode Base */
     --color-midnight: #0A0E12;
     --color-charcoal: #131820;
     --color-slate: #1C2530;
     --color-steel: #2A3544;
     --color-mist: #A3B1C6;
 
-    /* Base Colors - WCAG AA compliant contrast ratios */
+    /* Base Colors - Dark Mode (default) */
     --background-color: var(--color-midnight);
     --background-subtle: var(--color-charcoal);
-    --text-color: #F7F8FA;
-    --text-muted: #9FAFCA;           /* Improved: 5.2:1 contrast ratio */
-    --text-soft: rgba(247, 248, 250, 0.75);  /* Improved: better legibility */
-    --color-border: rgba(163, 177, 198, 0.15);
-    --color-border-light: rgba(163, 177, 198, 0.08);
+    --text-color: #FFFCF1;
+    --text-muted: #B8C4D8;
+    --text-soft: rgba(255, 252, 241, 0.78);
+    --color-border: rgba(238, 198, 67, 0.12);
+    --color-border-light: rgba(238, 198, 67, 0.06);
 
-    /* Gradients - Living Color - MORE VISIBLE */
+    /* Gradients - Warm Glowing with complementary color pops */
     --gradient-sky: linear-gradient(135deg, #0C1015 0%, #141C28 30%, #1a2540 60%, #1E2845 100%);
     --gradient-dawn: linear-gradient(135deg, #0F0D14 0%, #201828 40%, #2A1C30 70%, #1E1620 100%);
     --gradient-ocean: linear-gradient(180deg, #070E14 0%, #0D1C28 40%, #0F2535 70%, #0A1E2C 100%);
-    --gradient-warmth: linear-gradient(135deg, rgba(232, 168, 71, 0.12) 0%, rgba(45, 155, 150, 0.08) 100%);
+    --gradient-warmth: linear-gradient(135deg, rgba(238, 198, 67, 0.12) 0%, rgba(232, 142, 164, 0.06) 50%, rgba(67, 205, 190, 0.08) 100%);
     --gradient-card: linear-gradient(145deg, rgba(35, 45, 60, 0.6) 0%, rgba(20, 28, 40, 0.9) 100%);
-    --gradient-glow: radial-gradient(ellipse 800px 500px at 50% -100px, rgba(232, 168, 71, 0.2) 0%, rgba(200, 120, 60, 0.08) 40%, transparent 70%);
+    --gradient-glow: radial-gradient(ellipse 900px 600px at 50% -100px, rgba(238, 198, 67, 0.25) 0%, rgba(238, 123, 90, 0.08) 35%, rgba(155, 126, 217, 0.06) 60%, transparent 75%);
+
+    /* Multi-color ambient glow for backgrounds */
+    --gradient-ambient:
+        radial-gradient(ellipse 600px 400px at 20% 30%, rgba(238, 198, 67, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse 500px 350px at 80% 20%, rgba(232, 142, 164, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse 450px 300px at 70% 80%, rgba(67, 205, 190, 0.06) 0%, transparent 50%);
 
     /* ═══════════════════════════════════════════════════════════
        TYPOGRAPHY - Editorial Character
@@ -147,7 +163,7 @@
     --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.25);
     --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.3);
     --shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.4);
-    --shadow-glow: 0 0 40px rgba(232, 168, 71, 0.15);
+    --shadow-glow: 0 0 50px rgba(238, 198, 67, 0.2);
     --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.2);
 
     /* Blur */
@@ -182,63 +198,74 @@
 }
 
 /* ═══════════════════════════════════════════════════════════
-   LIGHT MODE - Warm paper, ink, and sunlight
+   LIGHT MODE - Cream & Golden Warmth
+   Inspired by #FFFCF1 (cream) and #EEC643 (golden)
    ═══════════════════════════════════════════════════════════ */
 
 .light-mode {
-    /* Base colors inverted */
-    --background-color: #FDFBF7;
-    --background-subtle: #F5F2EC;
-    --text-color: #1A1A1A;
-    --text-muted: #5A5A5A;
-    --text-soft: rgba(26, 26, 26, 0.75);
-    --color-border: rgba(0, 0, 0, 0.1);
-    --color-border-light: rgba(0, 0, 0, 0.05);
+    /* Base colors - warm cream background */
+    --background-color: #FFFCF1;
+    --background-subtle: #FBF7E8;
+    --text-color: #1A1612;
+    --text-muted: #5A5246;
+    --text-soft: rgba(26, 22, 18, 0.72);
+    --color-border: rgba(238, 198, 67, 0.18);
+    --color-border-light: rgba(238, 198, 67, 0.08);
 
-    /* Neutrals for light mode */
-    --color-midnight: #FDFBF7;
-    --color-charcoal: #F5F2EC;
-    --color-slate: #EDE8E0;
-    --color-steel: #E0DAD0;
-    --color-mist: #5A5A5A;
+    /* Neutrals remapped for light mode */
+    --color-midnight: #FFFCF1;
+    --color-charcoal: #FBF7E8;
+    --color-slate: #F5EED8;
+    --color-steel: #EDE5CC;
+    --color-mist: #5A5246;
 
-    /* Primary stays warm but adapts */
-    --color-primary: var(--ghost-accent-color, #C4892A);
-    --color-primary-soft: #E8A847;
-    --color-primary-deep: #A66F1C;
-    --color-primary-glow: rgba(196, 137, 42, 0.12);
+    /* Primary stays golden */
+    --color-primary: var(--ghost-accent-color, #EEC643);
+    --color-primary-soft: #F5D76E;
+    --color-primary-deep: #C9A528;
+    --color-primary-glow: rgba(238, 198, 67, 0.15);
 
-    /* Light gradients */
-    --gradient-sky: linear-gradient(135deg, #FDFBF7 0%, #F5F2EC 50%, #EDE8E0 100%);
-    --gradient-dawn: linear-gradient(135deg, #FFF8F0 0%, #FDF5E8 50%, #F8EED8 100%);
-    --gradient-ocean: linear-gradient(180deg, #F8FAFB 0%, #F0F5F7 50%, #E8F0F3 100%);
-    --gradient-warmth: linear-gradient(135deg, rgba(196, 137, 42, 0.08) 0%, rgba(45, 155, 150, 0.05) 100%);
-    --gradient-card: linear-gradient(145deg, rgba(255, 255, 255, 0.9) 0%, rgba(245, 242, 236, 0.95) 100%);
-    --gradient-glow: radial-gradient(ellipse 800px 500px at 50% -100px, rgba(196, 137, 42, 0.12) 0%, rgba(200, 160, 100, 0.05) 40%, transparent 70%);
+    /* Light gradients - warmer with complementary color pops */
+    --gradient-sky: linear-gradient(135deg, #FFFCF1 0%, #FBF7E8 50%, #F5EED8 100%);
+    --gradient-dawn: linear-gradient(135deg, #FFFDF5 0%, #FFF8E6 50%, #FFF2D0 100%);
+    --gradient-ocean: linear-gradient(180deg, #FFFCF1 0%, #F8F5E8 50%, #F0EDE0 100%);
+    --gradient-warmth: linear-gradient(135deg, rgba(238, 198, 67, 0.10) 0%, rgba(232, 142, 164, 0.05) 50%, rgba(67, 205, 190, 0.06) 100%);
+    --gradient-card: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(251, 247, 232, 0.98) 100%);
+    --gradient-glow: radial-gradient(ellipse 900px 600px at 50% -100px, rgba(238, 198, 67, 0.15) 0%, rgba(238, 123, 90, 0.06) 35%, rgba(155, 126, 217, 0.04) 60%, transparent 75%);
+
+    /* Multi-color ambient glow for light backgrounds */
+    --gradient-ambient:
+        radial-gradient(ellipse 600px 400px at 20% 30%, rgba(238, 198, 67, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse 500px 350px at 80% 20%, rgba(232, 142, 164, 0.06) 0%, transparent 50%),
+        radial-gradient(ellipse 450px 300px at 70% 80%, rgba(67, 205, 190, 0.05) 0%, transparent 50%);
 
     /* Softer shadows for light mode */
-    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.12);
-    --shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.15);
-    --shadow-glow: 0 0 40px rgba(196, 137, 42, 0.1);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.10);
+    --shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.12);
+    --shadow-glow: 0 0 50px rgba(238, 198, 67, 0.15);
 }
 
 /* System preference for light mode */
 @media (prefers-color-scheme: light) {
     :root:not(.dark-mode) {
-        --background-color: #FDFBF7;
-        --background-subtle: #F5F2EC;
-        --text-color: #1A1A1A;
-        --text-muted: #5A5A5A;
-        --text-soft: rgba(26, 26, 26, 0.75);
-        --color-border: rgba(0, 0, 0, 0.1);
-        --color-border-light: rgba(0, 0, 0, 0.05);
-        --color-midnight: #FDFBF7;
-        --color-charcoal: #F5F2EC;
-        --color-slate: #EDE8E0;
-        --color-steel: #E0DAD0;
-        --color-mist: #5A5A5A;
+        --background-color: #FFFCF1;
+        --background-subtle: #FBF7E8;
+        --text-color: #1A1612;
+        --text-muted: #5A5246;
+        --text-soft: rgba(26, 22, 18, 0.72);
+        --color-border: rgba(238, 198, 67, 0.18);
+        --color-border-light: rgba(238, 198, 67, 0.08);
+        --color-midnight: #FFFCF1;
+        --color-charcoal: #FBF7E8;
+        --color-slate: #F5EED8;
+        --color-steel: #EDE5CC;
+        --color-mist: #5A5246;
+        --color-primary: var(--ghost-accent-color, #EEC643);
+        --color-primary-soft: #F5D76E;
+        --color-primary-deep: #C9A528;
+        --color-primary-glow: rgba(238, 198, 67, 0.15);
     }
 }
 
