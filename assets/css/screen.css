@@ -859,35 +859,52 @@ hr {
         display: none !important;
     }
 
-    .gh-head-inner {
+    /* Override Ghost's grid layout with flexbox - using #gh-head for specificity */
+    #gh-head .gh-head-inner {
         display: flex !important;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        padding: var(--space-3) var(--space-4);
+        flex-direction: row !important;
+        grid-template-rows: unset !important;
+        grid-template-columns: unset !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        gap: var(--space-4) !important;
+        padding: var(--space-3) var(--space-4) !important;
+        height: auto !important;
     }
 
-    .gh-head-brand {
-        flex: 0 0 auto;
+    /* Brand on left - reset Ghost's grid positioning */
+    #gh-head .gh-head-brand {
+        display: flex !important;
+        flex: 0 0 auto !important;
+        order: 1 !important;
+        grid-template-columns: unset !important;
+        grid-column-start: unset !important;
+        height: auto !important;
+        margin-right: auto !important;
     }
 
-    .gh-head-actions {
+    /* Actions on right - override Ghost's hidden state */
+    #gh-head .gh-head-actions {
         display: flex !important;
         visibility: visible !important;
         opacity: 1 !important;
-        flex-direction: row;
-        align-items: center;
-        gap: var(--space-3);
-        flex: 0 0 auto;
+        position: static !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
+        gap: var(--space-3) !important;
+        flex: 0 0 auto !important;
+        order: 2 !important;
+        margin-left: 0 !important;
     }
 
-    .gh-search.gh-icon-btn {
+    #gh-head .gh-search.gh-icon-btn {
         display: flex !important;
         visibility: visible !important;
         opacity: 1 !important;
     }
 
-    .gh-drawer-toggle {
+    #gh-head .gh-drawer-toggle {
         display: flex !important;
         visibility: visible !important;
         opacity: 1 !important;
@@ -903,11 +920,16 @@ hr {
         color: var(--text-color);
     }
 
-    .gh-drawer-toggle .dropdown-icon {
+    #gh-head .gh-drawer-toggle .dropdown-icon {
         width: 20px;
         height: 20px;
         stroke: var(--text-color);
         stroke-width: 2.5;
+    }
+
+    /* Hide the burger menu - we use drawer toggle instead */
+    #gh-head .gh-burger {
+        display: none !important;
     }
 
     .gh-drawer-inner {
@@ -2400,6 +2422,21 @@ hr {
     transform: scale(1.02);
 }
 
+/* Portfolio/content galleries - single column on mobile */
+@media (max-width: 768px) {
+    .portfolio-body .kg-gallery-row,
+    .gh-content .kg-gallery-row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .portfolio-body .kg-gallery-image,
+    .gh-content .kg-gallery-image {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
 /* Wide images break out */
 .portfolio-body .kg-image-card.kg-width-wide,
 .portfolio-body .kg-image-card.kg-width-full {
@@ -2672,6 +2709,15 @@ hr {
 
 .photography-body .kg-gallery-image:hover img {
     transform: scale(1.02);
+}
+
+/* Photography galleries - single column on mobile */
+@media (max-width: 768px) {
+    .photography-body .kg-gallery-row {
+        grid-auto-flow: row;
+        grid-auto-columns: unset;
+        grid-template-columns: 1fr;
+    }
 }
 
 .photography-body .kg-image-card {
@@ -3313,6 +3359,18 @@ hr {
 
 .kg-gallery-image:hover img {
     transform: scale(1.02);
+}
+
+/* Mobile galleries - single column */
+@media (max-width: 768px) {
+    .kg-gallery-row {
+        flex-direction: column;
+    }
+
+    .kg-gallery-image {
+        flex: 1 1 100%;
+        width: 100%;
+    }
 }
 
 /* Image Cards */
