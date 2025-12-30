@@ -61,6 +61,15 @@ Description: Cinematic portfolio detail page with bold header, wide galleries, a
         {{content}}
     </div>
 
+    {{!-- Contact CTA --}}
+    <section class="portfolio-contact-cta reveal-on-scroll">
+        <div class="portfolio-contact-inner">
+            <span class="portfolio-contact-label">Like what you see?</span>
+            <h3 class="portfolio-contact-title">Let's work together</h3>
+            <a href="/contact/" class="portfolio-contact-button">Get in touch</a>
+        </div>
+    </section>
+
     {{!-- Project Navigation --}}
     {{#get "posts" filter="tag:portfolio+id:-{{id}}" limit="2"}}
         {{#if posts}}

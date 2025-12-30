@@ -81,6 +81,15 @@ scattered typography, and playful chaos. For the bold.
     </aside>
     {{/if}}
 
+    {{!-- Contact CTA --}}
+    <section class="portfolio-contact-cta experimental-contact reveal-on-scroll">
+        <div class="portfolio-contact-inner">
+            <span class="portfolio-contact-label">Like what you see?</span>
+            <h3 class="portfolio-contact-title">Let's work together</h3>
+            <a href="/contact/" class="portfolio-contact-button">Get in touch</a>
+        </div>
+    </section>
+
     {{!-- Playful Next Project --}}
     {{#get "posts" filter="tag:portfolio+id:-{{id}}" limit="1" order="random"}}
         {{#foreach posts}}

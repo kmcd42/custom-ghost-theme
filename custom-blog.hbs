@@ -1,23 +1,77 @@
 {{!< default}}
 {{!--
 Template Name: Blog
-Description: Clean, minimal blog index. Image-free list with essential metadata.
+Description: Editorial blog index with hero image and refined list layout.
 --}}
 
 <div class="blog-index">
-    <header class="blog-header reveal-on-scroll">
-        <h1 class="blog-title kinetic-text">{{#post}}{{title}}{{else}}Writing{{/post}}</h1>
-        {{#post}}
-            {{#if custom_excerpt}}
-                <p class="blog-intro">{{custom_excerpt}}</p>
-            {{/if}}
-        {{/post}}
+    {{!-- Hero Header with Featured Image --}}
+    <header class="blog-hero">
+        <div class="blog-hero-content">
+            <h1 class="blog-title kinetic-text">{{#post}}{{title}}{{else}}Writing{{/post}}</h1>
+            {{#post}}
+                {{#if custom_excerpt}}
+                    <p class="blog-intro">{{custom_excerpt}}</p>
+                {{/if}}
+            {{/post}}
+        </div>
+
+        {{!-- Featured Photo - show most recent featured or first post with image --}}
+        {{#get "posts" filter="tag:-portfolio+tag:-photography+featured:true" limit="1"}}
+            {{#foreach posts}}
+                {{#if feature_image}}
+                    <div class="blog-hero-image">
+                        <div class="blog-hero-image-frame">
+                            <img
+                                srcset="{{img_url feature_image size="m"}} 720w,
+                                        {{img_url feature_image size="l"}} 1200w"
+                                sizes="(max-width: 768px) 90vw, 40vw"
+                                src="{{img_url feature_image size="l"}}"
+                                alt="{{title}}"
+                                loading="eager"
+                            />
+                        </div>
+                        <a href="{{url}}" class="blog-hero-featured-link">
+                            <span class="blog-hero-featured-label">Featured</span>
+                            <span class="blog-hero-featured-title">{{title}}</span>
+                        </a>
+                    </div>
+                {{/if}}
+            {{/foreach}}
+        {{else}}
+            {{!-- Fallback: show first post with feature image --}}
+            {{#get "posts" filter="tag:-portfolio+tag:-photography" limit="3"}}
+                {{#foreach posts}}
+                    {{#if feature_image}}
+                        {{#if @first}}
+                            <div class="blog-hero-image">
+                                <div class="blog-hero-image-frame">
+                                    <img
+                                        srcset="{{img_url feature_image size="m"}} 720w,
+                                                {{img_url feature_image size="l"}} 1200w"
+                                        sizes="(max-width: 768px) 90vw, 40vw"
+                                        src="{{img_url feature_image size="l"}}"
+                                        alt="{{title}}"
+                                        loading="eager"
+                                    />
+                                </div>
+                                <a href="{{url}}" class="blog-hero-featured-link">
+                                    <span class="blog-hero-featured-label">Latest</span>
+                                    <span class="blog-hero-featured-title">{{title}}</span>
+                                </a>
+                            </div>
+                        {{/if}}
+                    {{/if}}
+                {{/foreach}}
+            {{/get}}
+        {{/get}}
     </header>
 
+    {{!-- Blog List --}}
     <div class="blog-list">
         {{#get "posts" filter="tag:-portfolio+tag:-photography" limit="all" include="tags"}}
             {{#foreach posts}}
-                <article class="blog-item reveal-on-scroll">
+                <article class="blog-item" style="--item-index: {{@index}}">
                     <a href="{{url}}" class="blog-item-link">
                         <div class="blog-item-content">
                             <h2 class="blog-item-title">{{title}}</h2>

@@ -213,44 +213,90 @@
     {{/is}}
     {{/if}}
 
-    {{!-- Header --}}
+    {{!-- Header with Drawer Navigation --}}
     <header id="gh-head" class="gh-head gh-outer">
         <div class="gh-head-inner gh-inner">
+            {{!-- Left: Logo --}}
             <div class="gh-head-brand">
                 <div class="gh-head-brand-wrapper">
                     <a class="gh-head-logo" href="{{@site.url}}">
                         {{#if @site.logo}}
                             <img src="{{@site.logo}}" alt="{{@site.title}}">
                         {{else}}
-                            {{> "icons/logo-k"}}
+                            <span class="logo-k-text">k.</span>
                         {{/if}}
                     </a>
                 </div>
-                <button class="gh-burger" aria-label="Toggle menu"></button>
             </div>
 
-            <nav class="gh-head-menu">
-                {{navigation}}
-            </nav>
+            {{!-- Center: Breadcrumbs --}}
+            <div class="gh-head-breadcrumbs">
+                <a href="{{@site.url}}" class="breadcrumb-home">
+                    <span class="breadcrumb-dot"></span>
+                </a>
+                <span class="breadcrumb-current" id="breadcrumb-current">
+                    {{!-- Dynamic breadcrumb inserted by JS --}}
+                </span>
+            </div>
 
+            {{!-- Right: Actions + Pulley Toggle --}}
             <div class="gh-head-actions">
-                {{#unless @site.members_enabled}}
-                    <button class="gh-search gh-icon-btn" aria-label="Search this site" data-ghost-search>{{> "icons/search"}}</button>
-                {{else}}
-                    <button class="gh-search gh-icon-btn" aria-label="Search this site" data-ghost-search>{{> "icons/search"}}</button>
-                    <div class="gh-head-members">
-                        {{#unless @member}}
-                            {{#unless @site.members_invite_only}}
-                                <a class="gh-head-link" href="#/portal/signin" data-portal="signin">Sign in</a>
-                                <a class="gh-head-btn gh-btn gh-primary-btn" href="#/portal/signup" data-portal="signup">Subscribe</a>
+                <button class="gh-search gh-icon-btn" aria-label="Search this site" data-ghost-search>{{> "icons/search"}}</button>
+                <button class="gh-drawer-toggle" aria-label="Toggle navigation drawer" aria-expanded="false">
+                    <svg class="pulley-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="16" cy="8" r="4"/>
+                        <line x1="16" y1="12" x2="16" y2="28"/>
+                        <path d="M12 24 L16 28 L20 24"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        {{!-- Full-Width Drawer --}}
+        <div class="gh-drawer" aria-hidden="true">
+            <div class="gh-drawer-inner">
+                {{!-- Navigation Links --}}
+                <nav class="gh-drawer-nav">
+                    {{navigation}}
+                </nav>
+
+                {{!-- Decorative Photos Grid --}}
+                <div class="gh-drawer-photos">
+                    {{#get "posts" filter="featured:true" limit="3"}}
+                        {{#foreach posts}}
+                            {{#if feature_image}}
+                                <a href="{{url}}" class="gh-drawer-photo">
+                                    <img src="{{img_url feature_image size="s"}}" alt="{{title}}" loading="lazy" />
+                                </a>
+                            {{/if}}
+                        {{/foreach}}
+                    {{/get}}
+                </div>
+
+                {{!-- Drawer Footer --}}
+                <div class="gh-drawer-footer">
+                    {{#if @site.members_enabled}}
+                        <div class="gh-drawer-members">
+                            {{#unless @member}}
+                                <a class="gh-drawer-link" href="#/portal/signin" data-portal="signin">Sign in</a>
                             {{else}}
-                                <a class="gh-head-btn gh-btn gh-primary-btn" href="#/portal/signin" data-portal="signin">Sign in</a>
+                                <a class="gh-drawer-link" href="#/portal/account" data-portal="account">Account</a>
                             {{/unless}}
-                        {{else}}
-                            <a class="gh-head-btn gh-btn gh-primary-btn" href="#/portal/account" data-portal="account">Account</a>
-                        {{/unless}}
+                        </div>
+                    {{/if}}
+                    <div class="gh-drawer-social">
+                        <a href="https://www.linkedin.com/in/kaseydesign/" target="_blank" rel="noopener" aria-label="LinkedIn">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                                <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/>
+                            </svg>
+                        </a>
+                        <a href="https://bsky.app/profile/kaseymcdonnell.co.nz" target="_blank" rel="noopener" aria-label="Bluesky">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 530" fill="currentColor" width="20" height="20">
+                                <path d="m135.72 44.03c66.496 49.921 138.02 151.14 164.28 205.46 26.262-54.316 97.782-155.54 164.28-205.46 47.98-36.021 125.72-63.892 125.72 24.795 0 17.712-10.155 148.79-16.111 170.07-20.703 73.984-96.144 92.854-163.25 81.433 117.3 19.964 147.14 86.092 82.697 152.22-122.39 125.59-175.91-31.511-189.63-71.766-2.514-7.3797-3.6904-10.832-3.7077-7.8964-0.0174-2.9357-1.1937 0.51669-3.7077 7.8964-13.714 40.255-67.233 197.36-189.63 71.766-64.444-66.128-34.605-132.26 82.697-152.22-67.108 11.421-142.55-7.4491-163.25-81.433-5.9562-21.282-16.111-152.36-16.111-170.07 0-88.687 77.742-60.816 125.72-24.795z"/>
+                            </svg>
+                        </a>
                     </div>
-                {{/unless}}
+                </div>
             </div>
         </div>
     </header>
