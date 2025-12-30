@@ -862,6 +862,7 @@ hr {
     .gh-head-brand {
         flex: 0 0 auto;
         margin-right: 0;
+        order: 1;
     }
 
     .gh-head-actions {
@@ -872,7 +873,8 @@ hr {
         align-items: center;
         gap: var(--space-3);
         flex: 0 0 auto;
-        margin-left: 0;
+        margin-left: auto;
+        order: 2;
     }
 
     .gh-search.gh-icon-btn {
@@ -3213,6 +3215,22 @@ hr {
     .portfolio-body .kg-gallery-card {
         width: 100%;
         padding: 0;
+    }
+
+    /* Gallery rows collapse to single column on mobile */
+    .portfolio-body .kg-gallery-row,
+    .experimental-body .kg-gallery-row,
+    .photography-body .kg-gallery-row,
+    .gh-content .kg-gallery-row {
+        flex-direction: column;
+    }
+
+    .portfolio-body .kg-gallery-image,
+    .experimental-body .kg-gallery-image,
+    .photography-body .kg-gallery-image,
+    .gh-content .kg-gallery-image {
+        width: 100%;
+        flex: none;
     }
 
     /* Video cards stay within content on mobile */

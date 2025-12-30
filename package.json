@@ -73,16 +73,6 @@
                 "default": "Midnight (Deep & Warm)",
                 "group": "design"
             },
-            "accent_style": {
-                "type": "select",
-                "options": [
-                    "Warm Amber",
-                    "Soft Copper",
-                    "Climate Teal"
-                ],
-                "default": "Warm Amber",
-                "group": "design"
-            },
             "typography_style": {
                 "type": "select",
                 "options": [
