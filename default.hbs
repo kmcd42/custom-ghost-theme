@@ -219,7 +219,11 @@
             {{!-- Left: Logo + Breadcrumbs --}}
             <div class="gh-head-brand">
                 <a class="gh-head-logo" href="{{@site.url}}" aria-label="{{@site.title}}">
-                    <span class="logo-k-text">k.</span>
+                    {{#if @site.logo}}
+                        <img src="{{@site.logo}}" alt="{{@site.title}}" />
+                    {{else}}
+                        {{@site.title}}
+                    {{/if}}
                 </a>
                 <div class="gh-head-breadcrumbs">
                     <span class="breadcrumb-current" id="breadcrumb-current">
@@ -380,33 +384,6 @@
 {{/is}}
 {{/if}}
 
-{{!-- Theme Color Randomization on Reload --}}
-<script>
-(function() {
-    // Beautiful accent color palettes - warm and playful
-    const colorPalettes = [
-        { primary: '#E8A847', soft: '#F0C670', deep: '#C98F3A', glow: 'rgba(232, 168, 71, 0.15)' },   // Warm Amber (default)
-        { primary: '#D4956A', soft: '#E8B896', deep: '#B57A4E', glow: 'rgba(212, 149, 106, 0.15)' }, // Soft Copper
-        { primary: '#2D9B96', soft: '#4EBAB5', deep: '#1F7A76', glow: 'rgba(45, 155, 150, 0.15)' },  // Ocean Teal
-        { primary: '#E87461', soft: '#F09989', deep: '#C95F4F', glow: 'rgba(232, 116, 97, 0.15)' },  // Coral
-        { primary: '#9B7ED9', soft: '#B9A5E5', deep: '#7B5FC9', glow: 'rgba(155, 126, 217, 0.15)' }, // Lavender
-        { primary: '#5DA9E9', soft: '#89C4F4', deep: '#3D89C9', glow: 'rgba(93, 169, 233, 0.15)' },  // Sky Blue
-        { primary: '#E88EA4', soft: '#F0B0BF', deep: '#C97088', glow: 'rgba(232, 142, 164, 0.15)' }, // Rose
-        { primary: '#7EC984', soft: '#A0D9A5', deep: '#5FB066', glow: 'rgba(126, 201, 132, 0.15)' }, // Sage
-    ];
-
-    // Pick a random palette
-    const randomIndex = Math.floor(Math.random() * colorPalettes.length);
-    const palette = colorPalettes[randomIndex];
-
-    // Apply to CSS custom properties
-    const root = document.documentElement;
-    root.style.setProperty('--color-primary', palette.primary);
-    root.style.setProperty('--color-primary-soft', palette.soft);
-    root.style.setProperty('--color-primary-deep', palette.deep);
-    root.style.setProperty('--color-primary-glow', palette.glow);
-})();
-</script>
 
 {{ghost_foot}}
 

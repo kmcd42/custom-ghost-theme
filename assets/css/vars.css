@@ -15,10 +15,19 @@
     --color-primary-deep: #D4A82F;
     --color-primary-glow: rgba(238, 198, 67, 0.18);
 
-    /* Secondary - Warm Earth Tones */
-    --color-teal: #2D9B96;
-    --color-teal-soft: #3DB5AF;
-    --color-teal-deep: #1F6B68;
+    /* Complementary Accent Colors - for visual pops */
+    --color-coral: #EE7B5A;
+    --color-coral-glow: rgba(238, 123, 90, 0.15);
+    --color-rose: #E88EA4;
+    --color-rose-glow: rgba(232, 142, 164, 0.12);
+    --color-teal: #43CDBE;
+    --color-teal-glow: rgba(67, 205, 190, 0.12);
+    --color-lavender: #9B7ED9;
+    --color-lavender-glow: rgba(155, 126, 217, 0.10);
+
+    /* Ocean & Deep Tones */
+    --color-teal-soft: #5DD9CB;
+    --color-teal-deep: #2A9B8E;
     --color-ocean: #0D3B4C;
 
     /* Neutral Depths - Dark Mode Base */
@@ -37,13 +46,19 @@
     --color-border: rgba(238, 198, 67, 0.12);
     --color-border-light: rgba(238, 198, 67, 0.06);
 
-    /* Gradients - Warm Glowing */
+    /* Gradients - Warm Glowing with complementary color pops */
     --gradient-sky: linear-gradient(135deg, #0C1015 0%, #141C28 30%, #1a2540 60%, #1E2845 100%);
     --gradient-dawn: linear-gradient(135deg, #0F0D14 0%, #201828 40%, #2A1C30 70%, #1E1620 100%);
     --gradient-ocean: linear-gradient(180deg, #070E14 0%, #0D1C28 40%, #0F2535 70%, #0A1E2C 100%);
-    --gradient-warmth: linear-gradient(135deg, rgba(238, 198, 67, 0.15) 0%, rgba(45, 155, 150, 0.08) 100%);
+    --gradient-warmth: linear-gradient(135deg, rgba(238, 198, 67, 0.12) 0%, rgba(232, 142, 164, 0.06) 50%, rgba(67, 205, 190, 0.08) 100%);
     --gradient-card: linear-gradient(145deg, rgba(35, 45, 60, 0.6) 0%, rgba(20, 28, 40, 0.9) 100%);
-    --gradient-glow: radial-gradient(ellipse 900px 600px at 50% -100px, rgba(238, 198, 67, 0.25) 0%, rgba(212, 168, 47, 0.12) 40%, transparent 70%);
+    --gradient-glow: radial-gradient(ellipse 900px 600px at 50% -100px, rgba(238, 198, 67, 0.25) 0%, rgba(238, 123, 90, 0.08) 35%, rgba(155, 126, 217, 0.06) 60%, transparent 75%);
+
+    /* Multi-color ambient glow for backgrounds */
+    --gradient-ambient:
+        radial-gradient(ellipse 600px 400px at 20% 30%, rgba(238, 198, 67, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse 500px 350px at 80% 20%, rgba(232, 142, 164, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse 450px 300px at 70% 80%, rgba(67, 205, 190, 0.06) 0%, transparent 50%);
 
     /* ═══════════════════════════════════════════════════════════
        TYPOGRAPHY - Editorial Character
@@ -210,13 +225,19 @@
     --color-primary-deep: #C9A528;
     --color-primary-glow: rgba(238, 198, 67, 0.15);
 
-    /* Light gradients - warmer with more glow */
+    /* Light gradients - warmer with complementary color pops */
     --gradient-sky: linear-gradient(135deg, #FFFCF1 0%, #FBF7E8 50%, #F5EED8 100%);
     --gradient-dawn: linear-gradient(135deg, #FFFDF5 0%, #FFF8E6 50%, #FFF2D0 100%);
     --gradient-ocean: linear-gradient(180deg, #FFFCF1 0%, #F8F5E8 50%, #F0EDE0 100%);
-    --gradient-warmth: linear-gradient(135deg, rgba(238, 198, 67, 0.12) 0%, rgba(45, 155, 150, 0.06) 100%);
+    --gradient-warmth: linear-gradient(135deg, rgba(238, 198, 67, 0.10) 0%, rgba(232, 142, 164, 0.05) 50%, rgba(67, 205, 190, 0.06) 100%);
     --gradient-card: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(251, 247, 232, 0.98) 100%);
-    --gradient-glow: radial-gradient(ellipse 900px 600px at 50% -100px, rgba(238, 198, 67, 0.18) 0%, rgba(212, 168, 47, 0.08) 40%, transparent 70%);
+    --gradient-glow: radial-gradient(ellipse 900px 600px at 50% -100px, rgba(238, 198, 67, 0.15) 0%, rgba(238, 123, 90, 0.06) 35%, rgba(155, 126, 217, 0.04) 60%, transparent 75%);
+
+    /* Multi-color ambient glow for light backgrounds */
+    --gradient-ambient:
+        radial-gradient(ellipse 600px 400px at 20% 30%, rgba(238, 198, 67, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse 500px 350px at 80% 20%, rgba(232, 142, 164, 0.06) 0%, transparent 50%),
+        radial-gradient(ellipse 450px 300px at 70% 80%, rgba(67, 205, 190, 0.05) 0%, transparent 50%);
 
     /* Softer shadows for light mode */
     --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
