@@ -314,12 +314,12 @@ hr {
     width: auto;
 }
 
-/* Text Logo - Dynamic "k." with bold weight */
+/* Text Logo - Dynamic "k." with wide Bookmania-inspired weight */
 .logo-k-text {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 44px;
+    width: 48px;
     height: 44px;
     background: var(--color-primary);
     color: var(--color-midnight);
@@ -328,10 +328,13 @@ hr {
     font-weight: 900;
     border-radius: var(--radius-lg);
     transition: all var(--duration-base) var(--ease-spring);
+    /* Wider like Bookmania black weight */
+    transform: scaleX(1.12);
+    letter-spacing: 0.02em;
 }
 
 .gh-head-logo:hover .logo-k-text {
-    transform: scale(1.05) rotate(-2deg);
+    transform: scaleX(1.12) scale(1.05) rotate(-2deg);
     box-shadow: var(--shadow-glow);
 }
 
@@ -826,6 +829,7 @@ hr {
 
 /* Mobile Drawer Adjustments */
 @media (max-width: 767px) {
+    /* Hide breadcrumbs on mobile */
     .gh-head-breadcrumbs {
         display: none !important;
     }
@@ -844,33 +848,41 @@ hr {
 
     .gh-head-actions {
         display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
         flex-direction: row;
         align-items: center;
-        gap: var(--space-2);
+        gap: var(--space-3);
         flex: 0 0 auto;
     }
 
-    .gh-search.gh-icon-btn,
+    .gh-search.gh-icon-btn {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
     .gh-drawer-toggle {
         display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
         align-items: center;
         justify-content: center;
-        width: 36px;
-        height: 36px;
-        min-width: 36px;
-        min-height: 36px;
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        min-height: 40px;
         border-radius: 50%;
+        background: transparent;
+        border: 1px solid var(--color-border);
+        color: var(--text-color);
     }
 
     .gh-drawer-toggle .dropdown-icon {
-        width: 16px;
-        height: 16px;
-        stroke: currentColor;
-    }
-
-    /* Hide breadcrumbs on mobile */
-    .gh-head-breadcrumbs {
-        display: none !important;
+        width: 20px;
+        height: 20px;
+        stroke: var(--text-color);
+        stroke-width: 2.5;
     }
 
     .gh-drawer-inner {
@@ -1109,13 +1121,13 @@ hr {
     padding: var(--space-8);
 }
 
-/* Hero Section - Dramatic like experimental */
+/* Hero Section */
 .home-hero {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.2fr 0.8fr;
     gap: var(--space-12);
     align-items: center;
-    min-height: 80vh;
+    min-height: 60vh;
     padding: var(--space-16) 0;
 }
 
@@ -1161,24 +1173,19 @@ hr {
     position: relative;
     border-radius: var(--radius-2xl);
     overflow: hidden;
-    transform: rotate(3deg);
-    box-shadow: var(--shadow-dramatic);
+    transform: rotate(2deg);
+    box-shadow: var(--shadow-xl);
     transition: transform var(--duration-slow) var(--ease-spring);
-    /* Make image larger and more prominent */
-    max-width: 100%;
-    width: 100%;
 }
 
 .home-hero-image:hover {
-    transform: rotate(0deg) scale(1.03);
+    transform: rotate(0deg) scale(1.02);
 }
 
 .home-hero-image img {
     width: 100%;
     height: auto;
     display: block;
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
 }
 
 /* Bento Grid */
@@ -1412,6 +1419,7 @@ hr {
 }
 
 /* Text background overlay for cards with images */
+/* Overlay radius is tighter so image border overhangs it */
 .home-bento-has-bg {
     position: absolute;
     bottom: 0;
@@ -1419,7 +1427,7 @@ hr {
     right: 0;
     padding: var(--space-6);
     background: linear-gradient(0deg, rgba(12, 16, 21, 0.98) 0%, rgba(12, 16, 21, 0.85) 50%, transparent 100%);
-    border-radius: 0 0 calc(var(--radius-xl) - 1px) calc(var(--radius-xl) - 1px);
+    border-radius: 0 0 calc(var(--radius-xl) - 8px) calc(var(--radius-xl) - 8px);
 }
 
 .light-mode .home-bento-has-bg {
@@ -1619,10 +1627,9 @@ hr {
     }
 
     .home-hero-image {
-        max-width: 500px;
-        width: 100%;
+        max-width: 400px;
         margin: 0 auto;
-        transform: rotate(2deg);
+        transform: rotate(0);
         order: 1;
     }
 
@@ -1673,12 +1680,6 @@ hr {
 
     .home-hero-image {
         max-width: 100%;
-        width: 100%;
-        transform: rotate(0);
-    }
-
-    .home-hero-image img {
-        aspect-ratio: 3 / 4;
     }
 
     .home-bento-grid {
@@ -2279,9 +2280,7 @@ hr {
 /* Gallery - Masonry/Cascade Style (no cropping) */
 .portfolio-body .kg-gallery-card,
 .gh-content .kg-gallery-card {
-    width: 100%;
-    max-width: 100%;
-    margin: var(--space-10) 0;
+    max-width: 100vw;
     padding: 0;
 }
 
