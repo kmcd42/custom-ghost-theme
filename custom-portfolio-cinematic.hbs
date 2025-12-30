@@ -1,0 +1,104 @@
+{{!< default}}
+{{!--
+Template Name: Portfolio Cinematic
+Description: Full-bleed, immersive experience. Images dominate, text minimal.
+Like walking through a film set or gallery exhibition.
+--}}
+
+{{#post}}
+<article class="cinematic-layout {{post_class}}">
+
+    {{!-- Full-screen Opening Shot --}}
+    <header class="cinematic-hero">
+        {{#if feature_image}}
+        <div class="cinematic-hero-image">
+            <img
+                srcset="{{img_url feature_image size="l"}} 1200w,
+                        {{img_url feature_image size="xl"}} 2000w"
+                sizes="100vw"
+                src="{{img_url feature_image size="xl"}}"
+                alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+                loading="eager"
+            />
+        </div>
+        {{/if}}
+
+        <div class="cinematic-hero-content">
+            <h1 class="cinematic-title kinetic-text">{{title}}</h1>
+        </div>
+
+        <div class="cinematic-hero-meta">
+            {{#if primary_tag}}
+                <span class="cinematic-tag">{{primary_tag.name}}</span>
+            {{/if}}
+            <span class="cinematic-year">{{date format="YYYY"}}</span>
+        </div>
+    </header>
+
+    {{!-- Synopsis Card --}}
+    {{#if custom_excerpt}}
+    <section class="cinematic-synopsis reveal-on-scroll">
+        <div class="cinematic-synopsis-inner">
+            <span class="cinematic-synopsis-label">Synopsis</span>
+            <p class="cinematic-synopsis-text">{{custom_excerpt}}</p>
+        </div>
+    </section>
+    {{/if}}
+
+    {{!-- Content as Scenes --}}
+    <div class="cinematic-body gh-content">
+        {{content}}
+    </div>
+
+    {{!-- Credits Roll --}}
+    <footer class="cinematic-credits reveal-on-scroll">
+        <div class="cinematic-credits-inner">
+            <div class="cinematic-credits-title">Credits</div>
+
+            {{#if primary_author}}
+            <div class="cinematic-credit">
+                <span class="cinematic-credit-role">Created by</span>
+                <span class="cinematic-credit-name">{{primary_author.name}}</span>
+            </div>
+            {{/if}}
+
+            <div class="cinematic-credit">
+                <span class="cinematic-credit-role">Published</span>
+                <span class="cinematic-credit-name">{{date format="MMMM D, YYYY"}}</span>
+            </div>
+
+            {{#if tags}}
+            <div class="cinematic-credit">
+                <span class="cinematic-credit-role">Filed Under</span>
+                <span class="cinematic-credit-name">
+                    {{#foreach tags limit="3"}}{{name}}{{#unless @last}}, {{/unless}}{{/foreach}}
+                </span>
+            </div>
+            {{/if}}
+        </div>
+    </footer>
+
+    {{!-- The End --}}
+    <div class="cinematic-end reveal-on-scroll">
+        <span class="cinematic-end-text">Fin</span>
+    </div>
+
+    {{!-- After Credits Scene (Next Project) --}}
+    {{#get "posts" filter="tag:portfolio+id:-{{id}}" limit="1"}}
+        {{#foreach posts}}
+            <a href="{{url}}" class="cinematic-next reveal-on-scroll">
+                <div class="cinematic-next-content">
+                    <span class="cinematic-next-label">After Credits</span>
+                    <span class="cinematic-next-title">{{title}}</span>
+                </div>
+                {{#if feature_image}}
+                    <div class="cinematic-next-preview">
+                        <img src="{{img_url feature_image size="m"}}" alt="" loading="lazy" />
+                    </div>
+                {{/if}}
+            </a>
+        {{/foreach}}
+    {{/get}}
+
+</article>
+{{/post}}

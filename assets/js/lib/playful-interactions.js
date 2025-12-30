@@ -9,6 +9,37 @@
     'use strict';
 
     // ═══════════════════════════════════════════════════════════
+    // IMAGE LOADING - Smooth fade in when images load
+    // ═══════════════════════════════════════════════════════════
+
+    function initImageLoading() {
+        // Handle lazy loaded images
+        document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+            if (img.complete) {
+                img.classList.add('loaded');
+            } else {
+                img.addEventListener('load', () => img.classList.add('loaded'));
+            }
+        });
+
+        // Also handle dynamically added images
+        const observer = new MutationObserver(mutations => {
+            mutations.forEach(mutation => {
+                mutation.addedNodes.forEach(node => {
+                    if (node.nodeName === 'IMG' && node.loading === 'lazy') {
+                        if (node.complete) {
+                            node.classList.add('loaded');
+                        } else {
+                            node.addEventListener('load', () => node.classList.add('loaded'));
+                        }
+                    }
+                });
+            });
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+    }
+
+    // ═══════════════════════════════════════════════════════════
     // KINETIC TYPOGRAPHY - Text that breathes
     // ═══════════════════════════════════════════════════════════
 
@@ -225,7 +256,10 @@
     // ═══════════════════════════════════════════════════════════
 
     function init() {
-        // Respect reduced motion
+        // Image loading works even with reduced motion
+        initImageLoading();
+
+        // Respect reduced motion for animations
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
             document.documentElement.classList.add('reduce-motion');
             return;

@@ -1,0 +1,70 @@
+{{!< default}}
+{{!--
+Template Name: About
+Description: Your personal story. All content is editable through Ghost.
+Use the Ghost editor to write your story, add images, and structure your content.
+--}}
+
+{{#post}}
+<article class="about-page">
+    <header class="about-hero">
+        <div class="about-hero-content">
+            <h1 class="about-hero-title kinetic-text">{{title}}</h1>
+            {{#if custom_excerpt}}
+                <p class="about-hero-intro">{{custom_excerpt}}</p>
+            {{/if}}
+        </div>
+
+        {{#if feature_image}}
+        <div class="about-hero-portrait">
+            <img
+                srcset="{{img_url feature_image size="s"}} 400w,
+                        {{img_url feature_image size="m"}} 720w,
+                        {{img_url feature_image size="l"}} 1200w"
+                sizes="(max-width: 768px) 80vw, 40vw"
+                src="{{img_url feature_image size="l"}}"
+                alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+                loading="eager"
+            />
+            <div class="about-hero-portrait-frame"></div>
+        </div>
+        {{/if}}
+    </header>
+
+    <section class="about-story reveal-on-scroll">
+        <div class="about-story-inner gh-canvas">
+            <div class="about-story-content gh-content">
+                {{content}}
+            </div>
+        </div>
+    </section>
+
+    {{!-- Photography section - pulls from photography tag --}}
+    <section class="about-photos reveal-on-scroll">
+        <div class="about-photos-inner">
+            <h2 class="about-section-title">Through My Lens</h2>
+            <div class="about-photos-grid">
+                {{#get "posts" filter="tag:photography" limit="6" include="tags"}}
+                    {{#foreach posts}}
+                        {{#if feature_image}}
+                        <a href="{{url}}" class="about-photos-item">
+                            <img
+                                src="{{img_url feature_image size="m"}}"
+                                alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+                                loading="lazy"
+                            />
+                        </a>
+                        {{/if}}
+                    {{/foreach}}
+                {{/get}}
+            </div>
+            <a href="/photography/" class="about-photos-link">
+                <span>Explore all photography</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+    </section>
+</article>
+{{/post}}
