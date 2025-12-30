@@ -40,7 +40,7 @@
     }
 
     // ═══════════════════════════════════════════════════════════
-    // KINETIC TYPOGRAPHY - Text that breathes
+    // KINETIC TYPOGRAPHY - Stamp-style paragraph animation
     // ═══════════════════════════════════════════════════════════
 
     function initKineticType() {
@@ -52,13 +52,8 @@
             if (el.dataset.kineticReady) return;
             el.dataset.kineticReady = 'true';
 
-            // Wrap each word for animation
-            const text = el.textContent;
-            const words = text.split(' ');
-
-            el.innerHTML = words.map((word, i) =>
-                `<span class="kinetic-word" style="--word-index: ${i}">${word}</span>`
-            ).join(' ');
+            // Stamp-style animation on the whole element (no word wrapping)
+            el.classList.add('kinetic-stamp');
         });
     }
 
@@ -381,7 +376,7 @@
         initKineticType();
         initScrollReveal();
         initMagneticElements();
-        initCustomCursor();
+        // Custom cursor removed - using native cursor
         initOrganicElements();
         initEasterEggs();
         initTimeAwareness();

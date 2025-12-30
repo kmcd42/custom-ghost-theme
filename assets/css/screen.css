@@ -538,37 +538,20 @@ hr {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: var(--space-3);
+    gap: var(--space-2);
     font-family: var(--font-sans);
     font-size: var(--text-sm);
     color: var(--text-muted);
 }
 
 .breadcrumb-home {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 28px;
-    height: 28px;
-    background: var(--color-primary-glow);
-    border-radius: var(--radius-full);
-    transition: all var(--duration-base) var(--ease-smooth);
+    font-weight: var(--font-medium);
+    color: var(--text-color);
+    transition: color var(--duration-base) var(--ease-smooth);
 }
 
 .breadcrumb-home:hover {
-    background: var(--color-primary);
-}
-
-.breadcrumb-dot {
-    width: 6px;
-    height: 6px;
-    background: var(--color-primary);
-    border-radius: var(--radius-full);
-    transition: all var(--duration-base) var(--ease-smooth);
-}
-
-.breadcrumb-home:hover .breadcrumb-dot {
-    background: var(--color-midnight);
+    color: var(--color-primary);
 }
 
 .breadcrumb-current {
@@ -591,16 +574,16 @@ hr {
     display: none;
 }
 
-/* Pulley Toggle Button */
+/* Dropdown Toggle Button */
 .gh-drawer-toggle {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
     background: transparent;
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-full);
+    border-radius: var(--radius-lg);
     color: var(--text-muted);
     cursor: pointer;
     transition: all var(--duration-base) var(--ease-smooth);
@@ -612,14 +595,14 @@ hr {
     background: var(--color-primary-glow);
 }
 
-.pulley-icon {
-    width: 20px;
-    height: 20px;
+.dropdown-icon {
+    width: 18px;
+    height: 18px;
     transition: transform var(--duration-base) var(--ease-spring);
 }
 
-/* Rotate pulley when drawer is open */
-.is-drawer-open .gh-drawer-toggle .pulley-icon {
+/* Rotate chevron when drawer is open */
+.is-drawer-open .gh-drawer-toggle .dropdown-icon {
     transform: rotate(180deg);
 }
 
@@ -1278,18 +1261,18 @@ hr {
 }
 
 .home-bento-photos {
-    grid-column: span 6;
+    grid-column: span 4;
     grid-row: span 1;
     min-height: 280px;
 }
 
 .home-bento-now {
-    grid-column: span 6;
+    grid-column: span 4;
     grid-row: span 1;
 }
 
 .home-bento-colophon {
-    grid-column: span 6;
+    grid-column: span 4;
     grid-row: span 1;
 }
 
@@ -2255,10 +2238,13 @@ hr {
 .portfolio-body .kg-gallery-container,
 .gh-content .kg-gallery-card,
 .gh-content .kg-gallery-container {
+    position: relative;
     width: 100vw;
     max-width: none;
-    margin-left: calc(-50vw + 50%);
-    margin-right: calc(-50vw + 50%);
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
     padding: 0 var(--space-6);
     box-sizing: border-box;
 }
@@ -2339,17 +2325,27 @@ hr {
 .portfolio-body .kg-video-card {
     max-width: 100%;
     margin: var(--space-12) 0;
+    /* Explicit resets to prevent breakout */
+    position: relative;
+    left: auto;
+    right: auto;
+    transform: none;
+    width: 100%;
 }
 
-.portfolio-body .kg-video-card figure {
+.portfolio-body .kg-video-card figure,
+.portfolio-body .kg-video-card > div {
     margin: 0;
+    width: 100%;
 }
 
-.portfolio-body .kg-video-card video {
+.portfolio-body .kg-video-card video,
+.portfolio-body .kg-video-player {
     width: 100%;
     height: auto;
     display: block;
     border-radius: var(--radius-lg);
+    object-fit: contain;
 }
 
 .portfolio-body .kg-video-card figcaption {
@@ -3094,10 +3090,16 @@ hr {
     }
 
     .portfolio-body .kg-image-card.kg-card-hascaption,
-    .portfolio-body .kg-video-card,
     .portfolio-body .kg-gallery-card {
         width: calc(100vw - var(--space-8));
         padding: 0 var(--space-2);
+    }
+
+    /* Video cards stay within content on mobile */
+    .portfolio-body .kg-video-card {
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
     }
 
     .split-image {
@@ -3517,10 +3519,19 @@ hr {
     position: relative;
     margin: var(--space-10) 0;
     max-width: 100%;
+    /* Ensure video stays in container - don't inherit gallery breakout styles */
+    left: auto;
+    right: auto;
+    margin-left: 0;
+    margin-right: 0;
+    transform: none;
+    width: 100%;
 }
 
-.kg-video-card figure {
+.kg-video-card figure,
+.kg-video-card > div {
     margin: 0;
+    width: 100%;
 }
 
 /* Video container - Ghost's native player wrapper */
@@ -3533,11 +3544,13 @@ hr {
 }
 
 /* The actual video element */
-.kg-video-card video {
+.kg-video-card video,
+.kg-video-player {
     width: 100%;
     height: auto;
     display: block;
     border-radius: var(--radius-lg);
+    object-fit: contain;
 }
 
 /* Ghost's video player wrapper */
@@ -3546,12 +3559,17 @@ hr {
     width: 100%;
     border-radius: var(--radius-lg);
     overflow: hidden;
+    background: #000;
 }
 
-.kg-video-player {
+/* Ensure video thumbnail displays correctly */
+.kg-video-player-thumbnail {
+    position: absolute;
+    inset: 0;
     width: 100%;
-    height: auto;
-    display: block;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
 }
 
 /* Ghost's video controls overlay */
@@ -5471,14 +5489,29 @@ img.loaded {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: brightness(0.6) contrast(1.1);
+    filter: brightness(0.5) contrast(1.1);
+}
+
+/* Gradient overlay for better title visibility */
+.cinematic-hero-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.3) 0%,
+        rgba(0, 0, 0, 0.1) 40%,
+        rgba(0, 0, 0, 0.5) 100%
+    );
+    pointer-events: none;
 }
 
 .cinematic-hero-content {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     text-align: center;
     padding: var(--space-8);
+    max-width: 90%;
 }
 
 .cinematic-title {
@@ -5487,8 +5520,8 @@ img.loaded {
     font-weight: var(--font-normal);
     line-height: 0.9;
     letter-spacing: -0.04em;
-    color: var(--text-color);
-    text-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    text-shadow: 0 4px 60px rgba(0, 0, 0, 0.8), 0 2px 20px rgba(0, 0, 0, 0.5);
 }
 
 .cinematic-hero-meta {
@@ -6667,39 +6700,31 @@ body:has(.custom-cursor) button {
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
-   KINETIC TYPOGRAPHY - Text that breathes
+   KINETIC TYPOGRAPHY - Stamp-style animation
    ───────────────────────────────────────────────────────────────────────────── */
 
-.kinetic-word {
-    display: inline-block;
-    transition: transform 0.4s var(--ease-spring), opacity 0.4s ease;
-    /* Occasional X-axis stretch - subtle, alive */
-    animation: wordStretch 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    animation-delay: calc(var(--word-index) * 0.08s);
+/* Stamp animation - whole paragraph scales in once */
+.kinetic-stamp {
+    animation: stampIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-.kinetic-text:hover .kinetic-word,
-.home-description .kinetic-word,
-.home-hero-statement .kinetic-word,
-.home-minimal-statement .kinetic-word {
-    /* Same single stretch animation for key elements */
-    animation: wordStretch 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    animation-delay: calc(var(--word-index) * 0.05s);
-}
-
-/* WellingtonNZ-style stretch animation - runs once */
-@keyframes wordStretch {
+@keyframes stampIn {
     0% {
-        transform: scaleX(0.85);
-        opacity: 0.7;
+        transform: scale(0.9);
+        opacity: 0;
     }
-    60% {
-        transform: scaleX(1.08);
+    50% {
+        transform: scale(1.02);
     }
     100% {
-        transform: scaleX(1);
+        transform: scale(1);
         opacity: 1;
     }
+}
+
+/* For backwards compatibility - kinetic-word no longer animated per-word */
+.kinetic-word {
+    display: inline;
 }
 
 /* Reveal on scroll */
@@ -7210,6 +7235,17 @@ body:has(.custom-cursor) button {
 
 .light-mode .portfolio-grid-image::after {
     background: linear-gradient(to top, rgba(253, 251, 247, 0.85) 0%, rgba(253, 251, 247, 0.3) 40%, transparent 100%);
+}
+
+/* Magazine template light mode - white background for readability */
+.light-mode .magazine-cover-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+.light-mode .magazine-title,
+.light-mode .magazine-excerpt {
+    color: var(--text-color);
 }
 
 .light-mode .gh-head.has-cover {

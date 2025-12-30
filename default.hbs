@@ -231,22 +231,18 @@
 
             {{!-- Center: Breadcrumbs --}}
             <div class="gh-head-breadcrumbs">
-                <a href="{{@site.url}}" class="breadcrumb-home">
-                    <span class="breadcrumb-dot"></span>
-                </a>
+                <a href="{{@site.url}}" class="breadcrumb-home">{{@site.title}}</a>
                 <span class="breadcrumb-current" id="breadcrumb-current">
                     {{!-- Dynamic breadcrumb inserted by JS --}}
                 </span>
             </div>
 
-            {{!-- Right: Actions + Pulley Toggle --}}
+            {{!-- Right: Actions + Dropdown Toggle --}}
             <div class="gh-head-actions">
                 <button class="gh-search gh-icon-btn" aria-label="Search this site" data-ghost-search>{{> "icons/search"}}</button>
                 <button class="gh-drawer-toggle" aria-label="Toggle navigation drawer" aria-expanded="false">
-                    <svg class="pulley-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="16" cy="8" r="4"/>
-                        <line x1="16" y1="12" x2="16" y2="28"/>
-                        <path d="M12 24 L16 28 L20 24"/>
+                    <svg class="dropdown-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
                 </button>
             </div>
