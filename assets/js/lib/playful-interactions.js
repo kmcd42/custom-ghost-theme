@@ -326,23 +326,24 @@
         if (body.classList.contains('home-template')) {
             pageName = ''; // Empty for home
         } else if (body.classList.contains('post-template')) {
-            // Get post title or "Article"
-            const title = document.querySelector('.post-title, .portfolio-title, .split-title, .cinematic-title, .magazine-title, .experimental-title');
-            pageName = title ? truncateText(title.textContent, 20) : 'Article';
+            // Get post title - check all possible title classes
+            const title = document.querySelector('.post-content-title, .portfolio-title, .split-title, .cinematic-title, .magazine-title, .experimental-title, .photography-title');
+            pageName = title ? truncateText(title.textContent, 30) : '';
         } else if (body.classList.contains('page-template')) {
-            const title = document.querySelector('h1');
-            pageName = title ? truncateText(title.textContent, 20) : 'Page';
+            // Get page title - check all possible page title classes
+            const title = document.querySelector('.about-hero-title, .now-title, .colophon-title, .blog-title, .portfolio-index-title, .photo-gallery-title, h1');
+            pageName = title ? truncateText(title.textContent, 30) : '';
         } else if (body.classList.contains('tag-template')) {
-            const tagName = document.querySelector('.tag-name, h1');
-            pageName = tagName ? truncateText(tagName.textContent, 20) : 'Tag';
+            const tagName = document.querySelector('.page-head-title, h1');
+            pageName = tagName ? truncateText(tagName.textContent, 30) : '';
         } else if (body.classList.contains('author-template')) {
-            const authorName = document.querySelector('.author-name, h1');
-            pageName = authorName ? truncateText(authorName.textContent, 20) : 'Author';
+            const authorName = document.querySelector('.page-head-title, h1');
+            pageName = authorName ? truncateText(authorName.textContent, 30) : '';
         } else {
             // Fallback: use page title
             const title = document.querySelector('h1');
             if (title) {
-                pageName = truncateText(title.textContent, 20);
+                pageName = truncateText(title.textContent, 30);
             }
         }
 
