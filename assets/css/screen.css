@@ -7422,3 +7422,63 @@ body:has(.custom-cursor) button {
 .reduce-motion .custom-cursor-dot {
     display: none;
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MOBILE GALLERIES - Comprehensive single column layout
+   This section placed at end to ensure proper cascade precedence
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+    /* All Ghost gallery rows - flexbox based */
+    .kg-gallery-row,
+    .gh-content .kg-gallery-row,
+    .portfolio-body .kg-gallery-row,
+    .experimental-body .kg-gallery-row {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: var(--space-4) !important;
+    }
+
+    /* All Ghost gallery images */
+    .kg-gallery-image,
+    .gh-content .kg-gallery-image,
+    .portfolio-body .kg-gallery-image,
+    .experimental-body .kg-gallery-image {
+        flex: 1 1 100% !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    /* Photography template galleries - grid based, force single column */
+    .photography-body .kg-gallery-row {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        grid-auto-flow: row !important;
+        grid-auto-columns: unset !important;
+    }
+
+    .photography-body .kg-gallery-image {
+        width: 100% !important;
+    }
+
+    /* Photo gallery index grid */
+    .photo-gallery-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .photo-gallery-item,
+    .photo-gallery-item:nth-child(n) {
+        grid-row: span 1 !important;
+    }
+
+    /* Photo bento grid */
+    .photo-bento-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* About page photos */
+    .about-photos-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
