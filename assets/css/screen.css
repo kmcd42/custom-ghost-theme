@@ -35,11 +35,19 @@ body {
     background: var(--gradient-sky);
     background-attachment: fixed;
     color: var(--text-color);
-    font-family: var(--font-sans);
+    font-family: var(--font-display);
     font-weight: var(--font-normal);
     line-height: var(--leading-relaxed);
     letter-spacing: var(--tracking-normal);
     min-height: 100vh;
+}
+
+/* Keep paragraphs in clean sans-serif for readability */
+p,
+.gh-content p,
+.about-story-content p,
+.post-content p {
+    font-family: var(--font-sans);
 }
 
 /* Subtle animated background grain for organic warmth */
@@ -282,7 +290,7 @@ hr {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: var(--color-charcoal);
+    background: var(--gradient-sky);
     backdrop-filter: blur(var(--blur-lg));
     -webkit-backdrop-filter: blur(var(--blur-lg));
     border-bottom: 1px solid var(--color-border);
@@ -606,13 +614,13 @@ hr {
     color: var(--color-midnight);
 }
 
-/* The Drawer */
+/* The Drawer - same background as site */
 .gh-drawer {
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
-    background: rgba(10, 14, 18, 0.98);
+    background: var(--gradient-sky);
     backdrop-filter: blur(var(--blur-xl));
     -webkit-backdrop-filter: blur(var(--blur-xl));
     border-bottom: 1px solid var(--color-border);
@@ -851,7 +859,8 @@ hr {
         display: none !important;
     }
 
-    .gh-head-inner {
+    /* Override Ghost's grid layout with flexbox - using #gh-head for specificity */
+    #gh-head .gh-head-inner {
         display: flex !important;
         flex-direction: row;
         justify-content: space-between;
@@ -865,7 +874,8 @@ hr {
         order: 1;
     }
 
-    .gh-head-actions {
+    /* Actions on right - override Ghost's hidden state */
+    #gh-head .gh-head-actions {
         display: flex !important;
         visibility: visible !important;
         opacity: 1 !important;
@@ -877,13 +887,13 @@ hr {
         order: 2;
     }
 
-    .gh-search.gh-icon-btn {
+    #gh-head .gh-search.gh-icon-btn {
         display: flex !important;
         visibility: visible !important;
         opacity: 1 !important;
     }
 
-    .gh-drawer-toggle {
+    #gh-head .gh-drawer-toggle {
         display: flex !important;
         visibility: visible !important;
         opacity: 1 !important;
@@ -899,11 +909,16 @@ hr {
         color: var(--text-color);
     }
 
-    .gh-drawer-toggle .dropdown-icon {
+    #gh-head .gh-drawer-toggle .dropdown-icon {
         width: 20px;
         height: 20px;
         stroke: var(--text-color);
         stroke-width: 2.5;
+    }
+
+    /* Hide the burger menu - we use drawer toggle instead */
+    #gh-head .gh-burger {
+        display: none !important;
     }
 
     .gh-drawer-inner {
@@ -933,7 +948,7 @@ hr {
 
 /* Light mode drawer - explicit text colors for visibility */
 .light-mode .gh-drawer {
-    background: rgba(255, 252, 241, 0.98);
+    background: var(--gradient-sky);
 }
 
 .light-mode .gh-drawer-nav .nav a {
@@ -2396,6 +2411,21 @@ hr {
     transform: scale(1.02);
 }
 
+/* Portfolio/content galleries - single column on mobile */
+@media (max-width: 768px) {
+    .portfolio-body .kg-gallery-row,
+    .gh-content .kg-gallery-row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .portfolio-body .kg-gallery-image,
+    .gh-content .kg-gallery-image {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
 /* Wide images break out */
 .portfolio-body .kg-image-card.kg-width-wide,
 .portfolio-body .kg-image-card.kg-width-full {
@@ -2668,6 +2698,15 @@ hr {
 
 .photography-body .kg-gallery-image:hover img {
     transform: scale(1.02);
+}
+
+/* Photography galleries - single column on mobile */
+@media (max-width: 768px) {
+    .photography-body .kg-gallery-row {
+        grid-auto-flow: row;
+        grid-auto-columns: unset;
+        grid-template-columns: 1fr;
+    }
 }
 
 .photography-body .kg-image-card {
@@ -3325,6 +3364,18 @@ hr {
 
 .kg-gallery-image:hover img {
     transform: scale(1.02);
+}
+
+/* Mobile galleries - single column */
+@media (max-width: 768px) {
+    .kg-gallery-row {
+        flex-direction: column;
+    }
+
+    .kg-gallery-image {
+        flex: 1 1 100%;
+        width: 100%;
+    }
 }
 
 /* Image Cards */
@@ -5929,6 +5980,7 @@ img.loaded {
     flex-direction: column;
     gap: var(--space-4);
     transform: rotate(var(--exp-rotation));
+    z-index: 10;
 }
 
 .experimental-meta-item {
@@ -6416,6 +6468,32 @@ body:has(.custom-cursor) button {
     opacity: 0.3;
     transform: rotate(2deg);
     pointer-events: none;
+}
+
+/* Larger about portrait at large screens - matching experimental hero sizing */
+@media (min-width: 1400px) {
+    .about-hero {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-20);
+        padding: var(--space-24) var(--space-12);
+        min-height: 80vh;
+    }
+
+    .about-hero-portrait img {
+        max-width: 600px;
+    }
+}
+
+@media (min-width: 1800px) {
+    .about-hero {
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: var(--space-24);
+        padding: var(--space-32) var(--space-16);
+    }
+
+    .about-hero-portrait img {
+        max-width: 750px;
+    }
 }
 
 /* Story Section */
@@ -7348,4 +7426,64 @@ body:has(.custom-cursor) button {
 .reduce-motion .custom-cursor,
 .reduce-motion .custom-cursor-dot {
     display: none;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MOBILE GALLERIES - Comprehensive single column layout
+   This section placed at end to ensure proper cascade precedence
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+    /* All Ghost gallery rows - flexbox based */
+    .kg-gallery-row,
+    .gh-content .kg-gallery-row,
+    .portfolio-body .kg-gallery-row,
+    .experimental-body .kg-gallery-row {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: var(--space-4) !important;
+    }
+
+    /* All Ghost gallery images */
+    .kg-gallery-image,
+    .gh-content .kg-gallery-image,
+    .portfolio-body .kg-gallery-image,
+    .experimental-body .kg-gallery-image {
+        flex: 1 1 100% !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    /* Photography template galleries - grid based, force single column */
+    .photography-body .kg-gallery-row {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        grid-auto-flow: row !important;
+        grid-auto-columns: unset !important;
+    }
+
+    .photography-body .kg-gallery-image {
+        width: 100% !important;
+    }
+
+    /* Photo gallery index grid */
+    .photo-gallery-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .photo-gallery-item,
+    .photo-gallery-item:nth-child(n) {
+        grid-row: span 1 !important;
+    }
+
+    /* Photo bento grid */
+    .photo-bento-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* About page photos */
+    .about-photos-grid {
+        grid-template-columns: 1fr !important;
+    }
 }
