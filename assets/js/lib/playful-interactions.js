@@ -252,12 +252,125 @@
     }
 
     // ═══════════════════════════════════════════════════════════
+    // DRAWER NAVIGATION - The pulley system
+    // ═══════════════════════════════════════════════════════════
+
+    function initDrawerNavigation() {
+        const toggle = document.querySelector('.gh-drawer-toggle');
+        const drawer = document.querySelector('.gh-drawer');
+        const header = document.querySelector('.gh-head');
+
+        if (!toggle || !drawer) return;
+
+        // Toggle drawer open/close
+        toggle.addEventListener('click', () => {
+            const isOpen = header.classList.contains('is-drawer-open');
+
+            if (isOpen) {
+                closeDrawer();
+            } else {
+                openDrawer();
+            }
+        });
+
+        function openDrawer() {
+            header.classList.add('is-drawer-open');
+            toggle.setAttribute('aria-expanded', 'true');
+            drawer.setAttribute('aria-hidden', 'false');
+
+            // Prevent body scroll when drawer is open
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDrawer() {
+            header.classList.remove('is-drawer-open');
+            toggle.setAttribute('aria-expanded', 'false');
+            drawer.setAttribute('aria-hidden', 'true');
+
+            // Restore body scroll
+            document.body.style.overflow = '';
+        }
+
+        // Close drawer when clicking outside
+        document.addEventListener('click', (e) => {
+            if (header.classList.contains('is-drawer-open')) {
+                if (!drawer.contains(e.target) && !toggle.contains(e.target)) {
+                    closeDrawer();
+                }
+            }
+        });
+
+        // Close drawer on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && header.classList.contains('is-drawer-open')) {
+                closeDrawer();
+                toggle.focus();
+            }
+        });
+
+        // Close drawer when clicking a nav link
+        drawer.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                closeDrawer();
+            });
+        });
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    // BREADCRUMBS - Dynamic page location
+    // ═══════════════════════════════════════════════════════════
+
+    function initBreadcrumbs() {
+        const breadcrumbCurrent = document.getElementById('breadcrumb-current');
+        if (!breadcrumbCurrent) return;
+
+        // Determine current page type from body classes
+        const body = document.body;
+        let pageName = '';
+
+        if (body.classList.contains('home-template')) {
+            pageName = ''; // Empty for home
+        } else if (body.classList.contains('post-template')) {
+            // Get post title or "Article"
+            const title = document.querySelector('.post-title, .portfolio-title, .split-title, .cinematic-title, .magazine-title, .experimental-title');
+            pageName = title ? truncateText(title.textContent, 20) : 'Article';
+        } else if (body.classList.contains('page-template')) {
+            const title = document.querySelector('h1');
+            pageName = title ? truncateText(title.textContent, 20) : 'Page';
+        } else if (body.classList.contains('tag-template')) {
+            const tagName = document.querySelector('.tag-name, h1');
+            pageName = tagName ? truncateText(tagName.textContent, 20) : 'Tag';
+        } else if (body.classList.contains('author-template')) {
+            const authorName = document.querySelector('.author-name, h1');
+            pageName = authorName ? truncateText(authorName.textContent, 20) : 'Author';
+        } else {
+            // Fallback: use page title
+            const title = document.querySelector('h1');
+            if (title) {
+                pageName = truncateText(title.textContent, 20);
+            }
+        }
+
+        breadcrumbCurrent.textContent = pageName;
+    }
+
+    function truncateText(text, maxLength) {
+        text = text.trim();
+        if (text.length <= maxLength) return text;
+        return text.substring(0, maxLength).trim() + '…';
+    }
+
+    // ═══════════════════════════════════════════════════════════
     // INITIALIZE ALL
     // ═══════════════════════════════════════════════════════════
 
     function init() {
         // Image loading works even with reduced motion
         initImageLoading();
+
+        // Navigation always works
+        initDrawerNavigation();
+        initBreadcrumbs();
 
         // Respect reduced motion for animations
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {

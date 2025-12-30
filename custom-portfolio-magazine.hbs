@@ -25,23 +25,25 @@ pull quotes, and asymmetric photo placements. Think Kinfolk meets Wallpaper*.
         {{/if}}
 
         <div class="magazine-cover-content">
-            <div class="magazine-issue">
-                {{#if primary_tag}}
-                    <span class="magazine-tag">{{primary_tag.name}}</span>
+            <div class="magazine-cover-card">
+                <div class="magazine-issue">
+                    {{#if primary_tag}}
+                        <span class="magazine-tag">{{primary_tag.name}}</span>
+                    {{/if}}
+                    <span class="magazine-date">{{date format="MMMM YYYY"}}</span>
+                </div>
+
+                <h1 class="magazine-title kinetic-text">{{title}}</h1>
+
+                {{#if custom_excerpt}}
+                    <p class="magazine-deck">{{custom_excerpt}}</p>
                 {{/if}}
-                <span class="magazine-date">{{date format="MMMM YYYY"}}</span>
-            </div>
 
-            <h1 class="magazine-title kinetic-text">{{title}}</h1>
-
-            {{#if custom_excerpt}}
-                <p class="magazine-deck">{{custom_excerpt}}</p>
-            {{/if}}
-
-            <div class="magazine-byline">
-                {{#if primary_author}}
-                    <span>By {{primary_author.name}}</span>
-                {{/if}}
+                <div class="magazine-byline">
+                    {{#if primary_author}}
+                        <span>By {{primary_author.name}}</span>
+                    {{/if}}
+                </div>
             </div>
         </div>
 
@@ -75,6 +77,15 @@ pull quotes, and asymmetric photo placements. Think Kinfolk meets Wallpaper*.
             {{/if}}
         </div>
     </footer>
+
+    {{!-- Contact CTA --}}
+    <section class="portfolio-contact-cta reveal-on-scroll">
+        <div class="portfolio-contact-inner">
+            <span class="portfolio-contact-label">Like what you see?</span>
+            <h3 class="portfolio-contact-title">Let's work together</h3>
+            <a href="/contact/" class="portfolio-contact-button">Get in touch</a>
+        </div>
+    </section>
 
     {{!-- Next Project Teaser --}}
     {{#get "posts" filter="tag:portfolio+id:-{{id}}" limit="1" order="random"}}

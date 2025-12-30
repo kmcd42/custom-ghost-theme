@@ -78,10 +78,14 @@ Like walking through a film set or gallery exhibition.
         </div>
     </footer>
 
-    {{!-- The End --}}
-    <div class="cinematic-end reveal-on-scroll">
-        <span class="cinematic-end-text">Fin</span>
-    </div>
+    {{!-- Contact CTA --}}
+    <section class="portfolio-contact-cta reveal-on-scroll">
+        <div class="portfolio-contact-inner">
+            <span class="portfolio-contact-label">Like what you see?</span>
+            <h3 class="portfolio-contact-title">Let's work together</h3>
+            <a href="/contact/" class="portfolio-contact-button">Get in touch</a>
+        </div>
+    </section>
 
     {{!-- After Credits Scene (Next Project) --}}
     {{#get "posts" filter="tag:portfolio+id:-{{id}}" limit="1"}}
