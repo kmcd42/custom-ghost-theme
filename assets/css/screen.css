@@ -546,7 +546,9 @@ hr {
 
 .breadcrumb-home {
     font-weight: var(--font-medium);
-    color: var(--text-color);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--text-soft);
     transition: color var(--duration-base) var(--ease-smooth);
 }
 
@@ -848,7 +850,19 @@ hr {
     }
 
     .gh-head-inner {
-        grid-template-columns: auto 1fr;
+        grid-template-columns: 1fr auto;
+        padding: var(--space-3) var(--space-4);
+    }
+
+    .gh-head-actions {
+        display: flex;
+        gap: var(--space-2);
+    }
+
+    .gh-search.gh-icon-btn,
+    .gh-drawer-toggle {
+        width: 36px;
+        height: 36px;
     }
 
     .gh-drawer-inner {
@@ -1586,12 +1600,14 @@ hr {
 
     .home-hero-content {
         max-width: none;
+        order: 2;
     }
 
     .home-hero-image {
         max-width: 400px;
         margin: 0 auto;
         transform: rotate(0);
+        order: 1;
     }
 
     .home-bento-grid {
@@ -1635,7 +1651,12 @@ hr {
     }
 
     .home-hero-statement {
-        font-size: var(--text-4xl);
+        font-size: var(--text-5xl);
+        line-height: 1.1;
+    }
+
+    .home-hero-image {
+        max-width: 100%;
     }
 
     .home-bento-grid {
@@ -2235,22 +2256,22 @@ hr {
 
 /* Full-viewport galleries - immersive photo experience */
 .portfolio-body .kg-gallery-card,
-.portfolio-body .kg-gallery-container,
-.gh-content .kg-gallery-card,
-.gh-content .kg-gallery-container {
+.gh-content .kg-gallery-card {
     position: relative;
     width: 100vw;
-    max-width: none;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-    padding: 0 var(--space-6);
+    max-width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    padding: 0;
     box-sizing: border-box;
 }
 
 .portfolio-body .kg-gallery-container,
 .gh-content .kg-gallery-container {
+    width: 100%;
+    max-width: 100%;
+    padding: 0 var(--space-4);
+    box-sizing: border-box;
     display: grid;
     gap: var(--space-4);
 }
@@ -2294,15 +2315,15 @@ hr {
     width: 100%;
 }
 
-/* Image with caption - side-by-side editorial layout */
+/* Image with caption - centered layout */
 .portfolio-body .kg-image-card.kg-card-hascaption {
     display: flex;
     flex-direction: column;
     gap: var(--space-4);
-    max-width: var(--width-wide);
-    width: calc(100vw - var(--space-8));
-    margin: var(--space-12) calc(-50vw + 50%);
-    padding: 0 var(--space-4);
+    max-width: var(--width-content);
+    width: 100%;
+    margin: var(--space-12) auto;
+    padding: 0;
 }
 
 .portfolio-body .kg-image-card.kg-card-hascaption img {
@@ -3283,44 +3304,36 @@ hr {
     object-fit: cover;
 }
 
-/* Callout Cards - Bento Box Style */
+/* Callout Cards - Quote-inspired Style */
 .kg-callout-card {
     position: relative;
     display: flex;
     align-items: flex-start;
     gap: var(--space-5);
-    padding: var(--space-8);
-    background: rgba(10, 14, 18, 0.6);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-xl);
+    padding: var(--space-6);
+    background: var(--color-primary-glow);
+    border-left: 4px solid var(--color-primary);
+    border-radius: var(--radius-lg);
     margin: var(--space-10) 0;
-    overflow: hidden;
-    transition: all var(--duration-slow) var(--ease-smooth);
+    transform: rotate(-0.5deg);
+    transition: all var(--duration-base) var(--ease-smooth);
 }
 
 .kg-callout-card:hover {
-    border-color: var(--color-primary);
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-glow);
+    transform: rotate(0deg) translateY(-2px);
 }
 
 .kg-callout-emoji {
-    font-size: 2.5rem;
+    font-size: 2rem;
     line-height: 1;
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
     flex-shrink: 0;
-}
-
-@keyframes gentleBounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-4px); }
 }
 
 .kg-callout-text {
     flex: 1;
-    font-size: var(--text-lg);
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-style: italic;
     line-height: var(--leading-relaxed);
     color: var(--text-color);
 }
@@ -3332,6 +3345,7 @@ hr {
 .kg-callout-text strong {
     color: var(--color-primary);
     font-weight: var(--font-semibold);
+    font-style: normal;
 }
 
 .kg-callout-text a {
@@ -3345,111 +3359,20 @@ hr {
     color: var(--color-primary-soft);
 }
 
-/* Callout Color Variants - Ghost uses background colors */
-.kg-callout-card-grey {
-    background: linear-gradient(145deg, rgba(50, 60, 75, 0.6) 0%, rgba(30, 40, 55, 0.9) 100%);
-}
-
-.kg-callout-card-white {
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.08) 0%, rgba(200, 200, 200, 0.04) 100%);
-    border-color: rgba(255, 255, 255, 0.15);
-}
-
-.kg-callout-card-blue {
-    background: linear-gradient(145deg, rgba(59, 130, 246, 0.15) 0%, rgba(37, 99, 235, 0.08) 100%);
-    border-color: rgba(59, 130, 246, 0.3);
-}
-
-.kg-callout-card-blue::before {
-    background: linear-gradient(180deg, #3B82F6 0%, #2563EB 100%);
-}
-
-.kg-callout-card-blue::after {
-    background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, transparent 70%);
-}
-
-.kg-callout-card-green {
-    background: linear-gradient(145deg, rgba(34, 197, 94, 0.15) 0%, rgba(22, 163, 74, 0.08) 100%);
-    border-color: rgba(34, 197, 94, 0.3);
-}
-
-.kg-callout-card-green::before {
-    background: linear-gradient(180deg, #22C55E 0%, #16A34A 100%);
-}
-
-.kg-callout-card-green::after {
-    background: radial-gradient(circle, rgba(34, 197, 94, 0.2) 0%, transparent 70%);
-}
-
-.kg-callout-card-yellow {
-    background: linear-gradient(145deg, rgba(234, 179, 8, 0.15) 0%, rgba(202, 138, 4, 0.08) 100%);
-    border-color: rgba(234, 179, 8, 0.3);
-}
-
-.kg-callout-card-yellow::before {
-    background: linear-gradient(180deg, #EAB308 0%, #CA8A04 100%);
-}
-
-.kg-callout-card-yellow::after {
-    background: radial-gradient(circle, rgba(234, 179, 8, 0.2) 0%, transparent 70%);
-}
-
-.kg-callout-card-red {
-    background: linear-gradient(145deg, rgba(239, 68, 68, 0.15) 0%, rgba(220, 38, 38, 0.08) 100%);
-    border-color: rgba(239, 68, 68, 0.3);
-}
-
-.kg-callout-card-red::before {
-    background: linear-gradient(180deg, #EF4444 0%, #DC2626 100%);
-}
-
-.kg-callout-card-red::after {
-    background: radial-gradient(circle, rgba(239, 68, 68, 0.2) 0%, transparent 70%);
-}
-
-.kg-callout-card-pink {
-    background: linear-gradient(145deg, rgba(236, 72, 153, 0.15) 0%, rgba(219, 39, 119, 0.08) 100%);
-    border-color: rgba(236, 72, 153, 0.3);
-}
-
-.kg-callout-card-pink::before {
-    background: linear-gradient(180deg, #EC4899 0%, #DB2777 100%);
-}
-
-.kg-callout-card-pink::after {
-    background: radial-gradient(circle, rgba(236, 72, 153, 0.2) 0%, transparent 70%);
-}
-
-.kg-callout-card-purple {
-    background: linear-gradient(145deg, rgba(168, 85, 247, 0.15) 0%, rgba(147, 51, 234, 0.08) 100%);
-    border-color: rgba(168, 85, 247, 0.3);
-}
-
-.kg-callout-card-purple::before {
-    background: linear-gradient(180deg, #A855F7 0%, #9333EA 100%);
-}
-
-.kg-callout-card-purple::after {
-    background: radial-gradient(circle, rgba(168, 85, 247, 0.2) 0%, transparent 70%);
-}
-
-/* Accent variant uses the theme's primary color */
-.kg-callout-card-accent {
-    background: linear-gradient(145deg, rgba(232, 168, 71, 0.15) 0%, rgba(196, 137, 42, 0.08) 100%);
-    border-color: var(--color-primary);
-}
-
-.kg-callout-card-accent::before {
-    background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary-deep) 100%);
-}
+/* Callout Color Variants - Simple border color changes */
+.kg-callout-card-grey { border-left-color: #6B7280; }
+.kg-callout-card-white { border-left-color: rgba(255, 255, 255, 0.5); }
+.kg-callout-card-blue { border-left-color: #3B82F6; }
+.kg-callout-card-green { border-left-color: #22C55E; }
+.kg-callout-card-yellow { border-left-color: #EAB308; }
+.kg-callout-card-red { border-left-color: #EF4444; }
+.kg-callout-card-pink { border-left-color: #EC4899; }
+.kg-callout-card-purple { border-left-color: #A855F7; }
+.kg-callout-card-accent { border-left-color: var(--color-primary); }
 
 /* Light mode callout adjustments */
 .light-mode .kg-callout-card {
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.9) 0%, rgba(245, 242, 236, 0.95) 100%);
-}
-
-.light-mode .kg-callout-text {
-    color: var(--text-color);
+    background: rgba(232, 168, 71, 0.1);
 }
 
 /* Button Cards */
@@ -3572,140 +3495,28 @@ hr {
     border-radius: var(--radius-lg);
 }
 
-/* Ghost's video controls overlay */
-.kg-video-overlay {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0, 0, 0, 0.4);
-    border-radius: var(--radius-lg);
-    opacity: 0;
-    transition: opacity var(--duration-base) var(--ease-smooth);
-    cursor: pointer;
-}
-
-.kg-video-card:hover .kg-video-overlay {
-    opacity: 1;
-}
-
-/* Large play button */
-.kg-video-large-play-icon {
-    width: 80px;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 50%;
-    transition: transform var(--duration-base) var(--ease-spring);
-}
-
-.kg-video-large-play-icon:hover {
-    transform: scale(1.1);
-}
-
-.kg-video-large-play-icon svg {
-    width: 32px;
-    height: 32px;
-    fill: var(--color-midnight);
-    margin-left: 4px;
-}
-
-/* Video seek/control bar at bottom */
-.kg-video-player-controls {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: var(--space-4);
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-    opacity: 0;
-    transition: opacity var(--duration-base) var(--ease-smooth);
-    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-}
-
-.kg-video-card:hover .kg-video-player-controls {
-    opacity: 1;
-}
-
-/* Play/pause button in controls */
+/* Hide all video controls - clean video display */
+.kg-video-overlay,
+.kg-video-large-play-icon,
+.kg-video-player-controls,
 .kg-video-play-icon,
-.kg-video-pause-icon {
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    cursor: pointer;
-    flex-shrink: 0;
-}
-
-.kg-video-play-icon svg,
-.kg-video-pause-icon svg {
-    width: 18px;
-    height: 18px;
-    fill: white;
-}
-
-/* Seek slider */
-.kg-video-seek-slider {
-    flex: 1;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 2px;
-    cursor: pointer;
-    position: relative;
-}
-
-.kg-video-seek-slider::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    background: var(--color-primary);
-    border-radius: 2px;
-    width: var(--seek-before-width, 0%);
-}
-
-/* Time display */
+.kg-video-pause-icon,
+.kg-video-seek-slider,
 .kg-video-current-time,
-.kg-video-duration {
-    font-family: var(--font-sans);
-    font-size: var(--text-xs);
-    color: white;
-    min-width: 40px;
+.kg-video-duration,
+.kg-video-volume-icon,
+.kg-video-volume-slider,
+.kg-video-playback-rate {
+    display: none !important;
 }
 
-/* Volume controls */
-.kg-video-volume-icon {
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
+/* Ensure native video controls are also hidden */
+.kg-video-card video::-webkit-media-controls {
+    display: none !important;
 }
 
-.kg-video-volume-icon svg {
-    width: 18px;
-    height: 18px;
-    fill: white;
-}
-
-.kg-video-volume-slider {
-    width: 60px;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 2px;
-    cursor: pointer;
+.kg-video-card video::-webkit-media-controls-enclosure {
+    display: none !important;
 }
 
 /* Video card caption */
