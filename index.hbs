@@ -80,13 +80,17 @@
                 </div>
             </a>
 
-            {{!-- About Card with photo --}}
+            {{!-- About Card with photo from about page --}}
             <a href="/about/" class="home-bento-card home-bento-about reveal-on-scroll">
-                {{#if @site.cover_image}}
-                <div class="home-bento-card-bg home-bento-about-bg">
-                    <img src="{{img_url @site.cover_image size="m"}}" alt="" loading="lazy" />
-                </div>
-                {{/if}}
+                {{#get "pages" filter="slug:about" limit="1"}}
+                    {{#foreach pages}}
+                        {{#if feature_image}}
+                        <div class="home-bento-card-bg home-bento-about-bg">
+                            <img src="{{img_url feature_image size="m"}}" alt="" loading="lazy" />
+                        </div>
+                        {{/if}}
+                    {{/foreach}}
+                {{/get}}
                 <div class="home-bento-card-content home-bento-has-bg">
                     <span class="home-bento-label">About</span>
                     <h3 class="home-bento-title">Who I am</h3>

@@ -10,7 +10,8 @@
        ═══════════════════════════════════════════════════════════ */
 
     /* Primary Palette - Golden Yellow (the slay 💛) */
-    --color-primary: var(--ghost-accent-color, #EEC643);
+    /* Always use golden yellow - ignoring Ghost admin accent color */
+    --color-primary: #EEC643;
     --color-primary-soft: #F5D76E;
     --color-primary-deep: #D4A82F;
     --color-primary-glow: rgba(238, 198, 67, 0.18);
@@ -219,8 +220,8 @@
     --color-steel: #EDE5CC;
     --color-mist: #5A5246;
 
-    /* Primary stays golden */
-    --color-primary: var(--ghost-accent-color, #EEC643);
+    /* Primary stays golden - always yellow */
+    --color-primary: #EEC643;
     --color-primary-soft: #F5D76E;
     --color-primary-deep: #C9A528;
     --color-primary-glow: rgba(238, 198, 67, 0.15);
@@ -262,7 +263,7 @@
         --color-slate: #F5EED8;
         --color-steel: #EDE5CC;
         --color-mist: #5A5246;
-        --color-primary: var(--ghost-accent-color, #EEC643);
+        --color-primary: #EEC643;
         --color-primary-soft: #F5D76E;
         --color-primary-deep: #C9A528;
         --color-primary-glow: rgba(238, 198, 67, 0.15);

@@ -282,7 +282,7 @@ hr {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: rgba(10, 14, 18, 0.85);
+    background: var(--color-charcoal);
     backdrop-filter: blur(var(--blur-lg));
     -webkit-backdrop-filter: blur(var(--blur-lg));
     border-bottom: 1px solid var(--color-border);
@@ -837,6 +837,15 @@ hr {
 
 /* Mobile Drawer Adjustments */
 @media (max-width: 767px) {
+    /* Override Ghost shared assets that hide nav items on mobile */
+    #gh-head .nav li,
+    .gh-head .nav li,
+    .gh-head-menu .nav li {
+        opacity: 1 !important;
+        transform: none !important;
+        visibility: visible !important;
+    }
+
     /* Hide breadcrumbs on mobile */
     .gh-head-breadcrumbs {
         display: none !important;
@@ -1166,6 +1175,21 @@ hr {
     align-items: center;
     min-height: 60vh;
     padding: var(--space-16) 0;
+}
+
+/* Larger hero image at large screens */
+@media (min-width: 1400px) {
+    .home-hero {
+        grid-template-columns: 1fr 1fr;
+        min-height: 70vh;
+    }
+}
+
+@media (min-width: 1800px) {
+    .home-hero {
+        grid-template-columns: 0.9fr 1.1fr;
+        min-height: 75vh;
+    }
 }
 
 .home-hero-content {
@@ -2337,12 +2361,21 @@ hr {
     gap: var(--space-4);
     width: 100%;
     align-items: flex-start;
+    justify-content: center;
 }
 
 .portfolio-body .kg-gallery-image,
 .gh-content .kg-gallery-image {
-    flex: 1 1 auto;
+    /* Allow images to size based on their natural aspect ratio */
+    flex: 0 1 auto;
     min-width: 0;
+    max-width: 100%;
+}
+
+/* Portrait images should be narrower */
+.portfolio-body .kg-gallery-image img,
+.gh-content .kg-gallery-image img {
+    max-height: 80vh;
 }
 
 .portfolio-body .kg-gallery-image img,
@@ -5037,6 +5070,109 @@ img.loaded {
     }
 }
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   PHOTOGRAPHY BENTO GRID - Bento-style photo cards
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.photo-bento-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-5);
+    max-width: var(--width-full);
+    margin: 0 auto;
+    padding: 0 var(--space-6);
+}
+
+.photo-bento-card {
+    position: relative;
+    display: block;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    text-decoration: none;
+    background: var(--gradient-card);
+    border: 1px solid var(--color-border);
+    transition: all var(--duration-base) var(--ease-smooth);
+}
+
+.photo-bento-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-glow);
+}
+
+.photo-bento-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.photo-bento-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--duration-slow) var(--ease-smooth);
+}
+
+.photo-bento-card:hover .photo-bento-bg img {
+    transform: scale(1.05);
+}
+
+.photo-bento-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    padding: var(--space-5);
+    background: linear-gradient(0deg, rgba(10, 14, 18, 0.95) 0%, rgba(10, 14, 18, 0.7) 60%, transparent 100%);
+    border-radius: 0 0 calc(var(--radius-xl) - 8px) calc(var(--radius-xl) - 8px);
+}
+
+.photo-bento-title {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: var(--font-normal);
+    color: var(--text-color);
+    margin: 0 0 var(--space-1) 0;
+    line-height: var(--leading-snug);
+}
+
+.photo-bento-tag {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+    color: var(--color-primary);
+}
+
+/* Light mode photo bento */
+.light-mode .photo-bento-content {
+    background: linear-gradient(0deg, rgba(255, 252, 241, 0.95) 0%, rgba(255, 252, 241, 0.7) 60%, transparent 100%);
+}
+
+.light-mode .photo-bento-title {
+    color: #1A1612;
+}
+
+/* Responsive photo bento */
+@media (max-width: 1024px) {
+    .photo-bento-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .photo-bento-grid {
+        grid-template-columns: 1fr;
+        padding: 0 var(--space-4);
+    }
+
+    .photo-bento-card {
+        aspect-ratio: 3/2;
+    }
+}
+
 
 /* ═══════════════════════════════════════════════════════════════════════════
    PORTFOLIO MAGAZINE TEMPLATE - Editorial Excellence
@@ -5655,20 +5791,25 @@ img.loaded {
 
 .experimental-deco {
     position: absolute;
-    font-size: 3rem;
+    font-size: 2.5rem;
     color: var(--color-primary);
-    opacity: 0.3;
-    animation: float 8s ease-in-out infinite;
+    opacity: 0.35;
+    animation: float 4s ease-in-out infinite;
 }
 
-.experimental-deco-1 { top: 15%; left: 10%; animation-delay: 0s; }
-.experimental-deco-2 { top: 30%; right: 15%; animation-delay: 2s; }
-.experimental-deco-3 { bottom: 25%; left: 20%; animation-delay: 4s; }
-.experimental-deco-4 { bottom: 15%; right: 10%; animation-delay: 6s; }
+/* More scattered positions with faster, varied animations */
+.experimental-deco-1 { top: 12%; left: 8%; animation-delay: 0s; animation-duration: 3.5s; }
+.experimental-deco-2 { top: 25%; right: 12%; animation-delay: 0.8s; animation-duration: 4.2s; }
+.experimental-deco-3 { bottom: 28%; left: 15%; animation-delay: 1.6s; animation-duration: 3.8s; }
+.experimental-deco-4 { bottom: 12%; right: 8%; animation-delay: 2.4s; animation-duration: 4s; }
+.experimental-deco-5 { top: 45%; left: 5%; animation-delay: 0.4s; animation-duration: 4.5s; }
+.experimental-deco-6 { top: 55%; right: 6%; animation-delay: 1.2s; animation-duration: 3.6s; }
+.experimental-deco-7 { bottom: 40%; left: 25%; animation-delay: 2s; animation-duration: 4.1s; }
+.experimental-deco-8 { top: 70%; right: 20%; animation-delay: 2.8s; animation-duration: 3.9s; }
 
 @keyframes float {
     0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-20px) rotate(10deg); }
+    50% { transform: translateY(-25px) rotate(12deg); }
 }
 
 .experimental-hero-content {
@@ -5717,9 +5858,24 @@ img.loaded {
     top: 50%;
     right: 5%;
     transform: translateY(-50%) rotate(var(--exp-rotation));
-    width: 45%;
-    max-width: 600px;
+    width: 50%;
+    max-width: 750px;
     z-index: 1;
+}
+
+/* Larger hero image at large screens */
+@media (min-width: 1400px) {
+    .experimental-hero-image {
+        width: 55%;
+        max-width: 900px;
+    }
+}
+
+@media (min-width: 1800px) {
+    .experimental-hero-image {
+        width: 60%;
+        max-width: 1100px;
+    }
 }
 
 .experimental-image-frame {
@@ -6245,7 +6401,6 @@ body:has(.custom-cursor) button {
 /* Story Section */
 .about-story {
     padding: var(--space-16) var(--space-8);
-    background: var(--gradient-warmth);
 }
 
 .about-story-inner {

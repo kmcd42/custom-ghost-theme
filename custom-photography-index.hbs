@@ -1,7 +1,7 @@
 {{!< default}}
 {{!--
 Template Name: Photography Index
-Description: Immersive full-gallery photography experience with tag filtering
+Description: Bento-style photography gallery experience
 --}}
 
 {{#post}}
@@ -15,56 +15,31 @@ Description: Immersive full-gallery photography experience with tag filtering
         {{/if}}
     </header>
 
-    {{!-- Tag Filter Pills --}}
-    {{#get "tags" filter="visibility:public" limit="all"}}
-        {{#if tags}}
-            <nav class="photo-gallery-filters reveal-on-scroll" aria-label="Filter by tag">
-                <button class="photo-filter-pill active" data-filter="all">
-                    <span>All</span>
-                </button>
-                {{#foreach tags}}
-                    {{!-- Only show tags that have photography posts --}}
-                    {{#get "posts" filter="tag:photography+tag:{{slug}}" limit="1"}}
-                        {{#if posts}}
-                            <button class="photo-filter-pill" data-filter="{{slug}}">
-                                <span>{{name}}</span>
-                            </button>
-                        {{/if}}
-                    {{/get}}
-                {{/foreach}}
-            </nav>
-        {{/if}}
-    {{/get}}
-
-    {{!-- Masonry Photo Grid --}}
-    <div class="photo-gallery-grid">
+    {{!-- Bento Photo Grid --}}
+    <div class="photo-bento-grid">
         {{#get "posts" limit="100" filter="tag:photography" include="tags"}}
             {{#foreach posts}}
-                <article class="photo-gallery-item reveal-on-scroll"
-                         data-tags="{{#foreach tags}}{{slug}} {{/foreach}}"
-                         style="--stagger: {{@index}}">
-                    <a href="{{url}}" class="photo-gallery-link">
-                        {{#if feature_image}}
-                            <figure class="photo-gallery-figure">
-                                <img
-                                    srcset="{{img_url feature_image size="s"}} 400w,
-                                            {{img_url feature_image size="m"}} 720w,
-                                            {{img_url feature_image size="l"}} 1200w"
-                                    sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                    src="{{img_url feature_image size="m"}}"
-                                    alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
-                                    loading="lazy"
-                                />
-                                <figcaption class="photo-gallery-caption">
-                                    <span class="photo-gallery-name">{{title}}</span>
-                                    {{#if primary_tag}}
-                                        <span class="photo-gallery-tag">{{primary_tag.name}}</span>
-                                    {{/if}}
-                                </figcaption>
-                            </figure>
+                <a href="{{url}}" class="photo-bento-card reveal-on-scroll" style="--stagger: {{@index}}">
+                    {{#if feature_image}}
+                        <div class="photo-bento-bg">
+                            <img
+                                srcset="{{img_url feature_image size="s"}} 400w,
+                                        {{img_url feature_image size="m"}} 720w,
+                                        {{img_url feature_image size="l"}} 1200w"
+                                sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                src="{{img_url feature_image size="m"}}"
+                                alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+                                loading="lazy"
+                            />
+                        </div>
+                    {{/if}}
+                    <div class="photo-bento-content">
+                        <h2 class="photo-bento-title">{{title}}</h2>
+                        {{#if primary_tag}}
+                            <span class="photo-bento-tag">{{primary_tag.name}}</span>
                         {{/if}}
-                    </a>
-                </article>
+                    </div>
+                </a>
             {{/foreach}}
         {{/get}}
     </div>
@@ -86,36 +61,4 @@ Description: Immersive full-gallery photography experience with tag filtering
     {{/if}}
 
 </div>
-
-{{!-- Tag Filtering Script --}}
-<script>
-(function() {
-    const filters = document.querySelectorAll('.photo-filter-pill');
-    const items = document.querySelectorAll('.photo-gallery-item');
-
-    if (!filters.length || !items.length) return;
-
-    filters.forEach(filter => {
-        filter.addEventListener('click', () => {
-            const tag = filter.dataset.filter;
-
-            // Update active state
-            filters.forEach(f => f.classList.remove('active'));
-            filter.classList.add('active');
-
-            // Filter items
-            items.forEach(item => {
-                const tags = item.dataset.tags || '';
-                if (tag === 'all' || tags.includes(tag)) {
-                    item.style.display = '';
-                    item.classList.remove('hidden');
-                } else {
-                    item.style.display = 'none';
-                    item.classList.add('hidden');
-                }
-            });
-        });
-    });
-})();
-</script>
 {{/post}}
