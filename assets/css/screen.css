@@ -862,25 +862,16 @@ hr {
     /* Override Ghost's grid layout with flexbox - using #gh-head for specificity */
     #gh-head .gh-head-inner {
         display: flex !important;
-        flex-direction: row !important;
-        grid-template-rows: unset !important;
-        grid-template-columns: unset !important;
-        justify-content: space-between !important;
-        align-items: center !important;
-        gap: var(--space-4) !important;
-        padding: var(--space-3) var(--space-4) !important;
-        height: auto !important;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--space-3) var(--space-4);
     }
 
-    /* Brand on left - reset Ghost's grid positioning */
-    #gh-head .gh-head-brand {
-        display: flex !important;
-        flex: 0 0 auto !important;
-        order: 1 !important;
-        grid-template-columns: unset !important;
-        grid-column-start: unset !important;
-        height: auto !important;
-        margin-right: auto !important;
+    .gh-head-brand {
+        flex: 0 0 auto;
+        margin-right: 0;
+        order: 1;
     }
 
     /* Actions on right - override Ghost's hidden state */
@@ -888,14 +879,12 @@ hr {
         display: flex !important;
         visibility: visible !important;
         opacity: 1 !important;
-        position: static !important;
-        flex-direction: row !important;
-        align-items: center !important;
-        justify-content: flex-end !important;
-        gap: var(--space-3) !important;
-        flex: 0 0 auto !important;
-        order: 2 !important;
-        margin-left: 0 !important;
+        flex-direction: row;
+        align-items: center;
+        gap: var(--space-3);
+        flex: 0 0 auto;
+        margin-left: auto;
+        order: 2;
     }
 
     #gh-head .gh-search.gh-icon-btn {
@@ -3265,6 +3254,22 @@ hr {
     .portfolio-body .kg-gallery-card {
         width: 100%;
         padding: 0;
+    }
+
+    /* Gallery rows collapse to single column on mobile */
+    .portfolio-body .kg-gallery-row,
+    .experimental-body .kg-gallery-row,
+    .photography-body .kg-gallery-row,
+    .gh-content .kg-gallery-row {
+        flex-direction: column;
+    }
+
+    .portfolio-body .kg-gallery-image,
+    .experimental-body .kg-gallery-image,
+    .photography-body .kg-gallery-image,
+    .gh-content .kg-gallery-image {
+        width: 100%;
+        flex: none;
     }
 
     /* Video cards stay within content on mobile */

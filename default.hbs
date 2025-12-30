@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{@site.locale}}"
     class="{{#match @custom.site_mood "Dawn (Soft & Hopeful)"}}mood-dawn{{else match @custom.site_mood "Ocean (Teal & Contemplative)"}}mood-ocean{{else}}mood-midnight{{/match}}
-           {{#match @custom.accent_style "Soft Copper"}}accent-copper{{else match @custom.accent_style "Climate Teal"}}accent-teal{{else}}accent-amber{{/match}}
+           accent-amber
            {{#match @custom.typography_style "Modern (Sans-serif headlines)"}}typo-modern{{else match @custom.typography_style "Mixed (Serif body, sans headlines)"}}typo-mixed{{else}}typo-editorial{{/match}}
            {{#match @custom.animation_style "Playful & Expressive"}}anim-playful{{else match @custom.animation_style "Minimal Motion"}}anim-minimal{{else}}anim-subtle{{/match}}">
 <head>
@@ -44,23 +44,11 @@
             --gradient-glow: radial-gradient(ellipse 600px 400px at 50% 0%, rgba(45, 155, 150, 0.08) 0%, transparent 70%);
             {{/match}}
 
-            {{!-- Accent color overrides --}}
-            {{#match @custom.accent_style "Soft Copper"}}
-            --color-primary: #D4956A;
-            --color-primary-soft: #E8B896;
-            --color-primary-deep: #B57A4E;
-            --color-primary-glow: rgba(212, 149, 106, 0.15);
-            {{else match @custom.accent_style "Climate Teal"}}
-            --color-primary: #2D9B96;
-            --color-primary-soft: #4EBAB5;
-            --color-primary-deep: #1F7A76;
-            --color-primary-glow: rgba(45, 155, 150, 0.15);
-            {{/match}}
-
-            {{!-- Ghost accent color override --}}
-            {{#if @site.accent_color}}
-            --ghost-accent-color: {{@site.accent_color}};
-            {{/if}}
+            {{!-- Accent color - always use golden yellow #EEC643 --}}
+            --color-primary: #EEC643;
+            --color-primary-soft: #F5D76E;
+            --color-primary-deep: #D4A82F;
+            --color-primary-glow: rgba(238, 198, 67, 0.18);
         }
 
         {{!-- Typography style overrides --}}
