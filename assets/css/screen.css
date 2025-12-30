@@ -35,11 +35,19 @@ body {
     background: var(--gradient-sky);
     background-attachment: fixed;
     color: var(--text-color);
-    font-family: var(--font-sans);
+    font-family: var(--font-display);
     font-weight: var(--font-normal);
     line-height: var(--leading-relaxed);
     letter-spacing: var(--tracking-normal);
     min-height: 100vh;
+}
+
+/* Keep paragraphs in clean sans-serif for readability */
+p,
+.gh-content p,
+.about-story-content p,
+.post-content p {
+    font-family: var(--font-sans);
 }
 
 /* Subtle animated background grain for organic warmth */
@@ -282,7 +290,7 @@ hr {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: var(--color-charcoal);
+    background: var(--gradient-sky);
     backdrop-filter: blur(var(--blur-lg));
     -webkit-backdrop-filter: blur(var(--blur-lg));
     border-bottom: 1px solid var(--color-border);
@@ -606,13 +614,13 @@ hr {
     color: var(--color-midnight);
 }
 
-/* The Drawer */
+/* The Drawer - same background as site */
 .gh-drawer {
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
-    background: rgba(10, 14, 18, 0.98);
+    background: var(--gradient-sky);
     backdrop-filter: blur(var(--blur-xl));
     -webkit-backdrop-filter: blur(var(--blur-xl));
     border-bottom: 1px solid var(--color-border);
@@ -929,7 +937,7 @@ hr {
 
 /* Light mode drawer - explicit text colors for visibility */
 .light-mode .gh-drawer {
-    background: rgba(255, 252, 241, 0.98);
+    background: var(--gradient-sky);
 }
 
 .light-mode .gh-drawer-nav .nav a {
@@ -5909,6 +5917,7 @@ img.loaded {
     flex-direction: column;
     gap: var(--space-4);
     transform: rotate(var(--exp-rotation));
+    z-index: 10;
 }
 
 .experimental-meta-item {
@@ -6396,6 +6405,32 @@ body:has(.custom-cursor) button {
     opacity: 0.3;
     transform: rotate(2deg);
     pointer-events: none;
+}
+
+/* Larger about portrait at large screens - matching experimental hero sizing */
+@media (min-width: 1400px) {
+    .about-hero {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-20);
+        padding: var(--space-24) var(--space-12);
+        min-height: 80vh;
+    }
+
+    .about-hero-portrait img {
+        max-width: 600px;
+    }
+}
+
+@media (min-width: 1800px) {
+    .about-hero {
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: var(--space-24);
+        padding: var(--space-32) var(--space-16);
+    }
+
+    .about-hero-portrait img {
+        max-width: 750px;
+    }
 }
 
 /* Story Section */
