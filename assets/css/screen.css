@@ -226,13 +226,15 @@ blockquote {
     margin: var(--space-10) 0;
 }
 
-/* Lists */
+/* Lists - match paragraph styling */
 ul, ol {
     padding-left: var(--space-6);
     margin-bottom: var(--space-6);
+    font-family: var(--font-sans);
 }
 
 li {
+    font-family: var(--font-sans);
     font-size: var(--text-lg);
     line-height: var(--leading-relaxed);
     color: var(--text-soft);
@@ -295,6 +297,8 @@ hr {
     -webkit-backdrop-filter: blur(var(--blur-lg));
     border-bottom: 1px solid var(--color-border);
     transition: all var(--duration-slow) var(--ease-smooth);
+    /* Safe area for iPhone notch/Dynamic Island */
+    padding-top: env(safe-area-inset-top);
 }
 
 .gh-head-inner {
