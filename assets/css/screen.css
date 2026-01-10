@@ -226,22 +226,32 @@ blockquote {
     margin: var(--space-10) 0;
 }
 
-/* Lists - match paragraph styling */
-ul, ol {
+/* Lists - match paragraph styling (override Ghost shared theme) */
+ul, ol,
+.gh-content ul,
+.gh-content ol,
+.post-content ul,
+.post-content ol,
+.about-story-content ul,
+.about-story-content ol {
     padding-left: var(--space-6);
     margin-bottom: var(--space-6);
-    font-family: var(--font-sans);
+    font-family: var(--font-sans) !important;
 }
 
-li {
-    font-family: var(--font-sans);
+li,
+.gh-content li,
+.post-content li,
+.about-story-content li {
+    font-family: var(--font-sans) !important;
     font-size: var(--text-lg);
     line-height: var(--leading-relaxed);
     color: var(--text-soft);
     margin-bottom: var(--space-2);
 }
 
-li::marker {
+li::marker,
+.gh-content li::marker {
     color: var(--color-primary);
 }
 
@@ -292,13 +302,25 @@ hr {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: var(--gradient-sky);
-    backdrop-filter: blur(var(--blur-lg));
-    -webkit-backdrop-filter: blur(var(--blur-lg));
+    background: var(--color-midnight);
     border-bottom: 1px solid var(--color-border);
     transition: all var(--duration-slow) var(--ease-smooth);
     /* Safe area for iPhone notch/Dynamic Island */
     padding-top: env(safe-area-inset-top);
+}
+
+/* Extend solid background into safe area for iOS devices */
+@supports (padding-top: env(safe-area-inset-top)) {
+    .gh-head::before {
+        content: '';
+        position: absolute;
+        top: calc(-1 * env(safe-area-inset-top));
+        left: 0;
+        right: 0;
+        height: env(safe-area-inset-top);
+        background: var(--color-midnight);
+        z-index: -1;
+    }
 }
 
 .gh-head-inner {
