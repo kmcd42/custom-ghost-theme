@@ -227,9 +227,16 @@ blockquote {
 }
 
 /* Lists - match paragraph styling (override Ghost shared theme) */
+/* Must override Ghost's .has-serif-body selectors with high specificity */
 ul, ol,
-.gh-content ul,
-.gh-content ol,
+body .gh-content > ul,
+body .gh-content > ol,
+body .gh-content ul,
+body .gh-content ol,
+body.has-serif-body .gh-content > ul,
+body.has-serif-body .gh-content > ol,
+body.has-serif-body .gh-content ul,
+body.has-serif-body .gh-content ol,
 .post-content ul,
 .post-content ol,
 .about-story-content ul,
@@ -240,7 +247,10 @@ ul, ol,
 }
 
 li,
-.gh-content li,
+body .gh-content > li,
+body .gh-content li,
+body.has-serif-body .gh-content > li,
+body.has-serif-body .gh-content li,
 .post-content li,
 .about-story-content li {
     font-family: var(--font-sans) !important;
