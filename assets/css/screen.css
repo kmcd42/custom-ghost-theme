@@ -43,10 +43,22 @@ html.light-mode {
     html:not(.dark-mode) {
         background-color: #FFFCF1;
     }
+    body:not(.dark-mode) {
+        background-color: #FFFCF1;
+    }
+}
+
+.light-mode body,
+body.light-mode {
+    background-color: #FFFCF1;
 }
 
 body {
-    background: var(--gradient-sky);
+    /* iOS Safari: background-color fills the safe area (notch/Dynamic Island) */
+    /* Must be explicit background-color, not just background gradient */
+    /* See: https://webkit.org/blog/7929/designing-websites-for-iphone-x/ */
+    background-color: #0C1015;
+    background-image: var(--gradient-sky);
     background-attachment: fixed;
     color: var(--text-color);
     font-family: var(--font-display);
