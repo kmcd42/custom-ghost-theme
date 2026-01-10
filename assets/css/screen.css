@@ -29,6 +29,20 @@ html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* iOS Safari: html background extends into safe area (Dynamic Island/notch) */
+    background-color: #0A0E12;
+}
+
+/* Light mode html background for iOS safe area */
+.light-mode html,
+html.light-mode {
+    background-color: #FFFCF1;
+}
+
+@media (prefers-color-scheme: light) {
+    html:not(.dark-mode) {
+        background-color: #FFFCF1;
+    }
 }
 
 body {
@@ -319,17 +333,21 @@ hr {
     padding-top: env(safe-area-inset-top);
 }
 
-/* Extend solid background into safe area for iOS devices */
+/* iOS Safe Area: Fixed position element to cover the notch/Dynamic Island area
+   This works alongside the html background-color for maximum compatibility */
 @supports (padding-top: env(safe-area-inset-top)) {
     .gh-head::before {
         content: '';
-        position: absolute;
-        top: calc(-1 * env(safe-area-inset-top));
+        position: fixed;
+        top: 0;
         left: 0;
         right: 0;
         height: env(safe-area-inset-top);
         background: var(--color-midnight);
-        z-index: -1;
+        /* Above body backgrounds, below header content */
+        z-index: 999;
+        /* Prevent interaction with underlying elements */
+        pointer-events: none;
     }
 }
 
@@ -340,6 +358,9 @@ hr {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    /* Ensure header content renders above the safe area fill */
+    position: relative;
+    z-index: 1;
 }
 
 /* Logo - Editorial Wordmark */
@@ -3246,6 +3267,22 @@ hr {
 .light-mode .gh-head {
     background: rgba(253, 251, 247, 0.9);
     border-bottom-color: rgba(0, 0, 0, 0.08);
+}
+
+/* Light mode safe area fill for iOS */
+.light-mode .gh-head::before {
+    background: #FFFCF1;
+}
+
+@media (prefers-color-scheme: light) {
+    html:not(.dark-mode) .gh-head::before {
+        background: #FFFCF1;
+    }
+}
+
+/* Explicit dark mode override */
+.dark-mode .gh-head::before {
+    background: #0A0E12;
 }
 
 .light-mode .gh-search.gh-icon-btn {
