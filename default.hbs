@@ -168,6 +168,13 @@
             backdrop-filter: none;
             border-bottom-color: var(--color-border);
         }
+        /* Keep safe area solid even with transparent nav */
+        .gh-head::before {
+            background: var(--color-midnight) !important;
+        }
+        .light-mode .gh-head::before {
+            background: #FFFCF1 !important;
+        }
         {{else match @custom.navigation_layout "Bold Statement"}}
         .gh-head {
             background: var(--color-primary);
