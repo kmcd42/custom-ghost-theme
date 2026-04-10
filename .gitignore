@@ -4,3 +4,6 @@ node_modules/
 dist/
 *.zip
 London-main/
+
+# Source maps (expose original source in production)
+assets/built/*.map

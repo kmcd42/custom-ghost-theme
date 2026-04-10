@@ -39,13 +39,13 @@ function hbs(done) {
 
 function css(done) {
     pump([
-        src('assets/css/screen.css', {sourcemaps: true}),
+        src('assets/css/screen.css'),
         postcss([
             easyimport,
             autoprefixer(),
             cssnano()
         ]),
-        dest('assets/built/', {sourcemaps: '.'}),
+        dest('assets/built/'),
         livereload()
     ], handleError(done));
 }
@@ -67,10 +67,10 @@ function getJsFiles(version) {
 
 function js(done) {
     pump([
-        order(getJsFiles('v1'), {sourcemaps: true}),
+        order(getJsFiles('v1')),
         concat('main.min.js'),
         uglify(),
-        dest('assets/built/', {sourcemaps: '.'}),
+        dest('assets/built/'),
         livereload()
     ], handleError(done));
 }
@@ -83,7 +83,8 @@ function zipper(done) {
             '**',
             '!node_modules', '!node_modules/**',
             '!dist', '!dist/**',
-            '!yarn-error.log'
+            '!yarn-error.log',
+            '!**/*.map'
         ]),
         zip(filename),
         dest('dist/')
