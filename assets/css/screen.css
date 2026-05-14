@@ -11,7 +11,6 @@ The well-worn favourite sweater of the future.
 /* Foundation
 /* ---------------------------------------------------------- */
 @import "@tryghost/shared-theme-assets/assets/css/v1/screen.css";
-@import "fonts.css";
 @import "vars.css";
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -6393,66 +6392,6 @@ img.loaded {
    EXPERIMENTAL: HUMAN, MESSY, PLAYFUL, OPTIMISTIC
    The bicycle of the mind. Agency and community first.
    ═══════════════════════════════════════════════════════════════════════════ */
-
-/* ─────────────────────────────────────────────────────────────────────────────
-   CLIMATE PULSE - A living connection to our atmosphere
-   ───────────────────────────────────────────────────────────────────────────── */
-
-.climate-pulse {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-1);
-    padding: var(--space-3) var(--space-4);
-    background: rgba(232, 168, 71, 0.08);
-    background: linear-gradient(135deg, rgba(232, 168, 71, 0.1) 0%, rgba(232, 100, 71, 0.05) 100%);
-    border: 1px solid rgba(232, 168, 71, 0.2);
-    border-radius: var(--radius-lg);
-    margin-bottom: var(--space-4);
-    cursor: help;
-    transition: all var(--duration-base) var(--ease-smooth);
-}
-
-.climate-pulse:hover {
-    background: rgba(232, 168, 71, 0.12);
-    border-color: rgba(232, 168, 71, 0.3);
-    transform: translateY(-2px);
-}
-
-.climate-pulse-inner {
-    display: flex;
-    align-items: baseline;
-    gap: var(--space-1);
-}
-
-.climate-pulse-current {
-    font-family: var(--font-mono);
-    font-size: var(--text-2xl);
-    font-weight: var(--font-bold);
-    color: var(--color-climate-accent, var(--color-primary));
-    letter-spacing: -0.02em;
-}
-
-.climate-pulse-unit {
-    font-family: var(--font-mono);
-    font-size: var(--text-sm);
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-.climate-pulse-delta {
-    font-family: var(--font-mono);
-    font-size: var(--text-sm);
-    color: rgba(232, 100, 71, 0.9);
-    margin-left: var(--space-2);
-}
-
-.climate-pulse-label {
-    font-size: var(--text-xs);
-    color: var(--text-muted);
-    font-style: italic;
-}
 
 /* ─────────────────────────────────────────────────────────────────────────────
    CUSTOM CURSOR - Your presence on the page

@@ -32,7 +32,8 @@ These colors appear subtly in ambient background glows, creating depth without o
 ## Typography
 
 - **Display/Headings**: Instrument Serif - elegant, editorial character
-- **Body Text (paragraphs)**: Inter - clean, readable sans-serif
+- **Body Text (paragraphs)**: Source Serif 4 - readable editorial serif
+- **UI / Sans-serif**: Inter - clean, readable sans-serif
 - **Monospace**: JetBrains Mono - for code blocks
 
 The theme uses fluid typography with `clamp()` for smooth scaling between breakpoints.
@@ -105,25 +106,6 @@ Enter the Konami code (↑↑↓↓←→←→BA) to reveal a hidden message.
 
 ---
 
-## Climate Pulse
-
-A unique feature that connects the site to real atmospheric data.
-
-Located in the footer, Climate Pulse displays:
-- Current atmospheric CO₂ level (fetched from NOAA)
-- The increase since 1990 (birth year reference)
-
-Enable it by adding `has-climate-pulse` to the body class.
-
-The CO₂ data is:
-- Fetched from NOAA's Mauna Loa observatory
-- Cached for 24 hours
-- Falls back to estimated values if fetch fails
-
-As CO₂ rises, the theme subtly shifts warmer—a visual reminder of our changing atmosphere.
-
----
-
 ## Responsive Breakpoints
 
 | Breakpoint | Width | Notes |
@@ -183,11 +165,7 @@ assets/css/
 - Light/dark mode switching
 - System preference detection
 - LocalStorage persistence
-
-### `assets/js/lib/climate-pulse.js`
-- NOAA CO₂ data fetching
-- 24-hour caching
-- Fallback calculations
+- Initial theme class applied inline in `default.hbs` `<head>` to avoid a flash
 
 ---
 
@@ -294,9 +272,8 @@ yarn zip
 
 ## Credits
 
-- **Typography**: Instrument Serif, Inter, JetBrains Mono
+- **Typography**: Instrument Serif, Source Serif 4, Inter, JetBrains Mono
 - **Icons**: Custom SVG
-- **CO₂ Data**: NOAA Global Monitoring Laboratory
 - **Framework**: Ghost CMS
 
 ---

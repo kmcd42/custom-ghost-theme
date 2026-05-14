@@ -69,7 +69,7 @@ Description: Editorial blog index with hero image and refined list layout.
 
     {{!-- Blog List --}}
     <div class="blog-list">
-        {{#get "posts" filter="tag:-portfolio+tag:-photography" limit="all" include="tags"}}
+        {{#get "posts" filter="tag:-portfolio+tag:-photography" limit="50" include="tags"}}
             {{#foreach posts}}
                 <article class="blog-item" style="--item-index: {{@index}}">
                     <a href="{{url}}" class="blog-item-link">

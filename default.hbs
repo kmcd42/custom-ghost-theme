@@ -14,6 +14,19 @@
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
+    {{!-- Apply theme class before paint to avoid a flash of the wrong mode --}}
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem('theme-preference');
+                if (!t) {
+                    t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+                }
+                document.documentElement.classList.add(t === 'light' ? 'light-mode' : 'dark-mode');
+            } catch (e) {}
+        })();
+    </script>
+
     {{!-- Theme color for browser chrome and iOS Dynamic Island/status bar --}}
     <meta name="theme-color" content="#0C1015" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#FFFCF1" media="(prefers-color-scheme: light)" />
@@ -190,8 +203,7 @@
     {{#match @custom.homepage_style "Full Bleed (Immersive Image)"}}home-fullbleed{{/match}}
     {{#match @custom.homepage_style "Minimal Text (Words First)"}}home-minimal{{/match}}
     {{#unless @custom.show_portfolio_excerpts}}hide-excerpts{{/unless}}
-    {{#if @custom.show_reading_progress}}has-reading-progress{{/if}}
-    {{#if @custom.climate_signature}}has-climate-pulse{{/if}}">
+    {{#if @custom.show_reading_progress}}has-reading-progress{{/if}}">
 
 <div class="site-wrapper">
 
@@ -346,7 +358,7 @@
     {{> "pswp"}}
 {{/is}}
 
-{{!-- Main JavaScript (includes playful interactions and climate pulse) --}}
+{{!-- Main JavaScript (playful interactions and theme toggle) --}}
 <script src="{{asset "built/main.min.js"}}"></script>
 
 {{!-- Reading Progress Script --}}
