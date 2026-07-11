@@ -113,11 +113,6 @@
                 "default": "Portrait (4:5)",
                 "group": "homepage"
             },
-            "show_homepage_tagline": {
-                "type": "boolean",
-                "default": true,
-                "group": "homepage"
-            },
             "portfolio_layout": {
                 "type": "select",
                 "options": [

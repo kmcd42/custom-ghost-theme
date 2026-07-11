@@ -42,10 +42,16 @@ The theme uses fluid typography with `clamp()` for smooth scaling between breakp
 ## Page Templates
 
 ### Homepage (`index.hbs`)
-A bento-box layout with:
-- Hero section with site description and cover image
-- Grid of pathway cards: Portfolio, Writing, About, Photography, Now, Colophon
-- Recent Work & Writing section
+"The Front Door" — a letter-like, words-first page designed around the
+site's actual content. Every section either works with sparse content or
+hides itself when empty:
+- Personal introduction with site description and a snapshot-style portrait
+- "Right now" strip pulled live from the Now page (excerpt + last updated)
+- Writing index that looks right with one essay or twenty
+- threesixtysix newsletter card
+- Work section: statement + client list, with portfolio cards appearing
+  automatically once portfolio-tagged posts exist
+- Small corners: Photography (only if photography posts exist), Colophon, RSS
 - Subscribe CTA (if members enabled)
 
 ### Custom Templates
