@@ -42,16 +42,16 @@ The theme uses fluid typography with `clamp()` for smooth scaling between breakp
 ## Page Templates
 
 ### Homepage (`index.hbs`)
-"The Front Door" — a letter-like, words-first page designed around the
-site's actual content. Every section either works with sparse content or
-hides itself when empty:
-- Personal introduction with site description and a snapshot-style portrait
-- "Right now" strip pulled live from the Now page (excerpt + last updated)
-- Writing index that looks right with one essay or twenty
-- threesixtysix newsletter card
-- Work section: statement + client list, with portfolio cards appearing
-  automatically once portfolio-tagged posts exist
-- Small corners: Photography (only if photography posts exist), Colophon, RSS
+"The Portfolio" — boldly photographic. A compact greeting, then the work
+itself:
+- Short intro (kicker, site description, location line) that gets out of
+  the way of the images
+- Full-width masonry of portfolio + photography posts at their natural
+  aspect ratios (no cropping); the newest piece leads at full bleed
+- Links to the full /portfolio/ and /photography/ archives
+- A quiet strip at the end: "Right now" pulled live from the Now page
+  (excerpt + last updated), compact Writing index, and Elsewhere links
+  (threesixtysix, About, Colophon, RSS)
 - Subscribe CTA (if members enabled)
 
 ### Custom Templates

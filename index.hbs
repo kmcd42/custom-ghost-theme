@@ -1,183 +1,138 @@
 {{!< default}}
 {{!--
-    HOMEPAGE — The Front Door
-    Redesigned around the site's real content: a personal introduction,
-    a living pulse from the Now page, a small body of essays, the
-    threesixtysix newsletter, and client work. Every section either
-    works with sparse content or hides itself when empty — nothing
-    here depends on archives that don't exist yet.
+    HOMEPAGE — The Portfolio
+    Boldly photographic: a compact greeting, then the work itself.
+    Portfolio and photography posts flow together in a full-width
+    masonry of uncropped images — the first piece leads at full bleed.
+    Writing, the Now pulse and the newsletter live in a quiet strip
+    at the end.
 --}}
 
-<div class="home-letter">
+<div class="home-folio">
 
-    {{!-- 1. Introduction — a greeting, not a landing page --}}
-    <section class="home-intro">
-        <div class="home-intro-text">
-            <p class="home-intro-eyebrow">Kia ora — I'm Kasey</p>
-
-            {{#if @site.description}}
-                <h1 class="home-intro-statement">{{@site.description}}</h1>
-            {{else}}
-                <h1 class="home-intro-statement">{{@site.title}}</h1>
-            {{/if}}
-
-            <p class="home-intro-meta">
-                Designer, writer &amp; marketer in Wellington, Aotearoa.
-            </p>
-        </div>
-
-        {{#if @site.cover_image}}
-        <figure class="home-intro-portrait">
-            <img
-                srcset="{{img_url @site.cover_image size="s"}} 400w,
-                        {{img_url @site.cover_image size="m"}} 720w"
-                sizes="(max-width: 900px) 60vw, 300px"
-                src="{{img_url @site.cover_image size="m"}}"
-                alt="{{@site.title}}"
-                loading="eager"
-            />
-        </figure>
+    {{!-- 1. Greeting — small, then get out of the way of the work --}}
+    <header class="folio-intro">
+        <p class="folio-kicker">Kia ora — I'm Kasey</p>
+        {{#if @site.description}}
+            <h1 class="folio-statement">{{@site.description}}</h1>
+        {{else}}
+            <h1 class="folio-statement">{{@site.title}}</h1>
         {{/if}}
-    </section>
+        <p class="folio-meta">Designer, writer &amp; marketer in Wellington, Aotearoa.</p>
+    </header>
 
-    {{!-- 2. Right now — a living pulse from the Now page --}}
-    {{#get "pages" filter="slug:now" limit="1"}}
-        {{#foreach pages}}
-        <a href="{{url}}" class="home-now reveal-on-scroll">
-            <span class="home-now-dot" aria-hidden="true"></span>
-            <span class="home-now-body">
-                <span class="home-now-label">Right now</span>
-                <span class="home-now-excerpt">{{excerpt words="36"}}&hellip;</span>
-                <span class="home-now-updated">Updated {{date updated_at timeago="true"}}</span>
-            </span>
-            <span class="home-now-arrow" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-            </span>
-        </a>
-        {{/foreach}}
-    {{/get}}
-
-    {{!-- 3. Writing — an essay index that looks right with one post or twenty --}}
-    <section class="home-writing reveal-on-scroll">
-        <header class="home-section-head">
-            <h2 class="home-section-title">Writing</h2>
-            <p class="home-section-note">Essays, whenever there's something worth saying.</p>
-        </header>
-
-        {{#get "posts" filter="tag:-portfolio+tag:-photography" limit="4"}}
+    {{!-- 2. The work — portfolio and photography, images at natural ratios --}}
+    <section class="folio-grid" aria-label="Selected work and photography">
+        {{#get "posts" filter="tag:[portfolio,photography]" limit="15" include="tags" order="published_at desc"}}
             {{#foreach posts}}
-                <article class="home-essay">
-                    <a href="{{url}}" class="home-essay-link">
-                        <time class="home-essay-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMMM YYYY"}}</time>
-                        <span class="home-essay-main">
-                            <h3 class="home-essay-title">{{title}}</h3>
-                            <p class="home-essay-excerpt">{{excerpt words="28"}}&hellip;</p>
-                        </span>
-                    </a>
-                </article>
+                {{#if feature_image}}
+                <a href="{{url}}" class="folio-item{{#if @first}} folio-lead{{/if}} reveal-on-scroll">
+                    <span class="folio-item-frame">
+                        <img
+                            srcset="{{img_url feature_image size="m"}} 720w,
+                                    {{img_url feature_image size="l"}} 1200w,
+                                    {{img_url feature_image size="xl"}} 2000w"
+                            sizes="{{#if @first}}100vw{{else}}(max-width: 700px) 100vw, 50vw{{/if}}"
+                            src="{{img_url feature_image size="l"}}"
+                            alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+                            loading="{{#if @first}}eager{{else}}lazy{{/if}}"
+                        />
+                    </span>
+                    <span class="folio-item-caption">
+                        {{#if primary_tag}}
+                            <span class="folio-item-tag">{{primary_tag.name}}</span>
+                        {{/if}}
+                        <span class="folio-item-title">{{title}}</span>
+                    </span>
+                </a>
+                {{/if}}
             {{else}}
-                <p class="home-empty">Nothing here yet — new essays are brewing.</p>
+                <p class="folio-empty">Work is on its way — tag posts with <code>portfolio</code> or <code>photography</code> and they'll appear here.</p>
             {{/foreach}}
         {{/get}}
     </section>
 
-    {{!-- 4. threesixtysix — the newsletter, which is where much of the writing lives --}}
-    <a href="https://threesixtysix.news" target="_blank" rel="noopener" class="home-366 reveal-on-scroll">
-        <span class="home-366-label">Also me</span>
-        <span class="home-366-title">threesixtysix</span>
-        <span class="home-366-desc">A local climate newsletter — explaining climate change so everyone in Wellington can see how good a low-pollution life is.</span>
-        <span class="home-366-cta">
-            Read the latest
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M7 17L17 7M17 7H7M17 7V17"/>
-            </svg>
-        </span>
-    </a>
+    <div class="folio-grid-more">
+        <a href="/portfolio/" class="folio-more-link">All work
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="/photography/" class="folio-more-link">All photography
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+    </div>
 
-    {{!-- 5. Work — a statement and real clients, not an empty portfolio grid.
-         Portfolio cards appear automatically once portfolio-tagged posts exist. --}}
-    <section class="home-work reveal-on-scroll">
-        <header class="home-section-head">
-            <h2 class="home-section-title">Work</h2>
-            <p class="home-section-note">Seven years of design &amp; copy, agency and government.</p>
-        </header>
+    {{!-- 3. The quiet strip — everything that isn't the work --}}
+    <div class="folio-after">
 
-        <p class="home-work-lede">
-            I find the best way to tell a story, then use whatever it takes to
-            tell it well &mdash; design, copy, photography, video and motion.
-        </p>
-
-        <ul class="home-clients" aria-label="Selected clients">
-            <li>WellingtonNZ</li>
-            <li>Zealandia</li>
-            <li>NZ Red Cross</li>
-            <li>World of WearableArt</li>
-            <li>Silverstripe</li>
-            <li>Flick Electric</li>
-            <li>Bolton Hotel</li>
-            <li>Karawhiua</li>
-        </ul>
-
-        {{#get "posts" filter="tag:portfolio" limit="2" include="tags"}}
-            {{#if posts}}
-            <div class="home-work-samples">
-                {{#foreach posts}}
-                    <a href="{{url}}" class="home-work-card">
-                        {{#if feature_image}}
-                        <span class="home-work-card-image">
-                            <img src="{{img_url feature_image size="m"}}" alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}" loading="lazy" />
-                        </span>
-                        {{/if}}
-                        <span class="home-work-card-title">{{title}}</span>
-                    </a>
-                {{/foreach}}
-            </div>
-            {{/if}}
+        {{!-- Right now — live pulse from the Now page --}}
+        {{#get "pages" filter="slug:now" limit="1"}}
+            {{#foreach pages}}
+            <a href="{{url}}" class="home-now reveal-on-scroll">
+                <span class="home-now-dot" aria-hidden="true"></span>
+                <span class="home-now-body">
+                    <span class="home-now-label">Right now</span>
+                    <span class="home-now-excerpt">{{excerpt words="36"}}&hellip;</span>
+                    <span class="home-now-updated">Updated {{date updated_at timeago="true"}}</span>
+                </span>
+                <span class="home-now-arrow" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </span>
+            </a>
+            {{/foreach}}
         {{/get}}
 
-        <a href="/about/" class="home-more-link">More about me and my work
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-        </a>
-    </section>
+        <div class="folio-columns reveal-on-scroll">
+            {{!-- Writing — compact index --}}
+            <section class="folio-writing">
+                <h2 class="folio-column-title">Writing</h2>
+                {{#get "posts" filter="tag:-portfolio+tag:-photography" limit="3"}}
+                    {{#foreach posts}}
+                        <a href="{{url}}" class="folio-post-link">
+                            <span class="folio-post-title">{{title}}</span>
+                            <time class="folio-post-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMM YYYY"}}</time>
+                        </a>
+                    {{else}}
+                        <p class="folio-empty-note">New essays are brewing.</p>
+                    {{/foreach}}
+                {{/get}}
+                <a href="/blog/" class="folio-small-link">All writing &rarr;</a>
+            </section>
 
-    {{!-- 6. Small corners — quiet links, only shown when they lead somewhere --}}
-    <nav class="home-corners reveal-on-scroll" aria-label="More on this site">
-        {{#get "posts" filter="tag:photography" limit="1"}}
-            {{#if posts}}
-            <a href="/photography/" class="home-corner">
-                <span class="home-corner-title">Photography</span>
-                <span class="home-corner-desc">Frames from an X-T4, an iPhone and a 35mm SureShot</span>
-            </a>
-            {{/if}}
-        {{/get}}
-        <a href="/colophon/" class="home-corner">
-            <span class="home-corner-title">Colophon</span>
-            <span class="home-corner-desc">How this site is made</span>
-        </a>
-        <a href="{{@site.url}}/rss/" class="home-corner">
-            <span class="home-corner-title">RSS</span>
-            <span class="home-corner-desc">Follow along on the open web</span>
-        </a>
-    </nav>
-
-    {{!-- 7. Subscribe --}}
-    {{#if @site.members_enabled}}
-    <section class="home-subscribe reveal-on-scroll">
-        <div class="home-subscribe-content">
-            <h2 class="home-subscribe-title">Stay curious</h2>
-            <p class="home-subscribe-desc">Occasional notes when there's new writing. No spam, just genuine sharing.</p>
-            <a href="#/portal/signup" class="home-subscribe-btn" data-portal="signup">
-                <span>Subscribe</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-            </a>
+            {{!-- Elsewhere — the newsletter and the site's corners --}}
+            <section class="folio-elsewhere">
+                <h2 class="folio-column-title">Elsewhere</h2>
+                <a href="https://threesixtysix.news" target="_blank" rel="noopener" class="folio-post-link">
+                    <span class="folio-post-title">threesixtysix</span>
+                    <span class="folio-post-date">Climate newsletter</span>
+                </a>
+                <a href="/about/" class="folio-post-link">
+                    <span class="folio-post-title">About</span>
+                    <span class="folio-post-date">Bio &amp; work history</span>
+                </a>
+                <a href="/colophon/" class="folio-post-link">
+                    <span class="folio-post-title">Colophon</span>
+                    <span class="folio-post-date">How this site is made</span>
+                </a>
+                <a href="{{@site.url}}/rss/" class="folio-post-link">
+                    <span class="folio-post-title">RSS</span>
+                    <span class="folio-post-date">The open web</span>
+                </a>
+            </section>
         </div>
-    </section>
-    {{/if}}
 
+        {{!-- Subscribe --}}
+        {{#if @site.members_enabled}}
+        <section class="home-subscribe reveal-on-scroll">
+            <div class="home-subscribe-content">
+                <h2 class="home-subscribe-title">Stay curious</h2>
+                <p class="home-subscribe-desc">Occasional notes when there's new work and writing. No spam, just genuine sharing.</p>
+                <a href="#/portal/signup" class="home-subscribe-btn" data-portal="signup">
+                    <span>Subscribe</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+        </section>
+        {{/if}}
+
+    </div>
 </div>
