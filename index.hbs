@@ -10,15 +10,14 @@
 
 <div class="home-folio">
 
-    {{!-- 1. Greeting — small, then get out of the way of the work --}}
+    {{!-- 1. Greeting — one statement, one line, then the work --}}
     <header class="folio-intro">
-        <p class="folio-kicker">Kia ora — I'm Kasey</p>
         {{#if @site.description}}
             <h1 class="folio-statement">{{@site.description}}</h1>
         {{else}}
             <h1 class="folio-statement">{{@site.title}}</h1>
         {{/if}}
-        <p class="folio-meta">Designer, writer &amp; marketer in Wellington, Aotearoa.</p>
+        <p class="folio-meta">Kasey McDonnell &mdash; design, words &amp; marketing. Wellington, Aotearoa.</p>
     </header>
 
     {{!-- 2. The work — portfolio and photography, images at natural ratios --}}
@@ -54,10 +53,10 @@
 
     <div class="folio-grid-more">
         <a href="/portfolio/" class="folio-more-link">All work
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
         </a>
         <a href="/photography/" class="folio-more-link">All photography
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
         </a>
     </div>
 
@@ -68,11 +67,9 @@
         {{#get "pages" filter="slug:now" limit="1"}}
             {{#foreach pages}}
             <a href="{{url}}" class="home-now reveal-on-scroll">
-                <span class="home-now-dot" aria-hidden="true"></span>
                 <span class="home-now-body">
-                    <span class="home-now-label">Right now</span>
+                    <span class="home-now-head">Now <span class="home-now-updated">/ updated {{date updated_at timeago="true"}}</span></span>
                     <span class="home-now-excerpt">{{excerpt words="36"}}&hellip;</span>
-                    <span class="home-now-updated">Updated {{date updated_at timeago="true"}}</span>
                 </span>
                 <span class="home-now-arrow" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -124,8 +121,8 @@
         {{#if @site.members_enabled}}
         <section class="home-subscribe reveal-on-scroll">
             <div class="home-subscribe-content">
-                <h2 class="home-subscribe-title">Stay curious</h2>
-                <p class="home-subscribe-desc">Occasional notes when there's new work and writing. No spam, just genuine sharing.</p>
+                <h2 class="home-subscribe-title">New work, occasionally</h2>
+                <p class="home-subscribe-desc">One email when something new ships.</p>
                 <a href="#/portal/signup" class="home-subscribe-btn" data-portal="signup">
                     <span>Subscribe</span>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
