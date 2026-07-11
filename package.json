@@ -60,7 +60,12 @@
             }
         },
         "card_assets": {
-            "exclude": ["audio", "video", "product", "signup"]
+            "exclude": [
+                "audio",
+                "video",
+                "product",
+                "signup"
+            ]
         },
         "custom": {
             "site_mood": {
@@ -211,7 +216,7 @@
         "autoprefixer": "10.4.23",
         "beeper": "2.1.0",
         "cssnano": "7.1.2",
-        "gscan": "5.2.1",
+        "gscan": "^5.4.3",
         "gulp": "5.0.1",
         "gulp-concat": "2.6.1",
         "gulp-livereload": "4.0.2",

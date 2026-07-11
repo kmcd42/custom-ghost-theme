@@ -22,13 +22,19 @@
 
     // Fetch current CO₂ from NOAA's weekly data
     async function fetchCurrentPPM() {
-        // Check cache first
-        const cached = localStorage.getItem(CACHE_KEY);
-        if (cached) {
-            const { ppm, timestamp } = JSON.parse(cached);
-            if (Date.now() - timestamp < CACHE_DURATION) {
-                return ppm;
+        // Check cache first — validate, since localStorage contents
+        // can be corrupted or tampered with
+        try {
+            const cached = localStorage.getItem(CACHE_KEY);
+            if (cached) {
+                const { ppm, timestamp } = JSON.parse(cached);
+                if (typeof ppm === 'number' && isFinite(ppm) && ppm > 300 && ppm < 700 &&
+                    typeof timestamp === 'number' && Date.now() - timestamp < CACHE_DURATION) {
+                    return Math.round(ppm);
+                }
             }
+        } catch (error) {
+            localStorage.removeItem(CACHE_KEY);
         }
 
         try {
