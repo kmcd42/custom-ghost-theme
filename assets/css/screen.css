@@ -444,7 +444,22 @@ body.menu-open { overflow: hidden; }
     min-width: 1.4em;
 }
 .index-list .index-row__num::before { content: counter(idxcount, decimal-leading-zero); }
-.index-row--history .index-row__num { min-width: 100px; color: var(--faint); }
+.index-row--history { align-items: flex-start; }
+.index-row--history .index-row__num { min-width: 100px; color: var(--faint); padding-top: 6px; }
+.index-row__body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.index-row--history .index-row__title { flex: none; }
+.index-row__copy {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--dim);
+    max-width: 62ch;
+}
 .history-list div.index-row { cursor: default; }
 .index-head a { color: var(--faint); transition: color 0.3s ease; }
 .index-head a:hover { color: var(--accent); }
