@@ -41,26 +41,59 @@
     </article>
 
 {{else}}
-{{#has tag="hash-photo"}}
-    {{!-- ── Photo detail ───────────────────────────────────────── --}}
-    <article class="wrap section photo-detail">
-        <div class="photo-detail__frame">
-            <a class="photo-detail__back" href="{{@site.url}}/photography/">&larr; Photography</a>
-            {{#if feature_image}}
-                <img class="photo-detail__img" src="{{img_url feature_image size="xl"}}" alt="{{title}}" />
-            {{/if}}
-            <div class="photo-detail__bar">
-                <div>
-                    <div class="photo-detail__caption">{{title}}</div>
-                    <div class="photo-detail__meta">{{tags separator=" · " autolink="false"}}{{#if published_at}} · {{date format="YYYY"}}{{/if}}</div>
+{{#has tag="hash-role"}}
+    {{!-- ── Role / experience detail ───────────────────────────── --}}
+    <article class="wrap section role-page">
+        <a class="back-link" href="{{@site.url}}/about/">&larr; About</a>
+        <header class="role-header">
+            <div class="eyebrow">Experience</div>
+            <h1 class="case__title">{{title}}</h1>
+        </header>
+
+        <div class="case__body">
+            <div class="case__meta">
+                {{#if custom_excerpt}}
+                <div class="meta-item">
+                    <div class="meta-label">Employer</div>
+                    <div class="meta-value">{{custom_excerpt}}</div>
                 </div>
-                <div class="photo-detail__nav">
-                    {{#prev_post in="primary_tag"}}<a href="{{url}}" aria-label="Previous photo">&larr;</a>{{/prev_post}}
-                    {{#next_post in="primary_tag"}}<a href="{{url}}" aria-label="Next photo">&rarr;</a>{{/next_post}}
+                {{/if}}
+                {{#if primary_tag}}
+                <div class="meta-item">
+                    <div class="meta-label">Period</div>
+                    <div class="meta-value">{{primary_tag.name}}</div>
                 </div>
+                {{/if}}
+            </div>
+
+            <div class="case__prose">
+                <div class="gh-content">{{content}}</div>
             </div>
         </div>
-        {{#if content}}<div class="gh-content" style="max-width:620px;margin:30px auto 0;">{{content}}</div>{{/if}}
+    </article>
+
+{{else}}
+{{#has tag="hash-photo"}}
+    {{!-- ── Photography collection ─────────────────────────────── --}}
+    <article class="wrap section photo-collection">
+        <a class="back-link" href="{{@site.url}}/photography/">&larr; Photography</a>
+
+        <header class="collection-header">
+            <div class="eyebrow">{{#if primary_tag}}{{primary_tag.name}}{{else}}Photography{{/if}}{{#if published_at}} · {{date format="YYYY"}}{{/if}}</div>
+            <h1 class="collection-title">{{title}}</h1>
+            {{#if custom_excerpt}}<p class="collection-dek">{{custom_excerpt}}</p>{{/if}}
+        </header>
+
+        {{#if feature_image}}
+            <img class="collection-cover" src="{{img_url feature_image size="xxl"}}" alt="{{title}}" />
+        {{/if}}
+
+        <div class="gh-content gh-content--gallery">{{content}}</div>
+
+        <div class="collection-foot">
+            {{#prev_post in="primary_tag"}}<a class="back-link" href="{{url}}">&larr; Previous set</a>{{/prev_post}}
+            {{#next_post in="primary_tag"}}<a class="back-link" href="{{url}}">Next set &rarr;</a>{{/next_post}}
+        </div>
     </article>
 
 {{else}}
@@ -84,6 +117,7 @@
             </div>
         {{/next_post}}
     </article>
+{{/has}}
 {{/has}}
 {{/has}}
 {{/post}}

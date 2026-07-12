@@ -445,7 +445,9 @@ body.menu-open { overflow: hidden; }
 }
 .index-list .index-row__num::before { content: counter(idxcount, decimal-leading-zero); }
 .index-row--history .index-row__num { min-width: 100px; color: var(--faint); }
-.history-list .index-row { cursor: default; }
+.history-list div.index-row { cursor: default; }
+.index-head a { color: var(--faint); transition: color 0.3s ease; }
+.index-head a:hover { color: var(--accent); }
 .index-row__title {
     flex: 1;
     font-family: var(--font-serif);
@@ -622,7 +624,6 @@ body.menu-open { overflow: hidden; }
    Photography index
    ─────────────────────────────────────────────────────────────── */
 
-.photo-section { background: var(--surface-2); }
 .photo-head {
     display: flex;
     align-items: flex-end;
@@ -638,87 +639,6 @@ body.menu-open { overflow: hidden; }
     line-height: 1;
     color: var(--text);
     margin: 12px 0 0;
-}
-.photo-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: 210px;
-    gap: 14px;
-    padding-bottom: 40px;
-}
-.photo-tile {
-    position: relative;
-    border-radius: var(--radius-img);
-    overflow: hidden;
-    border: 1px solid var(--hair-2);
-}
-.photo-tile:nth-child(6n + 1),
-.photo-tile:nth-child(6n + 5) { grid-row: span 2; }
-.photo-tile img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.8s var(--ease-out);
-}
-.photo-tile:hover img { transform: scale(1.05); }
-
-/* ───────────────────────────────────────────────────────────────
-   Photo detail (single #photo post)
-   ─────────────────────────────────────────────────────────────── */
-
-.photo-detail { padding-block: 8px 60px; }
-.photo-detail__frame {
-    position: relative;
-    border-radius: var(--radius-card);
-    overflow: hidden;
-    border: 1px solid var(--gold-12);
-    background: #050607;
-}
-.photo-detail__img {
-    width: 100%;
-    max-height: 78vh;
-    object-fit: contain;
-    background: #050607;
-}
-.photo-detail__back {
-    position: absolute;
-    top: 16px;
-    left: 20px;
-    z-index: 2;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text);
-    background: rgba(8, 9, 11, 0.6);
-    padding: 5px 10px;
-    border-radius: 6px;
-}
-.photo-detail__bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    padding: 20px 26px;
-}
-.photo-detail__caption {
-    font-family: var(--font-serif);
-    font-size: 22px;
-    color: var(--text);
-}
-.photo-detail__meta {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    color: var(--faint);
-    margin-top: 5px;
-}
-.photo-detail__nav {
-    display: flex;
-    gap: 14px;
-    font-family: var(--font-mono);
-    font-size: 14px;
-    color: var(--accent);
 }
 
 /* ───────────────────────────────────────────────────────────────
@@ -1043,6 +963,119 @@ body.menu-open { overflow: hidden; }
 }
 
 /* ───────────────────────────────────────────────────────────────
+   Photography collections — index grid
+   ─────────────────────────────────────────────────────────────── */
+
+.collection-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    padding-bottom: 40px;
+}
+.collection-card {
+    position: relative;
+    display: block;
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    border: 1px solid var(--hair-2);
+    background: var(--raised);
+}
+.collection-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s var(--ease-out);
+}
+.collection-card:hover img { transform: scale(1.04); }
+.collection-card__overlay {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: 26px 28px;
+    background: linear-gradient(to top, rgba(6, 8, 9, 0.88), rgba(6, 8, 9, 0.15) 70%, transparent);
+}
+.collection-card__title {
+    font-family: var(--font-serif);
+    font-size: 30px;
+    line-height: 1.05;
+    color: #FFFCF1;
+}
+.collection-card__meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-top: 6px;
+}
+
+/* ───────────────────────────────────────────────────────────────
+   Photography collection — detail (gallery)
+   ─────────────────────────────────────────────────────────────── */
+
+.back-link {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--faint);
+    transition: color 0.3s ease;
+}
+.back-link:hover { color: var(--accent); }
+
+.photo-collection { padding-block: 8px 60px; }
+.photo-collection .back-link { margin-bottom: 24px; }
+.collection-header { max-width: 760px; margin-bottom: 26px; }
+.collection-title {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(2.6rem, 1.6rem + 4vw, 3.75rem);
+    line-height: 1.02;
+    color: var(--text);
+    margin: 8px 0 0;
+}
+.collection-dek {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--dim);
+    max-width: 600px;
+    margin: 14px 0 0;
+}
+.collection-cover {
+    width: 100%;
+    border-radius: var(--radius-card);
+    border: 1px solid var(--gold-12);
+    margin-bottom: 34px;
+}
+/* Let galleries breathe — no prose measure on collection pages */
+.gh-content--gallery {
+    max-width: none;
+    font-size: 16px;
+}
+.gh-content--gallery > * { margin-bottom: 16px; }
+.collection-foot {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--hair);
+}
+
+/* ───────────────────────────────────────────────────────────────
+   Role / experience detail (reuses .case layout)
+   ─────────────────────────────────────────────────────────────── */
+
+.role-page { padding-block: 8px 60px; }
+.role-page .back-link { margin-bottom: 24px; }
+.role-header { margin-bottom: 6px; }
+.role-header .eyebrow { margin-bottom: 12px; }
+/* Render the bulleted role description with comfortable spacing */
+.role-page .gh-content ul { padding-left: 1.1em; }
+.role-page .gh-content li { margin-bottom: 12px; color: var(--prose); }
+
+/* ───────────────────────────────────────────────────────────────
    Responsive
    ─────────────────────────────────────────────────────────────── */
 
@@ -1075,13 +1108,14 @@ body.menu-open { overflow: hidden; }
     .case__body { grid-template-columns: 1fr; gap: 24px; }
     .case__lead { font-size: 22px; }
 
-    .photo-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 160px; }
-    .photo-tile:nth-child(6n + 1),
-    .photo-tile:nth-child(6n + 5) { grid-row: span 1; }
-    .photo-tile:nth-child(5n + 1) { grid-column: span 2; }
 
     .about__intro { grid-template-columns: 1fr; gap: 26px; }
     .about__portrait { max-width: 320px; order: -1; }
+
+    .collection-grid { grid-template-columns: 1fr; }
+    .collection-card__title { font-size: 25px; }
+    .role-page .index-head a,
+    .about__history .index-head a { font-size: 10px; }
 
     .footer-top { grid-template-columns: 1fr; gap: 24px; }
     .footer-line { font-size: 27px; }

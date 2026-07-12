@@ -21,14 +21,18 @@
     {{#get "posts" filter="tag:hash-role" order="published_at desc" limit="50"}}
         {{#if posts}}
         <section class="about__history">
-            <div class="index-head"><span>Work history</span></div>
+            <div class="index-head">
+                <span>Work history</span>
+                <a href="{{@site.url}}/roles/">Full experience &rarr;</a>
+            </div>
             <div class="history-list">
                 {{#foreach posts}}
-                    <div class="index-row index-row--history">
+                    <a class="index-row index-row--history" href="{{url}}">
                         <span class="index-row__num">{{#if primary_tag}}{{primary_tag.name}}{{/if}}</span>
                         <span class="index-row__title">{{title}}</span>
-                        <span class="index-row__meta">{{excerpt characters="40"}}</span>
-                    </div>
+                        <span class="index-row__meta">{{#if custom_excerpt}}{{custom_excerpt}}{{else}}{{excerpt characters="40"}}{{/if}}</span>
+                        <span class="index-row__arrow" aria-hidden="true">&rarr;</span>
+                    </a>
                 {{/foreach}}
             </div>
         </section>

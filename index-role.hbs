@@ -1,0 +1,21 @@
+{{!< default}}
+
+{{!-- Experience index: the work-history roles as a numbered career timeline --}}
+<div class="wrap section masthead">
+    <div class="eyebrow masthead__eyebrow">Career to date</div>
+    <h1 class="masthead__title">Experience</h1>
+</div>
+
+<div class="wrap section">
+    <div class="history-list">
+        {{#foreach posts}}
+            <a class="index-row index-row--history" href="{{url}}">
+                <span class="index-row__num">{{#if primary_tag}}{{primary_tag.name}}{{/if}}</span>
+                <span class="index-row__title">{{title}}</span>
+                <span class="index-row__meta">{{#if custom_excerpt}}{{custom_excerpt}}{{else}}{{excerpt characters="40"}}{{/if}}</span>
+                <span class="index-row__arrow" aria-hidden="true">&rarr;</span>
+            </a>
+        {{/foreach}}
+    </div>
+    {{pagination}}
+</div>
