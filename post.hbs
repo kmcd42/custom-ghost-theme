@@ -1,124 +1,89 @@
 {{!< default}}
-{{!--
-    Post Template - Article detail page
-    Supports multiple header styles via custom settings
---}}
 
 {{#post}}
-<article class="post-content {{post_class}}">
+{{#has tag="hash-work"}}
+    {{!-- ── Case study ─────────────────────────────────────────── --}}
+    <article class="wrap section case">
+        <div class="case__eyebrow">{{tags separator=" · " limit="3" autolink="false"}}</div>
+        <h1 class="case__title">{{title}}</h1>
 
-    {{#match @custom.post_header_style "Full Bleed Image"}}
-        {{!-- Full bleed header with image background --}}
         {{#if feature_image}}
-            <header class="post-header-fullbleed">
-                <div class="post-header-background">
-                    <img
-                        srcset="{{img_url feature_image size="l"}} 1200w,
-                                {{img_url feature_image size="xl"}} 2000w"
-                        sizes="100vw"
-                        src="{{img_url feature_image size="xl"}}"
-                        alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
-                    />
-                    <div class="post-header-overlay"></div>
-                </div>
-                <div class="post-header-content">
-                    {{#if primary_tag}}
-                        <a href="{{primary_tag.url}}" class="post-header-tag">{{primary_tag.name}}</a>
-                    {{/if}}
-                    <h1 class="post-content-title">{{title}}</h1>
-                    {{#if custom_excerpt}}
-                        <p class="post-content-excerpt">{{custom_excerpt}}</p>
-                    {{/if}}
-                    <div class="post-header-meta">
-                        <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMMM D, YYYY"}}</time>
-                        {{#if reading_time}}
-                            <span>·</span>
-                            <span>{{reading_time}}</span>
-                        {{/if}}
-                    </div>
-                </div>
-            </header>
-        {{else}}
-            <header class="post-content-header gh-canvas">
-                <h1 class="post-content-title">{{title}}</h1>
-                {{#if custom_excerpt}}
-                    <p class="post-content-excerpt">{{custom_excerpt}}</p>
-                {{/if}}
-            </header>
+            <img class="case__hero" src="{{img_url feature_image size="xl"}}" alt="{{title}}" />
         {{/if}}
 
-    {{else match @custom.post_header_style "Left Aligned"}}
-        {{!-- Left-aligned header --}}
-        <header class="post-header-left gh-canvas">
-            {{#if primary_tag}}
-                <a href="{{primary_tag.url}}" class="post-header-tag">{{primary_tag.name}}</a>
-            {{/if}}
-            <h1 class="post-content-title">{{title}}</h1>
-            {{#if custom_excerpt}}
-                <p class="post-content-excerpt">{{custom_excerpt}}</p>
-            {{/if}}
-            <div class="post-header-meta">
-                <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMMM D, YYYY"}}</time>
-                {{#if reading_time}}
-                    <span>·</span>
-                    <span>{{reading_time}}</span>
+        <div class="case__body">
+            <div class="case__meta">
+                {{#if primary_tag}}
+                <div class="meta-item">
+                    <div class="meta-label">Discipline</div>
+                    <div class="meta-value">{{primary_tag.name}}</div>
+                </div>
                 {{/if}}
-            </div>
-        </header>
-        {{> "feature-image"}}
-
-    {{else}}
-        {{!-- Default: Centered Classic --}}
-        <header class="post-content-header gh-canvas">
-            {{#if primary_tag}}
-                <a href="{{primary_tag.url}}" class="post-header-tag">{{primary_tag.name}}</a>
-            {{/if}}
-            <h1 class="post-content-title">{{title}}</h1>
-            {{#if custom_excerpt}}
-                <p class="post-content-excerpt">{{custom_excerpt}}</p>
-            {{/if}}
-            <div class="post-header-meta">
-                <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMMM D, YYYY"}}</time>
-                {{#if reading_time}}
-                    <span>·</span>
-                    <span>{{reading_time}}</span>
-                {{/if}}
-            </div>
-        </header>
-        {{> "feature-image"}}
-    {{/match}}
-
-    {{!-- Article Body --}}
-    <div class="post-content-body gh-content gh-canvas">
-        {{content}}
-    </div>
-
-    {{!-- Author Card --}}
-    {{#if primary_author}}
-        <section class="post-author-card gh-canvas">
-            <div class="post-author-inner">
-                {{#if primary_author.profile_image}}
-                    <img class="post-author-image" src="{{primary_author.profile_image}}" alt="{{primary_author.name}}" loading="lazy" />
-                {{/if}}
-                <div class="post-author-content">
-                    <span class="post-author-label">Written by</span>
-                    <h4 class="post-author-name">
-                        <a href="{{primary_author.url}}">{{primary_author.name}}</a>
-                    </h4>
-                    {{#if primary_author.bio}}
-                        <p class="post-author-bio">{{primary_author.bio}}</p>
-                    {{/if}}
+                <div class="meta-item">
+                    <div class="meta-label">Year</div>
+                    <div class="meta-value">{{date format="YYYY"}}</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Services</div>
+                    <div class="meta-value">{{tags separator=", " autolink="false"}}</div>
                 </div>
             </div>
-        </section>
-    {{/if}}
 
-    {{!-- Comments --}}
-    {{#if comments}}
-        <div class="gh-comments gh-canvas">
-            {{comments}}
+            <div class="case__prose">
+                {{#if custom_excerpt}}<p class="case__lead">{{custom_excerpt}}</p>{{/if}}
+                <div class="gh-content">{{content}}</div>
+            </div>
         </div>
-    {{/if}}
 
-</article>
+        {{#next_post in="primary_tag"}}
+            <a class="index-cta" href="{{url}}" style="margin-top:40px">Next project: {{title}} &rarr;</a>
+        {{/next_post}}
+    </article>
+
+{{else}}
+{{#has tag="hash-photo"}}
+    {{!-- ── Photo detail ───────────────────────────────────────── --}}
+    <article class="wrap section photo-detail">
+        <div class="photo-detail__frame">
+            <a class="photo-detail__back" href="{{@site.url}}/photography/">&larr; Photography</a>
+            {{#if feature_image}}
+                <img class="photo-detail__img" src="{{img_url feature_image size="xl"}}" alt="{{title}}" />
+            {{/if}}
+            <div class="photo-detail__bar">
+                <div>
+                    <div class="photo-detail__caption">{{title}}</div>
+                    <div class="photo-detail__meta">{{tags separator=" · " autolink="false"}}{{#if published_at}} · {{date format="YYYY"}}{{/if}}</div>
+                </div>
+                <div class="photo-detail__nav">
+                    {{#prev_post in="primary_tag"}}<a href="{{url}}" aria-label="Previous photo">&larr;</a>{{/prev_post}}
+                    {{#next_post in="primary_tag"}}<a href="{{url}}" aria-label="Next photo">&rarr;</a>{{/next_post}}
+                </div>
+            </div>
+        </div>
+        {{#if content}}<div class="gh-content" style="max-width:620px;margin:30px auto 0;">{{content}}</div>{{/if}}
+    </article>
+
+{{else}}
+    {{!-- ── Article ────────────────────────────────────────────── --}}
+    <article class="wrap section article">
+        <header class="article__header">
+            <div class="article__eyebrow">{{#if primary_tag}}{{primary_tag.name}} · {{/if}}{{date format="D MMMM YYYY"}} · {{reading_time}}</div>
+            <h1 class="article__title">{{title}}</h1>
+            {{#if custom_excerpt}}<div class="article__dek">{{custom_excerpt}}</div>{{/if}}
+        </header>
+
+        {{#if feature_image}}
+            <div class="article__feature"><img src="{{img_url feature_image size="xl"}}" alt="{{title}}" /></div>
+        {{/if}}
+
+        <div class="article__body gh-content has-dropcap">{{content}}</div>
+
+        {{#next_post}}
+            <div class="wrap" style="max-width:var(--measure);margin-inline:auto;">
+                <a class="index-cta" href="{{url}}">Next: {{title}} &rarr;</a>
+            </div>
+        {{/next_post}}
+    </article>
+{{/has}}
+{{/has}}
 {{/post}}

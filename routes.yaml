@@ -1,0 +1,28 @@
+# The Index — routing
+# Collections give clean URLs while individual posts stay Koenig-editable.
+# `hash-work` etc. are Ghost's YAML-safe way of writing the internal tags #work, #photo, #role.
+
+routes:
+  /:
+    template: home
+
+collections:
+  /work/:
+    permalink: /work/{slug}/
+    filter: "tag:hash-work"
+    template: index-work
+    order: featured desc, published_at desc
+
+  /writing/:
+    permalink: /writing/{slug}/
+    filter: "tag:-hash-work+tag:-hash-photo+tag:-hash-role"
+    template: index-writing
+
+  /photography/:
+    permalink: /photography/{slug}/
+    filter: "tag:hash-photo"
+    template: index-photo
+
+taxonomies:
+  tag: /tag/{slug}/
+  author: /author/{slug}/

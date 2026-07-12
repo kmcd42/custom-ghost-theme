@@ -1,0 +1,22 @@
+{{!< default}}
+
+{{!-- Photography index: quiet masthead, category filters, gallery grid --}}
+<div class="wrap section photo-head">
+    <div>
+        <div class="eyebrow">Shot around the motu</div>
+        <h1 class="photo-head__title">Photography</h1>
+    </div>
+    <div class="filter-row">
+        <a class="filter-chip is-active" href="{{@site.url}}/photography/">All</a>
+        {{#get "tags" filter="visibility:public" limit="4"}}
+            {{#foreach tags}}<a class="filter-chip" href="{{url}}">{{name}}</a>{{/foreach}}
+        {{/get}}
+    </div>
+</div>
+
+<div class="wrap section">
+    <div class="photo-grid">
+        {{#foreach posts}}{{> "photo-tile"}}{{/foreach}}
+    </div>
+    {{pagination}}
+</div>

@@ -1,276 +1,74 @@
-/* Variables - Warmth at the Edge of Tomorrow
-/* A design system for curious, compassionate, climate-conscious creativity
-/* Single bright theme inspired by #EEC643 (golden yellow) and #FFFCF1 (cream)
+/* Design tokens — The Index
+/* Dark, editorial, one warm light. Accent gold #EEC643.
 /* ---------------------------------------------------------- */
 
 :root {
-    /* ═══════════════════════════════════════════════════════════
-       COLOR SYSTEM - Bright & Warm
-       A single cohesive palette inspired by sunlight and warmth
-       ═══════════════════════════════════════════════════════════ */
+    /* Surfaces */
+    --bg: #060809;          /* deepest — page background */
+    --surface: #0A0E12;     /* cards / header / footer */
+    --surface-2: #08090B;   /* photography + quiet surfaces */
+    --raised: #131820;      /* image placeholders */
 
-    /* Primary Palette - Golden Yellow (the slay 💛) */
-    /* Always use golden yellow - ignoring Ghost admin accent color */
-    --color-primary: #EEC643;
-    --color-primary-soft: #F5D76E;
-    --color-primary-deep: #D4A82F;
-    --color-primary-glow: rgba(238, 198, 67, 0.18);
+    /* Accent (overridden inline from @custom.accent_color) */
+    --accent: #EEC643;
+    --accent-soft: #F5D76E;
 
-    /* Complementary Accent Colors - for visual pops */
-    --color-coral: #EE7B5A;
-    --color-coral-glow: rgba(238, 123, 90, 0.15);
-    --color-rose: #E88EA4;
-    --color-rose-glow: rgba(232, 142, 164, 0.12);
-    --color-teal: #43CDBE;
-    --color-teal-glow: rgba(67, 205, 190, 0.12);
-    --color-lavender: #9B7ED9;
-    --color-lavender-glow: rgba(155, 126, 217, 0.10);
+    /* Ink */
+    --text: #FFFCF1;        /* cream */
+    --muted: #B8C4D8;       /* body muted */
+    --dim: #8B97A8;         /* captions, secondary meta */
+    --faint: #6B7688;       /* mono labels, numbers */
+    --prose: #D8DEE8;       /* long-form reading */
 
-    /* Ocean & Deep Tones */
-    --color-teal-soft: #5DD9CB;
-    --color-teal-deep: #2A9B8E;
-    --color-ocean: #0D3B4C;
+    /* Hairlines */
+    --hair: rgba(255, 252, 241, 0.06);
+    --hair-2: rgba(255, 252, 241, 0.08);
+    --hair-3: rgba(255, 252, 241, 0.12);
 
-    /* Neutral Depths - Dark Mode Base */
-    --color-midnight: #0A0E12;
-    --color-charcoal: #131820;
-    --color-slate: #1C2530;
-    --color-steel: #2A3544;
-    --color-mist: #A3B1C6;
+    /* Gold lines */
+    --gold-12: rgba(238, 198, 67, 0.12);
+    --gold-15: rgba(238, 198, 67, 0.15);
+    --gold-40: rgba(238, 198, 67, 0.40);
 
-    /* Base Colors - Dark Mode (default) */
-    --background-color: var(--color-midnight);
-    --background-subtle: var(--color-charcoal);
-    --text-color: #FFFCF1;
-    --text-muted: #B8C4D8;
-    --text-soft: rgba(255, 252, 241, 0.78);
-    --color-border: rgba(238, 198, 67, 0.12);
-    --color-border-light: rgba(238, 198, 67, 0.06);
-
-    /* Gradients - Warm Glowing with complementary color pops */
-    --gradient-sky: linear-gradient(135deg, #0C1015 0%, #141C28 30%, #1a2540 60%, #1E2845 100%);
-    --gradient-dawn: linear-gradient(135deg, #0F0D14 0%, #201828 40%, #2A1C30 70%, #1E1620 100%);
-    --gradient-ocean: linear-gradient(180deg, #070E14 0%, #0D1C28 40%, #0F2535 70%, #0A1E2C 100%);
-    --gradient-warmth: linear-gradient(135deg, rgba(238, 198, 67, 0.12) 0%, rgba(232, 142, 164, 0.06) 50%, rgba(67, 205, 190, 0.08) 100%);
-    --gradient-card: linear-gradient(145deg, rgba(35, 45, 60, 0.6) 0%, rgba(20, 28, 40, 0.9) 100%);
-    --gradient-glow: radial-gradient(ellipse 900px 600px at 50% -100px, rgba(238, 198, 67, 0.25) 0%, rgba(238, 123, 90, 0.08) 35%, rgba(155, 126, 217, 0.06) 60%, transparent 75%);
-
-    /* Multi-color ambient glow for backgrounds */
-    --gradient-ambient:
-        radial-gradient(ellipse 600px 400px at 20% 30%, rgba(238, 198, 67, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse 500px 350px at 80% 20%, rgba(232, 142, 164, 0.08) 0%, transparent 50%),
-        radial-gradient(ellipse 450px 300px at 70% 80%, rgba(67, 205, 190, 0.06) 0%, transparent 50%);
-
-    /* ═══════════════════════════════════════════════════════════
-       TYPOGRAPHY - Editorial Character
-       ═══════════════════════════════════════════════════════════ */
-
-    /* Font Families */
-    --font-display: 'Instrument Serif', Georgia, serif;
+    /* Type */
+    --font-serif: 'Instrument Serif', Georgia, 'Times New Roman', serif;
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --font-serif: 'Source Serif 4', Georgia, Times, serif;
-    --font-mono: 'JetBrains Mono', 'Fira Code', Menlo, Courier, monospace;
+    --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 
-    /* Font Weights */
-    --font-light: 300;
-    --font-normal: 400;
-    --font-medium: 500;
-    --font-semibold: 600;
-    --font-bold: 700;
-    --font-heavy: 800;
+    /* Radius */
+    --radius-card: 14px;
+    --radius-img: 12px;
+    --radius-pill: 999px;
 
-    /* Type Scale - Musical Intervals with Fluid Sizing */
-    --text-xs: 0.75rem;      /* 12px */
-    --text-sm: 0.875rem;     /* 14px */
-    --text-base: 1rem;       /* 16px */
-    --text-lg: 1.125rem;     /* 18px */
-    --text-xl: 1.25rem;      /* 20px */
-    --text-2xl: clamp(1.25rem, 1.125rem + 0.5vw, 1.5rem);       /* 20-24px */
-    --text-3xl: clamp(1.5rem, 1.25rem + 1vw, 1.875rem);         /* 24-30px */
-    --text-4xl: clamp(1.75rem, 1.5rem + 1.5vw, 2.25rem);        /* 28-36px */
-    --text-5xl: clamp(2rem, 1.5rem + 2.5vw, 3rem);              /* 32-48px */
-    --text-6xl: clamp(2.5rem, 2rem + 3vw, 3.75rem);             /* 40-60px */
-    --text-7xl: clamp(3rem, 2rem + 4vw, 4.5rem);                /* 48-72px */
-    --text-8xl: clamp(3.5rem, 2.5rem + 5vw, 6rem);              /* 56-96px */
+    /* Rhythm */
+    --gutter: max(5vw, 28px);
+    --measure: 620px;
 
-    /* Line Heights */
-    --leading-none: 1;
-    --leading-tight: 1.1;
-    --leading-snug: 1.25;
-    --leading-normal: 1.5;
-    --leading-relaxed: 1.65;
-    --leading-loose: 1.8;
-
-    /* Letter Spacing */
-    --tracking-tighter: -0.04em;
-    --tracking-tight: -0.02em;
-    --tracking-normal: 0;
-    --tracking-wide: 0.02em;
-    --tracking-wider: 0.05em;
-    --tracking-widest: 0.1em;
-
-    /* ═══════════════════════════════════════════════════════════
-       SPACING & LAYOUT - Fluid with clamp()
-       ═══════════════════════════════════════════════════════════ */
-
-    /* Fixed Spacing Scale (for small, precise values) */
-    --space-1: 0.25rem;
-    --space-2: 0.5rem;
-    --space-3: 0.75rem;
-    --space-4: 1rem;
-    --space-5: 1.25rem;
-    --space-6: 1.5rem;
-
-    /* Fluid Spacing Scale (scales smoothly between breakpoints) */
-    --space-8: clamp(1.5rem, 1.25rem + 1vw, 2rem);
-    --space-10: clamp(2rem, 1.5rem + 1.5vw, 2.5rem);
-    --space-12: clamp(2.5rem, 2rem + 2vw, 3rem);
-    --space-16: clamp(3rem, 2rem + 3vw, 4rem);
-    --space-20: clamp(3.5rem, 2.5rem + 4vw, 5rem);
-    --space-24: clamp(4rem, 3rem + 5vw, 6rem);
-    --space-32: clamp(5rem, 4rem + 6vw, 8rem);
-
-    /* Fluid Section Spacing */
-    --section-gap: clamp(4rem, 3rem + 8vw, 8rem);
-    --content-gap: clamp(2rem, 1.5rem + 3vw, 4rem);
-
-    /* Container Widths */
-    --width-prose: 720px;
-    --width-content: 1000px;
-    --width-wide: 1400px;
-    --width-full: 1800px;
-
-    /* Breakpoints */
-    --screen-sm: 640px;
-    --screen-md: 768px;
-    --screen-lg: 1024px;
-    --screen-xl: 1280px;
-    --screen-2xl: 1536px;
-
-    /* Border Radius */
-    --radius-sm: 4px;
-    --radius-md: 8px;
-    --radius-lg: 12px;
-    --radius-xl: 16px;
-    --radius-2xl: 24px;
-    --radius-full: 9999px;
-
-    /* ═══════════════════════════════════════════════════════════
-       EFFECTS & ANIMATION
-       ═══════════════════════════════════════════════════════════ */
-
-    /* Shadows - Soft & Atmospheric */
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.25);
-    --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.3);
-    --shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.4);
-    --shadow-glow: 0 0 50px rgba(238, 198, 67, 0.2);
-    --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.2);
-
-    /* Blur */
-    --blur-sm: 4px;
-    --blur-md: 8px;
-    --blur-lg: 16px;
-    --blur-xl: 24px;
-
-    /* Animation Timing */
-    --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    --ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+    /* Motion */
+    --ease-out: cubic-bezier(0.2, 0.6, 0.2, 1);
     --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-
-    /* Durations */
-    --duration-fast: 150ms;
-    --duration-base: 250ms;
-    --duration-slow: 400ms;
-    --duration-slower: 600ms;
-
-    /* ═══════════════════════════════════════════════════════════
-       LEGACY SUPPORT
-       ═══════════════════════════════════════════════════════════ */
-
-    --color-base: #ffffff;
-    --color-secondary: var(--color-primary);
-    --height: 4rem;
-    --margin: 2rem;
-    --radius: var(--radius-md);
-    --header-spacing: max(6vw, 64px);
-    --gap: 24px;
 }
 
-/* ═══════════════════════════════════════════════════════════
-   LIGHT MODE - Cream & Golden Warmth
-   Inspired by #FFFCF1 (cream) and #EEC643 (golden)
-   ═══════════════════════════════════════════════════════════ */
+/* Light theme — cream & gold (opt-in via @custom.default_theme = Light) */
+.theme-light {
+    --bg: #FFFCF1;
+    --surface: #FBF7E8;
+    --surface-2: #F7F1DE;
+    --raised: #F1E9D2;
 
-.light-mode {
-    /* Base colors - warm cream background */
-    --background-color: #FFFCF1;
-    --background-subtle: #FBF7E8;
-    --text-color: #1A1612;
-    --text-muted: #5A5246;
-    --text-soft: rgba(26, 22, 18, 0.72);
-    --color-border: rgba(238, 198, 67, 0.18);
-    --color-border-light: rgba(238, 198, 67, 0.08);
+    --text: #171310;
+    --muted: #4A4436;
+    --dim: #6A6353;
+    --faint: #8A8371;
+    --prose: #2A251E;
 
-    /* Neutrals remapped for light mode */
-    --color-midnight: #FFFCF1;
-    --color-charcoal: #FBF7E8;
-    --color-slate: #F5EED8;
-    --color-steel: #EDE5CC;
-    --color-mist: #5A5246;
+    --hair: rgba(23, 19, 16, 0.08);
+    --hair-2: rgba(23, 19, 16, 0.10);
+    --hair-3: rgba(23, 19, 16, 0.14);
 
-    /* Primary stays golden - always yellow */
-    --color-primary: #EEC643;
-    --color-primary-soft: #F5D76E;
-    --color-primary-deep: #C9A528;
-    --color-primary-glow: rgba(238, 198, 67, 0.15);
+    --gold-12: rgba(200, 158, 40, 0.22);
+    --gold-15: rgba(200, 158, 40, 0.28);
+    --gold-40: rgba(200, 158, 40, 0.55);
 
-    /* Light gradients - warmer with complementary color pops */
-    --gradient-sky: linear-gradient(135deg, #FFFCF1 0%, #FBF7E8 50%, #F5EED8 100%);
-    --gradient-dawn: linear-gradient(135deg, #FFFDF5 0%, #FFF8E6 50%, #FFF2D0 100%);
-    --gradient-ocean: linear-gradient(180deg, #FFFCF1 0%, #F8F5E8 50%, #F0EDE0 100%);
-    --gradient-warmth: linear-gradient(135deg, rgba(238, 198, 67, 0.10) 0%, rgba(232, 142, 164, 0.05) 50%, rgba(67, 205, 190, 0.06) 100%);
-    --gradient-card: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(251, 247, 232, 0.98) 100%);
-    --gradient-glow: radial-gradient(ellipse 900px 600px at 50% -100px, rgba(238, 198, 67, 0.15) 0%, rgba(238, 123, 90, 0.06) 35%, rgba(155, 126, 217, 0.04) 60%, transparent 75%);
-
-    /* Multi-color ambient glow for light backgrounds */
-    --gradient-ambient:
-        radial-gradient(ellipse 600px 400px at 20% 30%, rgba(238, 198, 67, 0.12) 0%, transparent 50%),
-        radial-gradient(ellipse 500px 350px at 80% 20%, rgba(232, 142, 164, 0.06) 0%, transparent 50%),
-        radial-gradient(ellipse 450px 300px at 70% 80%, rgba(67, 205, 190, 0.05) 0%, transparent 50%);
-
-    /* Softer shadows for light mode */
-    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
-    --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.10);
-    --shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.12);
-    --shadow-glow: 0 0 50px rgba(238, 198, 67, 0.15);
+    --accent-soft: #C99E28;
 }
-
-/* System preference for light mode */
-@media (prefers-color-scheme: light) {
-    :root:not(.dark-mode) {
-        --background-color: #FFFCF1;
-        --background-subtle: #FBF7E8;
-        --text-color: #1A1612;
-        --text-muted: #5A5246;
-        --text-soft: rgba(26, 22, 18, 0.72);
-        --color-border: rgba(238, 198, 67, 0.18);
-        --color-border-light: rgba(238, 198, 67, 0.08);
-        --color-midnight: #FFFCF1;
-        --color-charcoal: #FBF7E8;
-        --color-slate: #F5EED8;
-        --color-steel: #EDE5CC;
-        --color-mist: #5A5246;
-        --color-primary: #EEC643;
-        --color-primary-soft: #F5D76E;
-        --color-primary-deep: #C9A528;
-        --color-primary-glow: rgba(238, 198, 67, 0.15);
-    }
-}
-
-/* ═══════════════════════════════════════════════════════════
-   FONTS - Loaded in HTML head with preload for performance
-   See default.hbs for font loading implementation
-   ═══════════════════════════════════════════════════════════ */

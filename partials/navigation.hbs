@@ -1,0 +1,5 @@
+{{!-- Rendered by the {{navigation}} helper, which computes `current`.
+     Styled per placement (header / mobile / footer) by the parent container. --}}
+{{#foreach navigation}}
+    <a class="nav-item{{#if current}} is-current{{/if}}" href="{{url}}">{{label}}</a>
+{{/foreach}}

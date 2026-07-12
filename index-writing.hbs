@@ -1,0 +1,14 @@
+{{!< default}}
+
+{{!-- Writing index: dated, numbered, type-led --}}
+<div class="wrap section masthead">
+    <div class="eyebrow masthead__eyebrow">Notes on craft, audience &amp; attention</div>
+    <h1 class="masthead__title">Writing</h1>
+</div>
+
+<div class="wrap section post-index">
+    {{#foreach posts}}{{> "post-row"}}{{/foreach}}
+    <p class="index-note">Each row is a Ghost post — date, title, and reading time pulled automatically.</p>
+</div>
+
+<div class="wrap">{{pagination}}</div>

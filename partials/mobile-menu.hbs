@@ -1,0 +1,26 @@
+{{!-- Full-screen mobile menu --}}
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu__glow" aria-hidden="true"></div>
+    <div class="mobile-menu__inner">
+        <div class="mobile-menu__top">
+            <a class="wordmark" href="{{@site.url}}" data-menu-close>{{@site.title}}</a>
+            <button class="mobile-menu__close" data-menu-close aria-label="Close menu">Close</button>
+        </div>
+
+        <nav class="mobile-menu__nav" aria-label="Mobile">
+            {{navigation}}
+            {{#foreach @site.secondary_navigation}}
+                <a class="nav-item" href="{{url}}">{{label}}</a>
+            {{/foreach}}
+        </nav>
+
+        {{#if @custom.contact_email}}
+            <div class="mobile-menu__meta">{{@custom.contact_email}}</div>
+        {{/if}}
+        <div class="mobile-menu__social">
+            {{#if @custom.social_linkedin}}<a href="{{@custom.social_linkedin}}" target="_blank" rel="noopener">LinkedIn</a>{{/if}}
+            {{#if @custom.social_instagram}}<a href="{{@custom.social_instagram}}" target="_blank" rel="noopener">Instagram</a>{{/if}}
+            {{#if @custom.social_readcv}}<a href="{{@custom.social_readcv}}" target="_blank" rel="noopener">Read.cv</a>{{/if}}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+{{!-- Site header: serif wordmark, mono nav, current section in gold --}}
+<header class="site-header section">
+    <div class="wrap site-header__inner">
+        <a class="wordmark" href="{{@site.url}}" aria-label="{{@site.title}}">
+            {{#if @site.logo}}
+                <img src="{{@site.logo}}" alt="{{@site.title}}" />
+            {{else}}
+                {{@site.title}}
+            {{/if}}
+        </a>
+
+        <nav class="site-nav" aria-label="Primary">
+            {{navigation}}
+            {{#if @site.secondary_navigation}}
+                {{#foreach @site.secondary_navigation}}
+                    {{#if @first}}<a class="nav-item nav-item--cta" data-magnetic href="{{url}}">{{label}}</a>{{/if}}
+                {{/foreach}}
+            {{else}}
+                {{#if @custom.contact_email}}
+                    <a class="nav-item nav-item--cta" data-magnetic href="mailto:{{@custom.contact_email}}">Get in touch</a>
+                {{/if}}
+            {{/if}}
+        </nav>
+
+        <button class="nav-toggle" data-menu-open aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <line x1="3" y1="8" x2="21" y2="8"></line>
+                <line x1="3" y1="16" x2="21" y2="16"></line>
+            </svg>
+        </button>
+    </div>
+</header>
