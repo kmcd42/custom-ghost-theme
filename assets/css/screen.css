@@ -444,23 +444,6 @@ body.menu-open { overflow: hidden; }
     min-width: 1.4em;
 }
 .index-list .index-row__num::before { content: counter(idxcount, decimal-leading-zero); }
-.index-row--history { align-items: flex-start; }
-.index-row--history .index-row__num { min-width: 100px; color: var(--faint); padding-top: 6px; }
-.index-row__body {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-.index-row--history .index-row__title { flex: none; }
-.index-row__copy {
-    font-family: var(--font-sans);
-    font-size: 14px;
-    line-height: 1.6;
-    color: var(--dim);
-    max-width: 62ch;
-}
-.history-list div.index-row { cursor: default; }
 .index-head a { color: var(--faint); transition: color 0.3s ease; }
 .index-head a:hover { color: var(--accent); }
 .index-row__title {
@@ -922,6 +905,53 @@ body.menu-open { overflow: hidden; }
 }
 .about__history { padding-top: 6px; }
 
+/* Roles / work history — flush-left stacked entries (period · title · excerpt · body) */
+.role-list {
+    display: flex;
+    flex-direction: column;
+}
+.role-entry {
+    padding: 26px 0;
+    border-bottom: 1px solid var(--hair);
+}
+.role-entry:first-child { padding-top: 20px; }
+.role-entry__period {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+}
+.role-entry__title {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 1.1;
+    color: var(--text);
+    margin: 0;
+}
+.role-entry__title a { transition: color 0.3s ease; }
+.role-entry__title a:hover { color: var(--accent); }
+.role-entry__excerpt {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--muted);
+    margin-top: 7px;
+}
+.role-entry__body {
+    margin-top: 14px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--prose);
+    max-width: 70ch;
+}
+.role-entry__body ul,
+.role-entry__body ol { padding-left: 1.1em; margin: 0; }
+.role-entry__body li { margin-bottom: 8px; }
+.role-entry__body p { margin: 0 0 12px; }
+.role-entry__body > *:last-child { margin-bottom: 0; }
+
 /* ───────────────────────────────────────────────────────────────
    Pagination
    ─────────────────────────────────────────────────────────────── */
@@ -1057,23 +1087,28 @@ body.menu-open { overflow: hidden; }
     max-width: 600px;
     margin: 14px 0 0;
 }
-.collection-cover {
-    width: 100%;
-    border-radius: var(--radius-card);
-    border: 1px solid var(--gold-12);
-    margin-bottom: 34px;
+/* Wide, near-full-bleed gallery — the photos lead */
+.photo-collection__gallery {
+    max-width: 1760px;
+    margin-inline: auto;
+    padding-inline: clamp(16px, 2vw, 44px);
 }
-/* Let galleries breathe — no prose measure on collection pages */
+/* Drop the prose measure/grid so galleries fill the wide container */
 .gh-content--gallery {
+    display: block;
     max-width: none;
     font-size: 16px;
 }
-.gh-content--gallery > * { margin-bottom: 16px; }
+.gh-content--gallery > * {
+    max-width: none;
+    margin-inline: 0;
+    margin-bottom: 20px;
+}
 .collection-foot {
     display: flex;
     justify-content: space-between;
     gap: 16px;
-    margin-top: 40px;
+    margin-top: 44px;
     padding-top: 24px;
     border-top: 1px solid var(--hair);
 }

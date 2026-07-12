@@ -75,20 +75,23 @@
 {{else}}
 {{#has tag="hash-photo"}}
     {{!-- ── Photography collection ─────────────────────────────── --}}
-    <article class="wrap section photo-collection">
-        <a class="back-link" href="{{@site.url}}/photography/">&larr; Photography</a>
+    <article class="section photo-collection">
+        <div class="wrap">
+            <a class="back-link" href="{{@site.url}}/photography/">&larr; Photography</a>
+            <header class="collection-header">
+                <div class="eyebrow">{{#if primary_tag}}{{primary_tag.name}}{{else}}Photography{{/if}}{{#if published_at}} · {{date format="YYYY"}}{{/if}}</div>
+                <h1 class="collection-title">{{title}}</h1>
+                {{#if custom_excerpt}}<p class="collection-dek">{{custom_excerpt}}</p>{{/if}}
+            </header>
+        </div>
 
-        <header class="collection-header">
-            <div class="eyebrow">{{#if primary_tag}}{{primary_tag.name}}{{else}}Photography{{/if}}{{#if published_at}} · {{date format="YYYY"}}{{/if}}</div>
-            <h1 class="collection-title">{{title}}</h1>
-            {{#if custom_excerpt}}<p class="collection-dek">{{custom_excerpt}}</p>{{/if}}
-        </header>
+        <div class="photo-collection__gallery gh-content gh-content--gallery">{{content}}</div>
 
-        <div class="gh-content gh-content--gallery">{{content}}</div>
-
-        <div class="collection-foot">
-            {{#prev_post in="primary_tag"}}<a class="back-link" href="{{url}}">&larr; Previous set</a>{{/prev_post}}
-            {{#next_post in="primary_tag"}}<a class="back-link" href="{{url}}">Next set &rarr;</a>{{/next_post}}
+        <div class="wrap">
+            <div class="collection-foot">
+                {{#prev_post in="primary_tag"}}<a class="back-link" href="{{url}}">&larr; Previous set</a>{{/prev_post}}
+                {{#next_post in="primary_tag"}}<a class="back-link" href="{{url}}">Next set &rarr;</a>{{/next_post}}
+            </div>
         </div>
     </article>
 

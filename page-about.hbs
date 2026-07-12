@@ -25,16 +25,14 @@
                 <span>Work history</span>
                 <a href="{{@site.url}}/roles/">Full experience &rarr;</a>
             </div>
-            <div class="history-list">
+            <div class="role-list">
                 {{#foreach posts}}
-                    <a class="index-row index-row--history" href="{{url}}">
-                        <span class="index-row__num">{{#if primary_tag}}{{primary_tag.name}}{{/if}}</span>
-                        <span class="index-row__body">
-                            <span class="index-row__title">{{title}}</span>
-                            {{#if excerpt}}<span class="index-row__copy">{{excerpt}}</span>{{/if}}
-                        </span>
-                        <span class="index-row__arrow" aria-hidden="true">&rarr;</span>
-                    </a>
+                    <article class="role-entry">
+                        {{#if primary_tag}}<div class="role-entry__period">{{primary_tag.name}}</div>{{/if}}
+                        <h3 class="role-entry__title"><a href="{{url}}">{{title}}</a></h3>
+                        {{#if custom_excerpt}}<div class="role-entry__excerpt">{{custom_excerpt}}</div>{{/if}}
+                        {{#if content}}<div class="role-entry__body">{{content}}</div>{{/if}}
+                    </article>
                 {{/foreach}}
             </div>
         </section>
