@@ -1,7 +1,7 @@
 {{!< default}}
 
 {{#post}}
-{{#has tag="hash-work"}}
+{{#has tag="#work"}}
     {{!-- ── Case study ─────────────────────────────────────────── --}}
     <article class="wrap section case">
         <div class="case__eyebrow">{{tags separator=" · " limit="3" autolink="false"}}</div>
@@ -41,7 +41,7 @@
     </article>
 
 {{else}}
-{{#has tag="hash-role"}}
+{{#has tag="#role"}}
     {{!-- ── Role / experience detail ───────────────────────────── --}}
     <article class="wrap section role-page">
         <a class="back-link" href="{{@site.url}}/about/">&larr; About</a>
@@ -73,7 +73,7 @@
     </article>
 
 {{else}}
-{{#has tag="hash-photo"}}
+{{#has tag="#photo"}}
     {{!-- ── Photography collection ─────────────────────────────── --}}
     <article class="section photo-collection">
         <div class="wrap">
