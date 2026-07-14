@@ -1,0 +1,28 @@
+{{!< default}}
+
+{{!-- Portfolio index: all #work projects, filters, pinned pane --}}
+<div class="wrap section masthead">
+    <div class="eyebrow masthead__eyebrow">Selected work</div>
+    <h1 class="masthead__title">Work</h1>
+    <div class="filter-row">
+        <a class="filter-chip is-active" href="{{@site.url}}/work/">All</a>
+        {{#get "tags" filter="visibility:public" limit="6"}}
+            {{#foreach tags}}<a class="filter-chip" href="{{url}}">{{name}}</a>{{/foreach}}
+        {{/get}}
+    </div>
+</div>
+
+<div class="wrap section">
+    <div class="index-layout">
+        <div class="index-main">
+            <div class="index-list">
+                {{#foreach posts}}{{> "index-row" meta="year"}}{{/foreach}}
+            </div>
+        </div>
+        <aside class="index-side">
+            <div class="index-pane" id="index-pane"></div>
+            <div class="pane-hint">Hover to preview — click to open the case study.</div>
+        </aside>
+    </div>
+    {{pagination}}
+</div>

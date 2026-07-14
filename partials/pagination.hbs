@@ -1,0 +1,9 @@
+<nav class="pagination" role="navigation" aria-label="Pagination">
+    {{#if prev}}
+        <a href="{{page_url prev}}" aria-label="Newer posts">&larr; Newer</a>
+    {{/if}}
+    <span class="pagination-page">Page {{page}} of {{pages}}</span>
+    {{#if next}}
+        <a href="{{page_url next}}" aria-label="Older posts">Older &rarr;</a>
+    {{/if}}
+</nav>

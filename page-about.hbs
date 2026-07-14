@@ -1,0 +1,42 @@
+{{!< default}}
+
+{{!-- About: portrait, story, and a numbered work-history index (#role posts) --}}
+{{#post}}
+<article class="wrap section about">
+    <div class="about__intro">
+        <div>
+            {{#if @page.show_title_and_feature_image}}
+                {{#if custom_excerpt}}<div class="eyebrow about__eyebrow">{{custom_excerpt}}</div>{{/if}}
+                <h1 class="about__title">{{title}}</h1>
+            {{/if}}
+            <div class="about__body gh-content">{{content}}</div>
+        </div>
+        {{#if @page.show_title_and_feature_image}}
+            {{#if feature_image}}
+                <img class="about__portrait" src="{{img_url feature_image size="l"}}" alt="{{title}}" />
+            {{/if}}
+        {{/if}}
+    </div>
+
+    {{#get "posts" filter="tag:hash-role" order="published_at desc" limit="50"}}
+        {{#if posts}}
+        <section class="about__history">
+            <div class="index-head">
+                <span>Work history</span>
+                <a href="{{@site.url}}/roles/">Full experience &rarr;</a>
+            </div>
+            <div class="role-list">
+                {{#foreach posts}}
+                    <article class="role-entry">
+                        {{#if primary_tag}}<div class="role-entry__period">{{primary_tag.name}}</div>{{/if}}
+                        <h3 class="role-entry__title"><a href="{{url}}">{{title}}</a></h3>
+                        {{#if custom_excerpt}}<div class="role-entry__excerpt">{{custom_excerpt}}</div>{{/if}}
+                        {{#if html}}<div class="role-entry__body">{{content}}</div>{{/if}}
+                    </article>
+                {{/foreach}}
+            </div>
+        </section>
+        {{/if}}
+    {{/get}}
+</article>
+{{/post}}

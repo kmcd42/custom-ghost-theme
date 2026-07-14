@@ -1,0 +1,41 @@
+{{!< default}}
+
+{{!-- Homepage: statement, then featured work as a numbered index with a pinned pane --}}
+<div class="wrap section home-hero">
+    {{#if @custom.hero_eyebrow}}
+        <div class="eyebrow hero-eyebrow">{{@custom.hero_eyebrow}}</div>
+    {{/if}}
+    {{#if @custom.hero_statement}}
+        <h1 class="hero-statement" data-highlight>{{@custom.hero_statement}}</h1>
+    {{/if}}
+</div>
+
+<div class="wrap section home-index">
+    <div class="index-layout">
+        <div class="index-main">
+            <div class="index-head">
+                <span>{{#if @custom.work_heading}}{{@custom.work_heading}}{{else}}Selected Work{{/if}}</span>
+                <span>Featured</span>
+            </div>
+
+            <div class="index-list">
+                {{#get "posts" filter="tag:hash-work+featured:true" limit="5"}}
+                    {{#foreach posts}}{{> "index-row"}}{{/foreach}}
+                {{else}}
+                    {{#get "posts" limit="5"}}
+                        {{#foreach posts}}{{> "index-row"}}{{/foreach}}
+                    {{/get}}
+                {{/get}}
+            </div>
+
+            {{#if @custom.work_cta}}
+                <a class="index-cta" data-magnetic href="{{@site.url}}/work/">{{@custom.work_cta}} &rarr;</a>
+            {{/if}}
+        </div>
+
+        <aside class="index-side">
+            <div class="index-pane" id="index-pane"></div>
+            <div class="pane-caption" id="pane-caption"></div>
+        </aside>
+    </div>
+</div>

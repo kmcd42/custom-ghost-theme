@@ -1,0 +1,37 @@
+{{!-- Quiet footer: one contact line, explore + elsewhere links, copyright --}}
+<footer class="site-footer section">
+    <div class="wrap site-footer__inner">
+        <div class="footer-top">
+            <div class="footer-cta">
+                {{#if @custom.footer_line}}
+                    <div class="footer-line">{{@custom.footer_line}}</div>
+                {{/if}}
+                {{#if @custom.contact_email}}
+                    <a class="footer-email" data-magnetic href="mailto:{{@custom.contact_email}}">{{@custom.contact_email}} →</a>
+                {{/if}}
+            </div>
+
+            <div class="footer-col">
+                <div class="footer-col__label">Explore</div>
+                <div class="footer-links">
+                    {{navigation}}
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <div class="footer-col__label">Elsewhere</div>
+                <div class="footer-links">
+                    {{#if @custom.social_linkedin}}<a href="{{@custom.social_linkedin}}" target="_blank" rel="noopener">LinkedIn</a>{{/if}}
+                    {{#if @custom.social_instagram}}<a href="{{@custom.social_instagram}}" target="_blank" rel="noopener">Instagram</a>{{/if}}
+                    {{#if @custom.social_readcv}}<a href="{{@custom.social_readcv}}" target="_blank" rel="noopener">Read.cv</a>{{/if}}
+                    <a href="{{@site.url}}/rss/">RSS</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <span>&copy; {{date format="YYYY"}} {{@site.title}}</span>
+            <a href="{{@site.url}}/colophon/">Colophon</a>
+        </div>
+    </div>
+</footer>

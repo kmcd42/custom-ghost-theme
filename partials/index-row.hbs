@@ -1,0 +1,12 @@
+{{!-- A numbered project row. Pass meta="year" for the portfolio index. --}}
+<a class="index-row"
+   href="{{url}}"
+   {{#if feature_image}}data-pane-img="{{img_url feature_image size="l"}}"{{/if}}
+   data-pane-caption="{{excerpt characters="150"}}">
+    <span class="index-row__num" aria-hidden="true"></span>
+    <span class="index-row__title">{{title}}</span>
+    <span class="index-row__meta">
+        {{#match meta "year"}}{{date format="YYYY"}}{{else}}{{tags separator=" · " limit="2"}}{{/match}}
+    </span>
+    <span class="index-row__arrow" aria-hidden="true">&rarr;</span>
+</a>

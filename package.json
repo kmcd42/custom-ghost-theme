@@ -1,7 +1,7 @@
 {
-    "name": "warmth-tomorrow",
-    "description": "A human, messy, playful, optimistic design system. The bicycle of the mind. Agency and community first.",
-    "version": "2.1.0",
+    "name": "the-index",
+    "description": "The Index — a dark, editorial custom Ghost theme for Kasey McDonnell. Numbered indexes, a pinned preview pane, Instrument Serif, and a single warm light.",
+    "version": "3.0.0",
     "private": true,
     "engines": {
         "ghost": ">=5.0.0"
@@ -31,8 +31,7 @@
         "portfolio",
         "designer",
         "creative",
-        "editorial",
-        "climate"
+        "editorial"
     ],
     "config": {
         "posts_per_page": 12,
@@ -59,150 +58,72 @@
                 "width": 2800
             }
         },
-        "card_assets": {
-            "exclude": ["audio", "video", "product", "signup"]
-        },
+        "card_assets": true,
         "custom": {
-            "site_mood": {
-                "type": "select",
-                "options": [
-                    "Midnight (Deep & Warm)",
-                    "Dawn (Soft & Hopeful)",
-                    "Ocean (Teal & Contemplative)"
-                ],
-                "default": "Midnight (Deep & Warm)",
-                "group": "design"
-            },
-            "typography_style": {
-                "type": "select",
-                "options": [
-                    "Editorial (Serif headlines)",
-                    "Modern (Sans-serif headlines)",
-                    "Mixed (Serif body, sans headlines)"
-                ],
-                "default": "Editorial (Serif headlines)",
-                "group": "design"
-            },
-            "navigation_layout": {
-                "type": "select",
-                "options": [
-                    "Floating Glass",
-                    "Minimal Line",
-                    "Bold Statement"
-                ],
-                "default": "Floating Glass",
-                "group": "design"
-            },
-            "homepage_style": {
-                "type": "select",
-                "options": [
-                    "Hero Split (Image + Statement)",
-                    "Full Bleed (Immersive Image)",
-                    "Minimal Text (Words First)"
-                ],
-                "default": "Hero Split (Image + Statement)",
+            "hero_eyebrow": {
+                "type": "text",
+                "default": "Wellington · Aotearoa — open to new roles",
                 "group": "homepage"
             },
-            "homepage_image_ratio": {
-                "type": "select",
-                "options": [
-                    "Portrait (4:5)",
-                    "Square (1:1)",
-                    "Landscape (16:10)"
-                ],
-                "default": "Portrait (4:5)",
+            "hero_statement": {
+                "type": "text",
+                "default": "Designer, writer, and marketer who delivers *audience-focused* creative.",
+                "description": "The homepage statement. Wrap a phrase in *asterisks* to highlight it in gold.",
                 "group": "homepage"
             },
-            "show_homepage_tagline": {
-                "type": "boolean",
-                "default": true,
+            "work_heading": {
+                "type": "text",
+                "default": "Selected Work",
                 "group": "homepage"
             },
-            "portfolio_layout": {
+            "work_cta": {
+                "type": "text",
+                "default": "View all work",
+                "group": "homepage"
+            },
+            "default_theme": {
                 "type": "select",
                 "options": [
-                    "Asymmetric Masonry",
-                    "Uniform Grid",
-                    "List View"
+                    "Dark",
+                    "Light"
                 ],
-                "default": "Asymmetric Masonry",
-                "group": "portfolio"
+                "default": "Dark"
             },
-            "portfolio_columns": {
-                "type": "select",
-                "options": [
-                    "Two Columns",
-                    "Three Columns",
-                    "Dynamic"
-                ],
-                "default": "Dynamic",
-                "group": "portfolio"
+            "accent_color": {
+                "type": "color",
+                "default": "#EEC643"
             },
-            "show_portfolio_excerpts": {
+            "footer_line": {
+                "type": "text",
+                "default": "Let's make something with an audience in mind."
+            },
+            "contact_email": {
+                "type": "text",
+                "default": "hello@kaseymcdonnell.co.nz"
+            },
+            "social_linkedin": {
+                "type": "text",
+                "default": "https://www.linkedin.com/in/kaseydesign/"
+            },
+            "social_instagram": {
+                "type": "text",
+                "default": ""
+            },
+            "social_readcv": {
+                "type": "text",
+                "default": ""
+            },
+            "enable_grain": {
                 "type": "boolean",
-                "default": true,
-                "group": "portfolio"
+                "default": true
             },
-            "animation_style": {
-                "type": "select",
-                "options": [
-                    "Subtle & Refined",
-                    "Playful & Expressive",
-                    "Minimal Motion"
-                ],
-                "default": "Subtle & Refined",
-                "group": "effects"
-            },
-            "enable_grain_texture": {
+            "enable_glow": {
                 "type": "boolean",
-                "default": true,
-                "group": "effects"
+                "default": true
             },
-            "enable_glow_effects": {
+            "enable_magnetic": {
                 "type": "boolean",
-                "default": true,
-                "group": "effects"
-            },
-            "image_treatment": {
-                "type": "select",
-                "options": [
-                    "Natural",
-                    "Slight Warmth",
-                    "High Contrast"
-                ],
-                "default": "Natural",
-                "group": "effects"
-            },
-            "footer_style": {
-                "type": "select",
-                "options": [
-                    "Minimal (Icons + Copyright)",
-                    "Expanded (Links + Bio)",
-                    "Hidden"
-                ],
-                "default": "Minimal (Icons + Copyright)",
-                "group": "footer"
-            },
-            "climate_signature": {
-                "type": "boolean",
-                "default": false,
-                "description": "Show 'Born at 366ppm CO₂' signature in footer",
-                "group": "footer"
-            },
-            "show_reading_progress": {
-                "type": "boolean",
-                "default": true,
-                "group": "posts"
-            },
-            "post_header_style": {
-                "type": "select",
-                "options": [
-                    "Centered Classic",
-                    "Left Aligned",
-                    "Full Bleed Image"
-                ],
-                "default": "Centered Classic",
-                "group": "posts"
+                "default": true
             }
         }
     },

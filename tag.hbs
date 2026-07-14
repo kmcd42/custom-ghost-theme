@@ -1,22 +1,15 @@
 {{!< default}}
-{{!-- The tag above means: insert everything in this file
-into the {body} of the default.hbs template --}}
 
 {{#tag}}
-<header class="page-head">
-    <h1 class="page-head-title">{{name}}</h1>
-    <p class="page-head-description">
-        {{#if description}}
-            {{description}}
-        {{else}}
-            A collection of {{plural ../pagination.total empty='posts' singular='% post' plural='% posts'}}
-        {{/if}}
-    </p>
-</header>
+<div class="wrap section masthead">
+    <div class="eyebrow masthead__eyebrow">Tag</div>
+    <h1 class="masthead__title">{{name}}</h1>
+    {{#if description}}<p class="about__lede" style="margin-top:18px">{{description}}</p>{{/if}}
+</div>
 {{/tag}}
 
-<div class="post-feed gh-feed">
-    {{#foreach posts}}
-        {{> "post-card"}}
-    {{/foreach}}
+<div class="wrap section post-index">
+    {{#foreach posts}}{{> "post-row"}}{{/foreach}}
 </div>
+
+<div class="wrap">{{pagination}}</div>

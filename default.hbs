@@ -1,385 +1,57 @@
 <!DOCTYPE html>
-<html lang="{{@site.locale}}"
-    class="{{#match @custom.site_mood "Dawn (Soft & Hopeful)"}}mood-dawn{{else match @custom.site_mood "Ocean (Teal & Contemplative)"}}mood-ocean{{else}}mood-midnight{{/match}}
-           accent-amber
-           {{#match @custom.typography_style "Modern (Sans-serif headlines)"}}typo-modern{{else match @custom.typography_style "Mixed (Serif body, sans headlines)"}}typo-mixed{{else}}typo-editorial{{/match}}
-           {{#match @custom.animation_style "Playful & Expressive"}}anim-playful{{else match @custom.animation_style "Minimal Motion"}}anim-minimal{{else}}anim-subtle{{/match}}">
+<html lang="{{@site.locale}}" class="{{#match @custom.default_theme "Light"}}theme-light{{else}}theme-dark{{/match}}">
 <head>
-    {{!-- Document Settings --}}
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
-    {{!-- Base Meta --}}
     <title>{{meta_title}}</title>
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
-    {{!-- Theme color for browser chrome and iOS Dynamic Island/status bar --}}
-    <meta name="theme-color" content="#0C1015" media="(prefers-color-scheme: dark)" />
-    <meta name="theme-color" content="#FFFCF1" media="(prefers-color-scheme: light)" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    {{!-- Browser chrome colour --}}
+    <meta name="theme-color" content="{{#match @custom.default_theme "Light"}}#FFFCF1{{else}}#060809{{/match}}" />
 
-    {{!-- Preload Critical Fonts --}}
+    {{!-- Fonts: Instrument Serif · Inter · JetBrains Mono (non-blocking) --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    {{!-- Font Loading - Non-blocking with display=swap --}}
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&display=swap" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&display=swap"></noscript>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
 
     {{!-- Styles --}}
     <link rel="stylesheet" type="text/css" href="{{asset "built/screen.css"}}" />
 
-    {{!-- Custom Properties Based on Settings --}}
-    <style>
-        :root {
-            {{!-- Mood-based color overrides --}}
-            {{#match @custom.site_mood "Dawn (Soft & Hopeful)"}}
-            --color-midnight: #0F0D14;
-            --color-charcoal: #1A1620;
-            --color-slate: #2A2435;
-            --gradient-sky: linear-gradient(135deg, #0F0D14 0%, #1A1620 40%, #2A2435 100%);
-            --gradient-glow: radial-gradient(ellipse 600px 400px at 50% 0%, rgba(255, 180, 120, 0.08) 0%, transparent 70%);
-            {{else match @custom.site_mood "Ocean (Teal & Contemplative)"}}
-            --color-midnight: #070E12;
-            --color-charcoal: #0D1920;
-            --color-slate: #15252F;
-            --gradient-sky: linear-gradient(135deg, #070E12 0%, #0D1920 40%, #15252F 100%);
-            --gradient-glow: radial-gradient(ellipse 600px 400px at 50% 0%, rgba(45, 155, 150, 0.08) 0%, transparent 70%);
-            {{/match}}
+    {{!-- Accent colour from Design settings --}}
+    {{#if @custom.accent_color}}
+    <style>:root { --accent: {{@custom.accent_color}}; }</style>
+    {{/if}}
 
-            {{!-- Accent color - always use golden yellow #EEC643 --}}
-            --color-primary: #EEC643;
-            --color-primary-soft: #F5D76E;
-            --color-primary-deep: #D4A82F;
-            --color-primary-glow: rgba(238, 198, 67, 0.18);
-        }
-
-        {{!-- Typography style overrides --}}
-        {{#match @custom.typography_style "Modern (Sans-serif headlines)"}}
-        h1, h2, h3, .home-description, .portfolio-title, .split-title, .photography-title {
-            font-family: var(--font-sans);
-            font-weight: 700;
-            letter-spacing: -0.03em;
-        }
-        {{else match @custom.typography_style "Mixed (Serif body, sans headlines)"}}
-        h1, h2, h3, .home-description, .portfolio-title, .split-title, .photography-title {
-            font-family: var(--font-sans);
-            font-weight: 700;
-        }
-        p, li, .post-content-body, .portfolio-body, .split-body {
-            font-family: var(--font-serif);
-        }
-        {{/match}}
-
-        {{!-- Grain texture toggle --}}
-        {{#unless @custom.enable_grain_texture}}
-        body::before { display: none; }
-        {{/unless}}
-
-        {{!-- Glow effects toggle --}}
-        {{#unless @custom.enable_glow_effects}}
-        body::after { display: none; }
-        .home-image-inner::after { display: none; }
-        {{/unless}}
-
-        {{!-- Animation style modifiers --}}
-        {{#match @custom.animation_style "Minimal Motion"}}
-        *, *::before, *::after {
-            transition-duration: 0.01ms !important;
-        }
-        {{else match @custom.animation_style "Playful & Expressive"}}
-        :root {
-            --duration-base: 350ms;
-            --duration-slow: 500ms;
-            --ease-smooth: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        {{/match}}
-
-        {{!-- Image treatment --}}
-        {{#match @custom.image_treatment "Slight Warmth"}}
-        .home-image img, .portfolio-header-image img, .split-image img, .portfolio-grid-image img {
-            filter: sepia(0.08) saturate(1.1);
-        }
-        {{else match @custom.image_treatment "High Contrast"}}
-        .home-image img, .portfolio-header-image img, .split-image img, .portfolio-grid-image img {
-            filter: contrast(1.1) saturate(1.05);
-        }
-        {{/match}}
-
-        {{!-- Homepage image ratio --}}
-        {{#match @custom.homepage_image_ratio "Square (1:1)"}}
-        .home-image-inner { aspect-ratio: 1 / 1; }
-        {{else match @custom.homepage_image_ratio "Landscape (16:10)"}}
-        .home-image-inner { aspect-ratio: 16 / 10; }
-        {{/match}}
-
-        {{!-- Portfolio layout variations --}}
-        {{#match @custom.portfolio_layout "Uniform Grid"}}
-        .portfolio-grid-item:nth-child(3n+1),
-        .portfolio-grid-item:nth-child(3n+2),
-        .portfolio-grid-item:nth-child(3n) {
-            grid-column: span 4;
-        }
-        .portfolio-grid-item:nth-child(3n) .portfolio-grid-image {
-            aspect-ratio: 16 / 10;
-        }
-        {{else match @custom.portfolio_layout "List View"}}
-        .portfolio-grid {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-8);
-        }
-        .portfolio-grid-item {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-        }
-        .portfolio-grid-image { aspect-ratio: 16 / 9; }
-        .portfolio-grid-content {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            border-top: none;
-            border-left: 1px solid var(--color-border);
-        }
-        {{/match}}
-
-        {{!-- Portfolio columns --}}
-        {{#match @custom.portfolio_columns "Two Columns"}}
-        .portfolio-grid-item:nth-child(3n+1),
-        .portfolio-grid-item:nth-child(3n+2),
-        .portfolio-grid-item:nth-child(3n) {
-            grid-column: span 6;
-        }
-        {{else match @custom.portfolio_columns "Three Columns"}}
-        .portfolio-grid-item:nth-child(3n+1),
-        .portfolio-grid-item:nth-child(3n+2),
-        .portfolio-grid-item:nth-child(3n) {
-            grid-column: span 4;
-        }
-        {{/match}}
-
-        {{!-- Navigation layout variations --}}
-        {{#match @custom.navigation_layout "Minimal Line"}}
-        .gh-head {
-            background: transparent;
-            backdrop-filter: none;
-            border-bottom-color: var(--color-border);
-        }
-        {{else match @custom.navigation_layout "Bold Statement"}}
-        .gh-head {
-            background: var(--color-primary);
-            border-bottom: none;
-        }
-        .gh-head-logo, .gh-head-menu .nav a, .gh-burger::before, .gh-burger::after {
-            color: var(--color-midnight);
-        }
-        .gh-head-menu .nav a { color: var(--color-midnight); opacity: 0.8; }
-        .gh-head-menu .nav a:hover { opacity: 1; background: rgba(0,0,0,0.1); }
-        .gh-search.gh-icon-btn { border-color: rgba(0,0,0,0.2); color: var(--color-midnight); }
-        {{/match}}
-    </style>
-
-    {{!-- SEO & Structured Data --}}
     {{ghost_head}}
 </head>
 
 <body class="{{body_class}}
-    {{#match @custom.homepage_style "Full Bleed (Immersive Image)"}}home-fullbleed{{/match}}
-    {{#match @custom.homepage_style "Minimal Text (Words First)"}}home-minimal{{/match}}
-    {{#unless @custom.show_portfolio_excerpts}}hide-excerpts{{/unless}}
-    {{#if @custom.show_reading_progress}}has-reading-progress{{/if}}
-    {{#if @custom.climate_signature}}has-climate-pulse{{/if}}">
+    {{#if @custom.enable_grain}}has-grain{{/if}}
+    {{#if @custom.enable_glow}}has-glow{{/if}}
+    {{#if @custom.enable_magnetic}}has-magnetic{{/if}}">
 
-<div class="site-wrapper">
+<a href="#site-main" class="skip-link">Skip to content</a>
 
-    {{!-- Skip Link for Accessibility --}}
-    <a href="#site-main" class="skip-link">Skip to main content</a>
+<div class="site">
+    {{#if @custom.enable_glow}}<div class="fx-glow" aria-hidden="true"></div>{{/if}}
 
-    {{!-- Reading Progress Bar (for posts) --}}
-    {{#if @custom.show_reading_progress}}
-    {{#is "post"}}
-    <div class="reading-progress" id="reading-progress">
-        <div class="reading-progress-bar"></div>
-    </div>
-    {{/is}}
-    {{/if}}
+    {{> "header"}}
 
-    {{!-- Header with Drawer Navigation --}}
-    <header id="gh-head" class="gh-head gh-outer">
-        <div class="gh-head-inner gh-inner">
-            {{!-- Left: Logo + Breadcrumbs --}}
-            <div class="gh-head-brand">
-                <a class="gh-head-logo" href="{{@site.url}}" aria-label="{{@site.title}}">
-                    {{#if @site.logo}}
-                        <img src="{{@site.logo}}" alt="{{@site.title}}" />
-                    {{else}}
-                        {{@site.title}}
-                    {{/if}}
-                </a>
-                <div class="gh-head-breadcrumbs">
-                    <span class="breadcrumb-current" id="breadcrumb-current">
-                        {{!-- Dynamic breadcrumb inserted by JS --}}
-                    </span>
-                </div>
-            </div>
-
-            {{!-- Right: Actions + Dropdown Toggle --}}
-            <div class="gh-head-actions">
-                <button class="gh-search gh-icon-btn" aria-label="Search this site" data-ghost-search>{{> "icons/search"}}</button>
-                <button class="gh-drawer-toggle" aria-label="Toggle navigation drawer" aria-expanded="false">
-                    <svg class="dropdown-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
-                </button>
-            </div>
-        </div>
-
-        {{!-- Full-Width Drawer --}}
-        <div class="gh-drawer" aria-hidden="true">
-            <div class="gh-drawer-inner">
-                {{!-- Navigation Links --}}
-                <nav class="gh-drawer-nav">
-                    {{navigation}}
-                </nav>
-
-                {{!-- Decorative Photos Grid --}}
-                <div class="gh-drawer-photos">
-                    {{#get "posts" filter="featured:true" limit="3"}}
-                        {{#foreach posts}}
-                            {{#if feature_image}}
-                                <a href="{{url}}" class="gh-drawer-photo">
-                                    <img src="{{img_url feature_image size="s"}}" alt="{{title}}" loading="lazy" />
-                                </a>
-                            {{/if}}
-                        {{/foreach}}
-                    {{/get}}
-                </div>
-
-                {{!-- Drawer Footer --}}
-                <div class="gh-drawer-footer">
-                    {{#if @site.members_enabled}}
-                        <div class="gh-drawer-members">
-                            {{#unless @member}}
-                                <a class="gh-drawer-link" href="#/portal/signin" data-portal="signin">Sign in</a>
-                            {{else}}
-                                <a class="gh-drawer-link" href="#/portal/account" data-portal="account">Account</a>
-                            {{/unless}}
-                        </div>
-                    {{/if}}
-                    <div class="gh-drawer-social">
-                        <a href="https://www.linkedin.com/in/kaseydesign/" target="_blank" rel="noopener" aria-label="LinkedIn">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-                                <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/>
-                            </svg>
-                        </a>
-                        <a href="https://bsky.app/profile/kaseymcdonnell.co.nz" target="_blank" rel="noopener" aria-label="Bluesky">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 530" fill="currentColor" width="20" height="20">
-                                <path d="m135.72 44.03c66.496 49.921 138.02 151.14 164.28 205.46 26.262-54.316 97.782-155.54 164.28-205.46 47.98-36.021 125.72-63.892 125.72 24.795 0 17.712-10.155 148.79-16.111 170.07-20.703 73.984-96.144 92.854-163.25 81.433 117.3 19.964 147.14 86.092 82.697 152.22-122.39 125.59-175.91-31.511-189.63-71.766-2.514-7.3797-3.6904-10.832-3.7077-7.8964-0.0174-2.9357-1.1937 0.51669-3.7077 7.8964-13.714 40.255-67.233 197.36-189.63 71.766-64.444-66.128-34.605-132.26 82.697-152.22-67.108 11.421-142.55-7.4491-163.25-81.433-5.9562-21.282-16.111-152.36-16.111-170.07 0-88.687 77.742-60.816 125.72-24.795z"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    {{!-- Main Content --}}
     <main id="site-main" class="site-main">
         {{{body}}}
     </main>
 
-    {{!-- Footer --}}
-    {{#match @custom.footer_style "!=" "Hidden"}}
-    <footer class="gh-foot gh-outer {{#match @custom.footer_style "Expanded (Links + Bio)"}}gh-foot-expanded{{/match}}">
-        <div class="gh-foot-inner">
-            <div class="gh-foot-content">
-                {{#match @custom.footer_style "Expanded (Links + Bio)"}}
-                    {{!-- Expanded footer with bio --}}
-                    <div class="gh-foot-bio">
-                        {{#if @site.description}}
-                            <p class="gh-foot-description">{{@site.description}}</p>
-                        {{/if}}
-                    </div>
-                    <nav class="gh-foot-nav">
-                        {{navigation type="secondary"}}
-                    </nav>
-                {{/match}}
-
-                <div class="gh-foot-social-links">
-                    {{!-- RSS - Open standards, community first --}}
-                    <a href="{{@site.url}}/rss/" class="rss-badge" aria-label="RSS Feed">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1Z"/>
-                        </svg>
-                        <span>RSS</span>
-                    </a>
-                    <a href="https://www.linkedin.com/in/kaseydesign/" target="_blank" rel="noopener" aria-label="LinkedIn">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
-                            <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/>
-                        </svg>
-                    </a>
-                    <a href="https://bsky.app/profile/kaseymcdonnell.co.nz" target="_blank" rel="noopener" aria-label="Bluesky">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 530" fill="currentColor" width="24" height="24">
-                            <path d="m135.72 44.03c66.496 49.921 138.02 151.14 164.28 205.46 26.262-54.316 97.782-155.54 164.28-205.46 47.98-36.021 125.72-63.892 125.72 24.795 0 17.712-10.155 148.79-16.111 170.07-20.703 73.984-96.144 92.854-163.25 81.433 117.3 19.964 147.14 86.092 82.697 152.22-122.39 125.59-175.91-31.511-189.63-71.766-2.514-7.3797-3.6904-10.832-3.7077-7.8964-0.0174-2.9357-1.1937 0.51669-3.7077 7.8964-13.714 40.255-67.233 197.36-189.63 71.766-64.444-66.128-34.605-132.26 82.697-152.22-67.108 11.421-142.55-7.4491-163.25-81.433-5.9562-21.282-16.111-152.36-16.111-170.07 0-88.687 77.742-60.816 125.72-24.795z"/>
-                        </svg>
-                    </a>
-                </div>
-
-                <div class="gh-foot-meta">
-                    {{#if @custom.climate_signature}}
-                        <p class="gh-foot-signature">Born at 366ppm CO₂</p>
-                    {{/if}}
-                    <p>{{@site.title}} © {{date format="YYYY"}}</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-    {{/match}}
-
+    {{> "footer"}}
 </div>
 
-{{!-- PhotoSwipe for image galleries --}}
-{{#is "post, page"}}
-    {{> "pswp"}}
-{{/is}}
+{{> "mobile-menu"}}
 
-{{!-- Main JavaScript (includes playful interactions and climate pulse) --}}
+{{#if @custom.enable_grain}}<div class="fx-grain" aria-hidden="true"></div>{{/if}}
+
 <script src="{{asset "built/main.min.js"}}"></script>
-
-{{!-- Reading Progress Script --}}
-{{#if @custom.show_reading_progress}}
-{{#is "post"}}
-<script>
-(function() {
-    const progressBar = document.querySelector('.reading-progress-bar');
-    if (!progressBar) return;
-
-    const article = document.querySelector('.post-content-body') || document.querySelector('.portfolio-body') || document.querySelector('.split-body');
-    if (!article) return;
-
-    function updateProgress() {
-        const articleRect = article.getBoundingClientRect();
-        const articleTop = articleRect.top + window.scrollY;
-        const articleHeight = article.offsetHeight;
-        const windowHeight = window.innerHeight;
-        const scrollY = window.scrollY;
-
-        const progress = Math.min(Math.max((scrollY - articleTop + windowHeight * 0.5) / articleHeight, 0), 1);
-        progressBar.style.transform = `scaleX(${progress})`;
-    }
-
-    window.addEventListener('scroll', updateProgress, { passive: true });
-    updateProgress();
-})();
-</script>
-{{/is}}
-{{/if}}
-
-
 {{ghost_foot}}
-
 </body>
 </html>
